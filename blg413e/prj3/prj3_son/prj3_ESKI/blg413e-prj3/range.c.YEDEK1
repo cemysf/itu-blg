@@ -1,0 +1,45 @@
+#include <linux/module.h>
+#include <linux/init.h>
+#include <linux/fs.h>
+#include <linux/kdev_t.h>
+
+MODULE_LICENSE("Dual BSD/GPL");
+MODULE_AUTHOR("cem");
+
+int major=0;
+int minor=0;
+int count=4;
+dev_t device_no=0;
+
+int initModule(void)
+{
+	int return_val = 0;		// return 0 if nothing goes wrong
+	printk(KERN_ALERT "blg413e prj3 - initializing module\n"); 
+
+	// dynamically allocate device numbers
+	// device_no: holds the first number in allocation (if allocation is successfull)
+	// minor: requested first minor (usually 0)
+	// count: total number of continious device numbers requested
+	return_val= alloc_chrdev_region(&device_no, minor, count, "range");
+	if (return_val!=0)
+	{
+		printk(KERN_ALERT "blg413e prj3 - (ERROR!!) cannot initialize module\n");
+		return return_val;
+	}
+	major=MAJOR(device_no);
+	printk(KERN_ALERT "blg413e prj3 - my major:%d minor: %d\n", major, minor);
+
+
+	
+	return return_val;
+}
+
+void exitModule(void)
+{
+	unregister_chrdev_region(device_no, count);
+	printk(KERN_ALERT "blg413e prj3 - exit module\n"); 
+}
+
+module_init(initModule);
+module_exit(exitModule);
+

@@ -1,0 +1,1 @@
+"./main.obj" "./aic3204_tone_headphone.obj" "./aic3204_test.obj" "./aic3204_loop_stereo_in1.obj" -l"usbstk5515bsl.lib" -l"rts55x_eh.lib" "../lnkx.cmd" 

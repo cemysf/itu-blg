@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1415477387 source:/home/cya/dev_/ders_temp/hw3Veri_son/main.cpp
+	<cstdlib>
+	<iostream>
+	<stdio.h>
+	"structs.h"
+
+1415480276 /home/cya/dev_/ders_temp/hw3Veri_son/structs.h
+	<fstream>
+	<cstring>
+	<sstream>
+	<iomanip>
+

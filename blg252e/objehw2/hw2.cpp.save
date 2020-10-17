@@ -1,0 +1,30 @@
+#include <iostream>
+using namespace std;
+#include "hw2.h"
+
+Piece::Piece(Color cl, Column co, int i){
+    if( co >= OUT || i>= OUT || co < 1 || i<1)
+        throw OutofBoard();
+    if(cl!=BLACK || cl!=WHITE)
+        throw InvalidColor();
+    if(board[co][i] != NULL)
+        throw Occupied();
+    else
+        board[co][i] = this;
+    color=cl;
+    x=co;
+    y=i;
+}
+
+void Piece::move(Column clmn, int row){
+
+	
+
+}
+
+Piece * Piece::getpiece(Column clmn, int row){
+	if(board[row][clmn]==NULL)
+        throw EmptyCell();
+
+    return board[row][clmn];
+}

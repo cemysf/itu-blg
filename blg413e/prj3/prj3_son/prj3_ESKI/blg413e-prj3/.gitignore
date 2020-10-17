@@ -1,0 +1,9 @@
+## tell git to ignore these files/file types
+*.cmd
+*.symvers
+*.order
+*.ko
+*.mod.c
+*.mod.o
+*.o
+.tmp_versions/

@@ -1,0 +1,18 @@
+# depslib dependency file v1.0
+1410984385 source:/home/cya/dev_/ders_temp/hw1/hw1_233/recordsProgram.cpp
+	<iostream>
+	<ctype.h>
+	<iomanip>
+	<cstdio>
+	"operations.h"
+	<cstring>
+
+1411060267 /home/cya/dev_/ders_temp/hw1/hw1_233/operations.h
+	<stdio.h>
+	<iostream>
+	<stdlib.h>
+	<string.h>
+	"facultyRecord_str.h"
+
+1410877561 /home/cya/dev_/ders_temp/hw1/hw1_233/facultyRecord_str.h
+

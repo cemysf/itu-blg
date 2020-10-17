@@ -1,0 +1,8 @@
+-----------------------------  rand16.pjt - Debug  -----------------------------
+[RAND16_T.C] "C:\CCStudio_v3.2\C5500\cgtools\bin\cl55" -g -q -fr"C:/TiDoc/c55dsplib/dsplib/EXAMPLES/rand16/Debug" -i"../../include" -d"_DEBUG" -@"Debug.lkf" "RAND16_T.C"
+
+[Linking...] "C:\CCStudio_v3.2\C5500\cgtools\bin\cl55" -@"Debug.lkf"
+<Linking>
+
+Build Complete,
+  0 Errors, 0 Warnings, 0 Remarks.

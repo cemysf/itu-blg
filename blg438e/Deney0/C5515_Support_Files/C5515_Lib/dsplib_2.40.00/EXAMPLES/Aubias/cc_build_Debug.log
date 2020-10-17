@@ -1,0 +1,13 @@
+-----------------------------  aubias.pjt - Debug  -----------------------------
+[aubias_c.c] "C:\CCStudio_v3.2\C5500\cgtools\bin\cl55" -g -q -fr"C:/TiDoc/c55dsplib/dsplib_new/EXAMPLES/Aubias/Debug" -i"../../include" -d"_DEBUG" -@"Debug.lkf" "aubias_c.c"
+
+[AUBIAS_T.C] "C:\CCStudio_v3.2\C5500\cgtools\bin\cl55" -g -q -fr"C:/TiDoc/c55dsplib/dsplib_new/EXAMPLES/Aubias/Debug" -i"../../include" -d"_DEBUG" -@"Debug.lkf" "AUBIAS_T.C"
+"AUBIAS_T.C", line 35: warning: variable "of" was set but never used
+
+[TEST.C] "C:\CCStudio_v3.2\C5500\cgtools\bin\cl55" -g -q -fr"C:/TiDoc/c55dsplib/dsplib_new/EXAMPLES/Aubias/Debug" -i"../../include" -d"_DEBUG" -@"Debug.lkf" "TEST.C"
+
+[Linking...] "C:\CCStudio_v3.2\C5500\cgtools\bin\cl55" -@"Debug.lkf"
+<Linking>
+
+Build Complete,
+  0 Errors, 1 Warnings, 0 Remarks.

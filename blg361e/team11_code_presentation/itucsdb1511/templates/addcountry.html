@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block title %}Country Add{% endblock %}
+{% block content %}
+
+  <form action="/addcountry" method="post">
+  Country_Name: <input type="text" name="Name"><br>
+  <input type="submit" value="Submit">
+</form>
+
+{% endblock %}
+
+
+

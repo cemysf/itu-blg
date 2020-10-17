@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block title %}City Add{% endblock %}
+{% block content %}
+
+ <form action="/addplayer" method="post">
+  Player_Name: <input type="text" name="Name"><br>
+  <div class="form-group">
+  <label for="sel1">Select list:</label>
+  <select class="form-control" id="sel1" data-asd="111">
+    {% for team in Teams %}
+		<option value="{{ team.ID }}" >{{ team.Name }}</option>
+	{% endfor %}
+  </select>
+</div>
+	<input type="hidden" name="selectedValue" id="hinput" />
+  <input type="submit" value="Submit">
+</form>
+
+<script>
+
+
+ $( document ).ready(function() {
+	 if($('select.form-control').val() == null){
+		 alert("no team exists yet please enter a new team")
+		 window.location.href = '/addteam'
+	 }
+	 $('form').submit(function(e){
+
+		    e.preventDefault();
+			var b = $('#hinput');
+			b.val($('select.form-control').val());
+
+
+
+		    $('form').unbind('submit').submit();
+
+		});
+	});
+
+</script>
+
+{% endblock %}

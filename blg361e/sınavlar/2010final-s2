@@ -1,0 +1,46 @@
+///// xquery:
+
+/births/birth/doctors[doctor="doc1"]/../babies/*/text()
+
+
+//// xml
+
+<births>
+    <birth>
+        <mother>asd</mother>
+        <babies>
+            <baby>b1</baby>
+        </babies>
+        <doctors>
+            <doctor>doc1</doctor>
+        </doctors>        
+    </birth>
+    <birth>
+        <mother>asd</mother>
+        <babies>
+            <baby>bb1</baby>
+        </babies>
+        <doctors>
+            <doctor>doc1</doctor>
+        </doctors>        
+    </birth>
+    <birth>
+        <mother>asd</mother>
+        <babies>
+            <baby>b1b1</baby>
+        </babies>
+        <doctors>
+            <doctor>doc1</doctor>
+        </doctors>        
+    </birth>
+
+    <birth>
+        <mother>www</mother>
+        <babies>
+            <baby>b2</baby>
+        </babies>
+        <doctors>
+            <doctor>doc2</doctor>
+        </doctors>
+    </birth>
+</births>

@@ -1,0 +1,43 @@
+
+Adaptive Entropy Coding (counts for Short Exam 1)
+Teslim Başlangıcı 02 Mart 2016 00:00 	Teslim Bitişi 23 Mart 2016 16:00 	Ödevi Yükle
+Ödev Açıklaması
+
+Using an alphabet of 4 letters {a,b,c,d} you are asked to encode the sequence assigned to you by both adaptive Huffman coding and adaptive arithmetic coding
+
+Source sequence to be used by each student (identified by the student number):
+
+040080193, 150110033: a b b c c c d d d d 
+
+150120251, 040100031: a a b b c d d b d d
+
+040090534, 150110124: a d a d d b b b b c
+
+040090523, 150110047: a b c d d d c c c c
+
+040100022, 150120108: a a b b b c c c c d
+
+040100009, 040090806: a b c d c d c d d d
+
+040050260, 150110020: a a a b c c c c d b
+
+040100041, 150120066: a d d b c c c a a a
+
+040050203, 150110042: a a d b b c b c c c
+
+040100048, 150110108: a b a a b b c c c c 
+
+150120106, 150130702: a c c a b b b c c d
+
+150120134, 150110032: a d c c b a b b b a
+
+040100232: a b c a b c d c b a
+
+For each symbol, determine and show the tree structure in adaptive Huffman coding and the probability model in adaptive arithmetic coding. Determine also the final bitstream in each case.
+
+In adaptive Huffman coding, the number of bits needed to encode the NYT symbol increases as the coding progresses. For each newly encountered letter, you should code this symbol using the Huffman tree and the binary representation of the newly encountered letter in 2 bits (a=00, b=01, c=10, d=11). For coding previously encoded symbols, you should use the Huffman tree.  Furthermore, you should take care to update the tree structure  where necessary by swapping subtrees.
+
+ In adaptive arithmetic coding, you should update the probability model as you go on by incrementing the frequency counter of the encoded symbol. For simplicity, do not use incremental encoding (which employs scaling for 3 cases). Each encoded symbol should result in a narrower interval. The tag should be selected as the midpoint of the final interval. Truncate the tag to an appropriate number of bits based on the source sequence probability (final interval size). 
+
+ YOU SHOULD WORK INDIVIDUALLY and not share information with the other person assigned the same sequence. Submit your homework on paper (not electronically) no later than  March 23, 2016 to Emrah Başaran.
+

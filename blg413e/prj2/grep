@@ -1,0 +1,114 @@
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root         1  0.0  0.1   4392  2428 ?        Ss   12:51   0:01 /sbin/init
+root         2  0.0  0.0      0     0 ?        S    12:51   0:00 [kthreadd]
+root         3  0.0  0.0      0     0 ?        S    12:51   0:02 [ksoftirqd/0]
+root         4  0.0  0.0      0     0 ?        S    12:51   0:00 [kworker/0:0]
+root         5  0.0  0.0      0     0 ?        S<   12:51   0:00 [kworker/0:0H]
+root         6  0.0  0.0      0     0 ?        S    12:51   0:00 [kworker/u4:0]
+root         7  0.0  0.0      0     0 ?        S    12:51   0:00 [rcu_sched]
+root         8  0.0  0.0      0     0 ?        S    12:51   0:00 [rcu_bh]
+root         9  0.0  0.0      0     0 ?        S    12:51   0:00 [migration/0]
+root        10  0.0  0.0      0     0 ?        S    12:51   0:00 [watchdog/0]
+root        11  0.0  0.0      0     0 ?        S    12:51   0:00 [watchdog/1]
+root        12  0.0  0.0      0     0 ?        S    12:51   0:00 [migration/1]
+root        13  0.0  0.0      0     0 ?        S    12:51   0:00 [ksoftirqd/1]
+root        14  0.0  0.0      0     0 ?        S    12:51   0:00 [kworker/1:0]
+root        15  0.0  0.0      0     0 ?        S<   12:51   0:00 [kworker/1:0H]
+root        16  0.0  0.0      0     0 ?        S<   12:51   0:00 [khelper]
+root        17  0.0  0.0      0     0 ?        S    12:51   0:00 [kdevtmpfs]
+root        18  0.0  0.0      0     0 ?        S<   12:51   0:00 [netns]
+root        19  0.0  0.0      0     0 ?        S<   12:51   0:00 [writeback]
+root        20  0.0  0.0      0     0 ?        S<   12:51   0:00 [kintegrityd]
+root        21  0.0  0.0      0     0 ?        S<   12:51   0:00 [bioset]
+root        22  0.0  0.0      0     0 ?        S<   12:51   0:00 [kworker/u5:0]
+root        23  0.0  0.0      0     0 ?        S<   12:51   0:00 [kblockd]
+root        24  0.0  0.0      0     0 ?        S<   12:51   0:00 [ata_sff]
+root        25  0.0  0.0      0     0 ?        S    12:51   0:00 [khubd]
+root        26  0.0  0.0      0     0 ?        S<   12:51   0:00 [md]
+root        27  0.0  0.0      0     0 ?        S<   12:51   0:00 [devfreq_wq]
+root        28  0.0  0.0      0     0 ?        S    12:51   0:02 [kworker/0:1]
+root        30  0.0  0.0      0     0 ?        S    12:51   0:00 [khungtaskd]
+root        31  0.0  0.0      0     0 ?        S    12:51   0:00 [kswapd0]
+root        32  0.0  0.0      0     0 ?        SN   12:51   0:00 [ksmd]
+root        33  0.0  0.0      0     0 ?        SN   12:51   0:00 [khugepaged]
+root        34  0.0  0.0      0     0 ?        S    12:51   0:00 [fsnotify_mark]
+root        35  0.0  0.0      0     0 ?        S    12:51   0:00 [ecryptfs-kthrea]
+root        36  0.0  0.0      0     0 ?        S<   12:51   0:00 [crypto]
+root        48  0.0  0.0      0     0 ?        S<   12:51   0:00 [kthrotld]
+root        49  0.0  0.0      0     0 ?        S    12:51   0:00 [kworker/u4:1]
+root        51  0.0  0.0      0     0 ?        S    12:51   0:00 [scsi_eh_0]
+root        52  0.0  0.0      0     0 ?        S    12:51   0:00 [scsi_eh_1]
+root        73  0.0  0.0      0     0 ?        S<   12:51   0:00 [deferwq]
+root        74  0.0  0.0      0     0 ?        S<   12:51   0:00 [charger_manager]
+root        75  0.0  0.0      0     0 ?        S    12:51   0:00 [kworker/1:2]
+root       124  0.0  0.0      0     0 ?        S<   12:51   0:00 [kpsmoused]
+root       125  0.0  0.0      0     0 ?        S<   12:51   0:00 [kworker/u5:1]
+root       133  0.0  0.0      0     0 ?        S    12:51   0:00 [jbd2/sda1-8]
+root       134  0.0  0.0      0     0 ?        S<   12:51   0:00 [ext4-rsv-conver]
+root       277  0.0  0.0   3008   884 ?        S    12:51   0:00 upstart-udev-bridge --daemon
+root       283  0.0  0.0  10408  1656 ?        Ss   12:51   0:00 /lib/systemd/systemd-udevd --daemon
+root       325  0.0  0.0      0     0 ?        S<   12:51   0:00 [iprt]
+root       405  0.0  0.0   2868   600 ?        S    12:51   0:00 upstart-socket-bridge --daemon
+message+   567  0.0  0.0   4540  1596 ?        Ss   12:51   0:01 dbus-daemon --system --fork
+root       604  0.0  0.0   2880   608 ?        S    12:51   0:00 upstart-file-bridge --daemon
+syslog     605  0.0  0.0  31368  1068 ?        Ssl  12:51   0:00 rsyslogd
+root       618  0.0  0.0   4876  1632 ?        Ss   12:51   0:00 /usr/sbin/bluetoothd
+root       620  0.0  0.0   4212  1772 ?        Ss   12:51   0:00 /lib/systemd/systemd-logind
+avahi      656  0.0  0.0   3472  1356 ?        S    12:51   0:00 avahi-daemon: running [ubuntu.local]
+avahi      659  0.0  0.0   3472   436 ?        S    12:51   0:00 avahi-daemon: chroot helper
+root       702  0.0  0.0      0     0 ?        S<   12:51   0:00 [krfcommd]
+root       704  0.0  0.0   5512  1864 ?        Ss   12:51   0:00 dhclient -1 -v -pf /run/dhclient.eth0.pid -lf /var/lib/dhcp/dhclient.eth0.leases eth0
+root       892  0.0  0.0   4644   848 tty4     Ss+  12:51   0:00 /sbin/getty -8 38400 tty4
+root       895  0.0  0.0   4644   836 tty5     Ss+  12:51   0:00 /sbin/getty -8 38400 tty5
+root       901  0.0  0.0   4644   836 tty2     Ss+  12:51   0:00 /sbin/getty -8 38400 tty2
+root       902  0.0  0.0   4644   832 tty3     Ss+  12:51   0:00 /sbin/getty -8 38400 tty3
+root       905  0.0  0.0   4644   844 tty6     Ss+  12:51   0:00 /sbin/getty -8 38400 tty6
+root       977  0.0  0.0   2192   632 ?        Ss   12:51   0:00 acpid -c /etc/acpi/events -s /var/run/acpid.socket
+root       979  0.0  0.0   3052   884 ?        Ss   12:51   0:00 cron
+root       986  0.0  0.1   8848  2896 ?        Ss   12:51   0:00 /usr/sbin/cups-browsed
+kernoops   995  0.0  0.0   6388  1144 ?        Ss   12:51   0:00 /usr/sbin/kerneloops
+root      1011  0.0  0.1  35188  3552 ?        SLsl 12:51   0:00 lightdm
+root      1033  0.0  0.0  10852  1384 ?        Sl   12:51   0:02 /usr/sbin/VBoxService
+root      1046  0.0  0.1  22592  3176 ?        Sl   12:51   0:00 /usr/sbin/console-kit-daemon --no-daemon
+root      1134  0.1  1.0 145904 22524 tty7     Ssl+ 12:51   0:05 /usr/bin/X -core :0 -seat seat0 -auth /var/run/lightdm/root/:0 -nolisten tcp vt7 -novtswitch
+root      1143  0.0  0.2  36528  5684 ?        Sl   12:51   0:00 /usr/lib/accountsservice/accounts-daemon
+root      1151  0.0  0.3  34972  7436 ?        Sl   12:51   0:00 /usr/lib/policykit-1/polkitd --no-debug
+root      1179  0.0  0.0   4644   840 tty1     Ss+  12:51   0:00 /sbin/getty -8 38400 tty1
+root      1205  0.0  0.0      0     0 ?        S    12:51   0:00 [kauditd]
+root      1254  0.0  0.1  17864  3504 ?        Sl   12:51   0:00 lightdm --session-child 12 19
+root      1324  0.0  0.1   8292  3172 ?        Ss   12:51   0:00 /usr/sbin/cupsd -f
+itucs     1341  0.0  0.2  45848  5644 ?        Sl   13:15   0:00 /usr/bin/gnome-keyring-daemon --daemonize --login
+itucs     1343  0.0  0.0   5884  1964 ?        Ss   13:15   0:00 init --user
+itucs     1393  0.0  0.0   9100  1704 ?        Sl   13:15   0:00 /usr/bin/VBoxClient --clipboard
+itucs     1401  0.0  0.0   9156  1600 ?        Sl   13:15   0:00 /usr/bin/VBoxClient --display
+itucs     1406  0.0  0.0   8064  1196 ?        Sl   13:15   0:00 /usr/bin/VBoxClient --seamless
+itucs     1410  0.0  0.0   9748  1428 ?        Sl   13:15   0:00 /usr/bin/VBoxClient --draganddrop
+itucs     1429  0.0  0.0   4344  1332 ?        Ss   13:15   0:00 dbus-daemon --fork --session --address=unix:abstract=/tmp/dbus-9MViYCY2Ff
+itucs     1437  0.0  0.0   4908  1060 ?        Ss   13:15   0:00 upstart-event-bridge
+itucs     1442  0.0  0.0   5164   392 ?        S    13:15   0:00 upstart-file-bridge --daemon --user
+itucs     1448  0.0  0.0   4912   336 ?        S    13:15   0:00 upstart-dbus-bridge --daemon --session --user --bus-name session
+itucs     1451  0.0  0.0   4912   340 ?        S    13:15   0:00 upstart-dbus-bridge --daemon --system --user --bus-name system
+itucs     1462  0.0  0.5  49796 10544 ?        Ssl  13:15   0:00 /usr/bin/lxsession -s Lubuntu -e LXDE
+itucs     1466  0.0  0.1  27612  2676 ?        Sl   13:15   0:00 /usr/lib/gvfs/gvfsd
+itucs     1470  0.0  0.3  43352  6984 ?        Sl   13:15   0:00 /usr/lib/gvfs/gvfsd-fuse /run/user/1000/gvfs -f -o big_writes
+itucs     1481  0.0  0.4  32724 10080 ?        Sl   13:15   0:00 openbox --config-file /home/itucs/.config/openbox/lubuntu-rc.xml
+itucs     1485  0.0  0.7 184668 14828 ?        Sl   13:15   0:00 lxpanel --profile Lubuntu
+itucs     1487  0.0  0.6 202008 13188 ?        Sl   13:15   0:00 pcmanfm --desktop --profile lubuntu
+itucs     1490  0.0  0.4  43208  8588 ?        Sl   13:15   0:00 /usr/lib/notification-daemon/notification-daemon
+itucs     1493  0.0  0.1  43272  2832 ?        Sl   13:15   0:00 /usr/lib/at-spi2-core/at-spi-bus-launcher
+itucs     1497  0.0  0.0   4236  1664 ?        S    13:15   0:00 /bin/dbus-daemon --config-file=/etc/at-spi2/accessibility.conf --nofork --print-address 3
+itucs     1500  0.0  0.1  17360  3092 ?        Sl   13:15   0:00 /usr/lib/at-spi2-core/at-spi2-registryd --use-gnome-session
+itucs     1514  0.0  0.0   4212   200 ?        Ss   13:15   0:00 /usr/bin/ssh-agent -s
+itucs     1521  0.0  0.2  25796  4952 ?        Ssl  13:15   0:00 /usr/lib/i386-linux-gnu/menu-cache/menu-cached
+itucs     1526  0.0  0.1  38688  4096 ?        Sl   13:15   0:00 /usr/lib/gvfs/gvfs-udisks2-volume-monitor
+root      1530  0.0  0.2  52500  4372 ?        Sl   13:15   0:00 /usr/lib/udisks2/udisksd --no-debug
+itucs     1541  0.0  0.1  28296  2744 ?        Sl   13:15   0:00 /usr/lib/gvfs/gvfs-gphoto2-volume-monitor
+itucs     1545  0.0  0.2  27184  4588 ?        Sl   13:15   0:00 /usr/lib/gvfs/gvfs-mtp-volume-monitor
+itucs     1549  0.0  0.1  39356  2644 ?        Sl   13:15   0:00 /usr/lib/gvfs/gvfs-afc-volume-monitor
+itucs     1556  0.0  0.1  54264  3428 ?        Sl   13:15   0:00 /usr/lib/gvfs/gvfsd-trash --spawner :1.5 /org/gtk/gvfs/exec_spaw/0
+itucs     1584  0.3  1.3 204812 28436 ?        Sl   13:21   0:05 /usr/bin/python /usr/bin/x-terminal-emulator
+itucs     1590  0.0  0.1   9064  2340 ?        S    13:21   0:00 /usr/lib/i386-linux-gnu/gconf/gconfd-2
+itucs     1592  0.0  0.0   2416   700 ?        S    13:21   0:00 gnome-pty-helper
+itucs     1593  0.0  0.1   7064  3540 pts/1    Ss   13:21   0:00 /bin/bash
+itucs     1703  0.1  0.5 165076 11608 pts/1    Sl   13:45   0:00 leafpad
+itucs     1716  0.0  0.0   5216  1168 pts/1    R+   13:48   0:00 ps aux 1703

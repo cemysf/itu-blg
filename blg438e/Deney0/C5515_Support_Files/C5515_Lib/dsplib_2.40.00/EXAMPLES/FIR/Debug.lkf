@@ -1,0 +1,4 @@
+-z -q -c -o"./Debug/fir.out" -x -i"../.." -i"C:/CCStudio_v3.2/C5500/rtdx/lib" -i"C:/CCStudio_v3.2/C5500/csl/lib" -i"C:/CCStudio_v3.2/C5500/xdais/lib" -i"C:/CCStudio_v3.2/bios_5_21/packages/ti/bios/lib" -i"C:/CCStudio_v3.2/C5500/cgtools/lib" -l"55xdsp.lib" -l"rts55.lib"
+"C:\TiDoc\c55dsplib\dsplib\EXAMPLES\FIR\Debug\FIR_T.obj"
+"C:\TiDoc\c55dsplib\dsplib\EXAMPLES\FIR\Debug\TEST.obj"
+"C:\TiDoc\c55dsplib\dsplib\EXAMPLES\FIR\55x.cmd"

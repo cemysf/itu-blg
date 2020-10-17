@@ -1,0 +1,7 @@
+Scenario			Pass		Fail
+mknod range0 and range1		x		
+set step for each		x
+set counter			x
+set rotate mode			x
+set eof mode			x
+

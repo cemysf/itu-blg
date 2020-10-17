@@ -1,0 +1,71 @@
+%%%
+%%% BLG336E Analysis of Algorithms 2 - Project 2
+%%% Cem Yusuf Aydoğdu - 150120251
+%%%
+
+\documentclass{article}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\usepackage{amsmath}
+
+\begin{document}
+
+\begin{algorithm}
+\caption{Needleman-Wunsch for Global Alignment of DNA sequences}
+\begin{algorithmic}[1]
+\State Initialize strings $str1$, $str2$ with gap symbol in front
+\State Initialize 2D scores array $S\gets 0$ with string sizes
+\For{each cell in the first row of $S$}
+	\State Assign gap scores 
+\EndFor
+\For{each cell in the first column of $S$}
+	\State Assign gap scores 
+\EndFor
+\\
+\For{$i:=1$}{\-\ size of $str2$} \Comment Calculate scoring table $S$
+	\For{$j:=1$}{\-\ size of $str1$}
+		\State 
+		\[ S_{i,j} = max
+  			\begin{cases}
+    			S_{i-1,j-1}+m_{i,j} & \quad  \text{\Comment $m$ is match/mismatch score}\\
+    			S_{i-1,j}+g & \quad  \text{\Comment $g$ is gap penalty score}\\
+    			S_{i,j-1}+g\\
+  			\end{cases}
+		\]
+	\EndFor
+\EndFor
+\\
+\State Initialize empty strings $seq1$ for $str1$, $seq2$ for $str2$ \Comment Backtrack
+\State Set $i\gets$ length of str2, $j\gets$ length of str1, $totalScore\gets 0$
+\While{$i>0$ and $j>0$}
+
+	\If{Score of \(S_{i,j}\) calculated from \(S_{i-1,j-1}\) }
+		\State Append str1[j] to front of seq1
+		\State Append str2[i] to front of seq2
+		\State Decrement $i$ and $j$ by 1
+		\State Increment $totalScore$ by \(S_{i,j}\)
+	\ElsIf{Score of \(S_{i,j}\) calculated from \(S_{i-1,j}\) }
+		\State Append gap symbol to front of seq1
+		\State Append str2[i] to front of seq2
+		\State Decrement $i$ by 1
+		\State Increment $totalScore$ by \(S_{i,j}\)
+	\ElsIf{Score of \(S_{i,j}\) calculated from \(S_{i,j-1}\) }
+		\State Append str1[j] to front of seq1
+		\State Append gap symbol to front of seq2
+		\State Decrement $j$ by 1
+		\State Increment $totalScore$ by \(S_{i,j}\)
+	\EndIf
+
+\EndWhile
+\\
+\For{each character of aligned sequences} \Comment Calculate metrics
+	\State Count $identity$, $similarity$ and $gap$
+\EndFor
+\\
+\State Output aligned sequences $seq1$, $seq2$
+
+\end{algorithmic}
+\end{algorithm}
+
+\end{document}

@@ -1,0 +1,36 @@
+------------------
+PROJECT PLAN NOTES
+------------------
+
+* Each title and subtitle must start with a drawing/chart/table (except 1.1 scope).
+* Each title and subtitle must contain the detailed explanation of all items in the drawing/chart/table.
+* Explanations should be itemized (no paragraphs).
+* If you are unfamiliar to a term in this document, it is your responsibility to search and learn it.
+
+---------------------
+PROJECT PLAN CONTENTS
+---------------------
+
+COVER PAGE
+	Course information, report name, project title, group name and members, date etc.
+
+1. INTRODUCTION (25)
+	1.1 Scope
+	1.2 Deliverables - Table of deliverables. Deliverables should be numbered.
+	1.3 Epics - Table of epics. Epics should be numbered and mapped to deliverables.
+	1.4 Non-functional issues - Security, performance, usability etc.
+
+2. PROJECT PLAN (15)
+	Work breakdown structure (WBS). Epics should be decomposed into smaller components. Each component should be assigned a size on a scale of 5: (T) Tiny, (S) Small, (M) Medium, (L) Large, (XL) Extra-large. (In the requirements document, user stories will be written for these components.)
+
+3. ESTIMATES (5)
+	A man.week value for each WBS component should be estimated. 
+	
+4. RESOURCES (10)
+	Team structure (member roles) and a mapping between group members and project components should be given.
+	
+5. SCHEDULE (15)
+	Gantt chart should be consistent with the estimates and resources. E.g. if 2 team members are assigned to a 2 man.week task, it should take 1 week.
+	
+6. RISKS (30)
+	Risk impact / probability chart that is ordered by ascending risks and probabilities. Risk mitigation (aversion) table where risks must me mapped to project activities.

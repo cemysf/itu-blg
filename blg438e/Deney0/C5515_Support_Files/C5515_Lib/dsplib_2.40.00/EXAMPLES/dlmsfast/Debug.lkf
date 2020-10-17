@@ -1,0 +1,6 @@
+-z -q -c -m"./Debug/dlmsfast.map" -o"./Debug/dlmsfast.out" -x -i"../.." -i"C:/CCStudio_v3.2/C5500/rtdx/lib" -i"C:/CCStudio_v3.2/C5500/csl/lib" -i"C:/CCStudio_v3.2/C5500/xdais/lib" -i"C:/CCStudio_v3.2/bios_5_21/packages/ti/bios/lib" -i"C:/CCStudio_v3.2/C5500/cgtools/lib" -l"rts55.lib" -l"55xdsp.lib"
+"C:\TiDoc\c55dsplib\dsplib\EXAMPLES\dlmsfast\Debug\dlmsfast_T.obj"
+"C:\TiDoc\c55dsplib\dsplib\EXAMPLES\dlmsfast\Debug\FTEST.obj"
+"C:\TiDoc\c55dsplib\dsplib\EXAMPLES\dlmsfast\Debug\LTEST.obj"
+"C:\TiDoc\c55dsplib\dsplib\EXAMPLES\dlmsfast\Debug\TEST.obj"
+"C:\TiDoc\c55dsplib\dsplib\EXAMPLES\dlmsfast\dlmsfast.cmd"

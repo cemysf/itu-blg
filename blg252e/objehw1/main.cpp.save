@@ -1,0 +1,56 @@
+//    
+//  BLG252E h
+//    
+//  
+//    
+//  
+
+#include <string>
+#include <iostream>
+#include "SystemManager.h"
+using namespace std;
+
+int main()
+{
+    SystemManager sys;
+
+    sys.createAirport("asd");
+    sys.createAirport("sdf");
+    sys.createAirport("qwe");
+   // sys.createAirport("qwe");
+
+    sys.createAirline("line1");
+    sys.createAirline("line2");
+    //sys.createAirline("LINE1");
+
+    sys.createFlight("line1","asd","sdf",2015,10,3,"idA123sa");
+    sys.createSection("line1","idA123sa",5,4,1);
+    sys.createSection("line1","idA123sa",3,2,2);
+    sys.createSection("line1","idA123sa",3,2,3);
+
+    sys.bookSeat("line1","idA123sa",1,2,'C');
+
+    sys.createFlight("line1","asd","sdf",2015,11,3,"idA1");
+
+    sys.createFlight("line1","asd","qwe",2015,11,5,"flid2");
+    sys.createSection("line1","flid2",5,4,1);
+    sys.createSection("line1","flid2",3,2,2);
+    sys.createSection("line1","flid2",3,2,3);
+
+//    sys.createFlight("line2","asd","sdf",2015,10,3,"idA123sa");
+//    sys.createSection("line2","idA123sa",5,4,1);
+//    sys.createSection("line2","idA123sa",3,2,2);
+//    sys.createSection("line2","idA123sa",3,2,3);
+//
+//    sys.createFlight("line2","asd","qwe",2015,11,5,"flid2");
+//    sys.createSection("line2","flid2",5,4,1);
+//    sys.createSection("line2","flid2",3,2,2);
+//    sys.createSection("line2","flid2",3,2,3);
+
+
+    sys.displaySystemDetails();
+
+    sys.findAvaibleFlights("asd","sdf");
+
+    return 0;
+}

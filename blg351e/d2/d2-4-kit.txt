@@ -1,0 +1,20 @@
+	ldx $4000
+	ldab 0,x
+	ldaa #$aa
+	staa 0,x
+	cmpa 0,x
+	bne fail
+	ldaa #$55
+	staa 0,x
+	cmpa 0,x
+	bne fail
+	ldaa #$01
+	staa $4002
+	swi
+
+fail	clra
+	staa $4002
+	swi
+
+
+	

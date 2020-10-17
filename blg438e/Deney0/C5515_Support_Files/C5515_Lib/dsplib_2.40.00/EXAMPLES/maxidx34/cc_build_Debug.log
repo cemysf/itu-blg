@@ -1,0 +1,8 @@
+----------------------------  maxidx34.pjt - Debug  ----------------------------
+[Maxidx34_t.c] "C:\CCStudio_v3.2\C5500\cgtools\bin\cl55" -g -q -fr"C:/TiDoc/c55dsplib/dsplib/EXAMPLES/maxidx34/Debug" -i"../../include" -d"_DEBUG" -@"Debug.lkf" "Maxidx34_t.c"
+
+[Linking...] "C:\CCStudio_v3.2\C5500\cgtools\bin\cl55" -@"Debug.lkf"
+<Linking>
+
+Build Complete,
+  0 Errors, 0 Warnings, 0 Remarks.

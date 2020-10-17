@@ -1,0 +1,14 @@
+	jmp $4000
+	.org $4000
+	ldx #$4100
+	ldaa #$0a
+	stx $0010
+	staa $12
+l1	staa 0,x
+	inx	
+	deca
+	cmpa #$0
+	bne l1
+	
+
+	

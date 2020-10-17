@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+<meta charset="utf-8" />
+{% extends "layout.html" %}
+{% block title %}Movie List{% endblock %}
+{% block content %}
+<h2>Movie List</h2> 
+<form action="{{ url_for('movies_page') }}" method="post"> <table>
+        {% for key, movie in movies %}
+<tr>
+<td><input type="checkbox" name="movies_to_delete" value="{{ key }}" /></td>
+<td> <a href="{{ url_for('movie_page', key=key) }}">
+              {{ movie.title }} ({{ movie.year }}) </a> </td>
+</tr>
+{% endfor %}
+</table>
+<input type="submit" value="Delete" name="delete" /> </form>
+{% endblock %}

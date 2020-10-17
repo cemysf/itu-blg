@@ -1,0 +1,22 @@
+derlemek için:
+
+iptc tagleme:
+	iptc -a <Tag_adı> -v "<tag_mesaj>" <dosyaadı>
+
+	<Tag_adı>: { Keywords | SubjectRef }
+
+mount fs:
+	./project4 test1 test2
+		
+		veya
+	./project4 -d -s test1 test2
+
+	test1: kaynak
+	test2: hedef
+
+	-d: debug
+	-s: single thread
+
+unmount:
+	fusermount  -u test2
+	

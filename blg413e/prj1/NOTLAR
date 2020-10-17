@@ -1,0 +1,23 @@
+kmp fonk stack durumu:
+
+ebp
+return address
+param 1
+param 2
+
+
+
+/*
+	FILE *text_file;
+	char *text = NULL;
+	size_t n = 0;
+	ssize_t text_len;
+	
+	text_file = fopen(argv[1], "r");
+	if(text_file == NULL){
+		printf("File error..");
+		return -1;
+	}
+	
+	text_len = getline(&text, &n, text_file);	//size bir fazla geliyor!
+*/

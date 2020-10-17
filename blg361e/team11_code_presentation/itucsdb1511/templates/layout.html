@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+    	<title>Home</title>
+    	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+	</head>
+  <body>
+  	<div class="container">
+    <nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="/">homepage</a>
+				</div>
+				<div>
+					<ul class="nav navbar-nav">
+						<li><a href="/tournamentlist">Tournament</a></li>
+						<li><a href="/teamlist">Team</a></li>
+						<li><a href="/playerlist">Player</a></li>
+						<li><a href="/citylist">City</a></li>
+						<li><a href="/countrylist">Country</a></li>
+						<li><a href="/accommodationlist">Accommodation</a></li>
+						<li><a href="#">Manager</a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+					{% if IsAdmin == False %}
+						<li><a href="/login"><span class="glyphicon glyphicon-user"></span>Admin Panel</a></li>
+					{% endif %}
+					{% if IsAdmin == True %}
+						<li><a href="/logout"><span class="glyphicon glyphicon-user"></span>Logout</a></li>
+					{% endif %}
+					</ul>
+				</div>
+			</div>
+	</nav>
+ 	{% block content %}{% endblock %}
+	</div>
+    <footer class="footer">
+			<div class="container">
+			<p class="text-muted"><a href="/contactus">Contact us <a/></p>
+			</div>
+	</footer>
+
+
+
+  </body>
+</html>

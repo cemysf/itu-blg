@@ -1,0 +1,24 @@
+Nurse: Patient 1 registered 
+Nurse: Patient 2 registered 
+Nurse: Patient 3 registered 
+	Doctor 1: Patient 1 treated (t=4)
+Nurse: Patient 4 registered 
+	Doctor 2: Patient 2 treated (t=5)
+Nurse: Patient 5 registered 
+	Doctor 1: Patient 3 treated (t=4)
+Nurse: Patient 6 registered 
+Nurse: Patient 7 registered 
+	Doctor 1: Patient 5 treated (t=4)
+	Doctor 2: Patient 4 treated (t=6)
+Nurse: Patient 8 registered 
+	Doctor 1: Patient 6 treated (t=3)
+Nurse: Patient 9 registered 
+	Doctor 2: Patient 7 treated (t=5)
+Nurse: Patient 10 registered 
+	Doctor 1: Patient 8 treated (t=4)
+Nurse: Patient 11 registered 
+	Doctor 2: Patient 9 treated (t=3)
+Nurse: Patient 12 registered 
+	Doctor 1: Patient 10 treated (t=5)
+	Doctor 2: Patient 11 treated (t=6)
+	Doctor 1: Patient 12 treated (t=4)

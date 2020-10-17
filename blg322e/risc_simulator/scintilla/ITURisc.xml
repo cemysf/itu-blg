@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScintillaNET>
+	<Language Name="ITURisc">
+		<AutoComplete FillUpCharacters=".([" SingleLineAccept="True" IsCaseSensitive="True">
+			<List>
+				EQU
+				ADD ADDC SUB SUBC SUBR SUBCR AND OR XOR SLL SLR SRA
+				LDL LDSU LDBU LDBS STL STS STB
+				JMP JMPR CALL CALLR RET RETINT CALLINT LDHI GTLPC GETPSW PUTPSW
+				NOP
+				BR BNE BEQ
+			</List>
+		</AutoComplete>
+
+		<Lexer LineCommentPrefix="//" StreamCommentPrefix="/* " StreamCommentSuffix=" */">
+			<Keywords List="0" Inherit="False">
+				EQU
+				ADD ADDC SUB SUBC SUBR SUBCR AND OR XOR SLL SLR SRA
+				LDL LDSU LDBU LDBS STL STS STB
+				JMP JMPR CALL CALLR RET RETINT CALLINT LDHI GTLPC GETPSW PUTPSW
+				NOP
+			</Keywords>
+			<Keywords List="3" Inherit="False">
+				R0 R1 R2 R3 R4 R5 R6 R7 R8 R9
+				R10 R11 R12 R13 R14 R15 R16 R17 R18 R19 R20
+				R21 R22 R23 R24 R25 R26 R27 R28 R29 R30 R31
+				BR BNE BEQ
+			</Keywords>
+		</Lexer>
+	</Language>
+</ScintillaNET>

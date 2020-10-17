@@ -1,0 +1,1 @@
+"./AIC_func.obj" "./main.obj" "./usbstk5515_i2c.obj" "./drivers/csl_irqplug.obj" "./drivers/vectors.obj" "../lnkx.cmd" -l"C:\C5515_Support_Files\usbstk5515bsl.lib" -l"rts55x.lib" 

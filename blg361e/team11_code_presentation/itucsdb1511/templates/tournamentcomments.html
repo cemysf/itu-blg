@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block title %}Comments{% endblock %}
+{% block content %}
+	<h2>Comments for Tournament {{ID}}</h2>
+	<style>
+		#tbl tr td,th{
+			padding:5px;
+			text-align: center;
+		}
+	</style>
+
+ 	<form action="/addtournamentcomment" method="post">
+	Comment ID: <input type="text" name="Comment_ID"><br>
+  	Text: <input type="text" name="Text"><br>
+  	<input type="hidden" name="Tournament_ID" value="{{ID}}">
+  	<input type="submit" value="Submit">
+  	</form>
+
+	<table border="1" id="tbl">
+		<tr>
+			<th>Comment ID</th>
+			<th>Comment</th>
+		</tr>
+
+		{% for comm in commentlist %}
+			<tr>
+				<td>{{ comm.ID }}</td>
+				<td>{{ comm.Text }}</td>
+			</tr>
+		{% endfor %}
+
+	</table>
+{% endblock %}

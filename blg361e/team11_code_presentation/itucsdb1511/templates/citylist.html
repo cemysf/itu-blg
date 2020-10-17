@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+{% block title %}City List{% endblock %}
+{% block content %}
+	<h2>City List</h2>
+	<style>
+		#tbl tr td,th{
+			padding:5px;
+			text-align: center;
+		}
+	</style>
+	{% if IsAdmin == True %}
+	<a style="font-weight:Bold" href="{{ url_for('addcity') }}">Add City</a>
+	{% endif %}
+	<a style="font-weight:Bold" href="{{ url_for('searchcity') }}">Search City</a>
+
+	<table border="1" id="tbl">
+	<tr>
+		<th>City ID</th>
+		<th>City Name</th>
+	</tr>
+		{% for city in citylist %}
+			<tr>
+				<td>{{ city.ID }}</td>
+				<td>{{ city.Name }}</td>
+				{% if IsAdmin == True %}
+				<td>
+				<a href="{{ url_for('citydelete',id=city.ID) }}">Delete City</a>
+				</td>
+				<td>
+				<a href="{{ url_for('updatecity',id=city.ID) }}">Update City</a>
+				</td>
+				{% endif %}
+				<td>
+					<a href="{{ url_for('addcitycomment',id = city.ID) }}">Add comment for {{ city.Name }} </a>
+				</td>
+				<td>
+					<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal{{city.ID}}">Comments</button>
+					<div id="myModal{{city.ID}}" class="modal fade" role="dialog">
+  						<div class="modal-dialog">
+  							<div class="modal-content">
+      							<div class="modal-header">
+        							<button type="button" class="close" data-dismiss="modal">&times;</button>
+        							<h4 class="modal-title">Check comments for {{ city.Name }} </h4>
+	      						</div>
+    	  						<div class="modal-body">
+    	  							{% for comment in city.Comments %}
+        								<p>{{ comment }}</p>
+        							{% endfor %}
+	      						</div>
+    	  						<div class="modal-footer">
+        							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      							</div>
+	    					</div>
+  						</div>
+					</div>
+				</td>
+			</tr>
+		{% endfor %}
+	</table>
+{% endblock %}

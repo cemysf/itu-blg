@@ -1,0 +1,21 @@
+	jmp $4000
+	.org $4000
+	ldaa #$f0
+	staa $10
+	clra	
+
+;;; part1 ;;;
+	ldaa $10
+	rola	;to carry
+	rola
+	rola
+	rola
+	rola
+	tab
+	anda #%10101010
+	rora
+	andb #%01010101
+	rolb
+	
+	swi
+	wai

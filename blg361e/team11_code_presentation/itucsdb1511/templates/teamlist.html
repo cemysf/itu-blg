@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+{% block title %}Team List{% endblock %}
+{% block content %}
+	<h2>Team List</h2>
+	<style>
+		#tbl tr td,th{
+			padding:5px;
+			text-align: center;
+		}
+	</style>
+	{% if IsAdmin == True %}
+	<a style="font-weight:Bold" href="{{ url_for('addteam') }}">Add Team</a>
+	{% endif %}
+	<a style="font-weight:Bold" href="{{ url_for('searchteam') }}">Search Team</a>
+
+	<table border="1" id="tbl">
+	<tr>
+		<th>Team ID</th>
+		<th>Team Name</th>
+	</tr><td>
+		{% for team in Teams %}
+			<tr>
+				<td>{{ team.ID }}</td>
+				<td>{{ team.Name }}</td>
+				{% if IsAdmin == True %}
+				<td><a href="{{ url_for('teamdelete',id=team.ID) }}">Delete Team</a></td>
+				<td><a href="{{ url_for('updateteam',id=team.ID) }}">Update Team</a></td>
+				{% endif %}
+				<td><a href="{{ url_for('addteamcomment',id=team.ID) }}">Add Comment</a></td>
+				<td>
+					<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal{{ team.ID }}">Comments</button>
+					<div id="myModal{{ team.ID }}" class="modal fade" role="dialog">
+  						<div class="modal-dialog">
+  							<div class="modal-content">
+      							<div class="modal-header">
+        							<button type="button" class="close" data-dismiss="modal">&times;</button>
+        							<h4 class="modal-title">Comments for {{ team.Name }} </h4>
+	      						</div>
+    	  						<div class="modal-body">
+	    	  						{% for comment in team.Comments %}
+        							<p>{{ comment }}</p>
+        							{% endfor %}
+	      						</div>
+    	  						<div class="modal-footer">
+        							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      							</div>
+	    					</div>
+  						</div>
+					</div>
+				</td>
+			</tr><td>
+		{% endfor %}
+	</td></td></table>
+{% endblock %}

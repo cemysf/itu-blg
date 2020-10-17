@@ -1,0 +1,199 @@
+
+	.data
+n:	.word	0a
+
+	.bss
+array:	1000					!defining array address
+
+	.equ
+1000:	.word	23,11,0f,ac,5f,fa,03,bb,df,6a
+
+	.text
+start:	sethi	0	%r0			!array address offset
+	sethi	n	%r1			!element counter
+loop:	ld	[array]%r0	%r3	
+	add	%r0	4	%r0
+	sub	%r1	1	%r1
+	bne	loop	
+end:	ta	0
+
+
+
+
+
+
+------------------------------
+
+
+
+	.data
+n:	.word	0a
+array:	.word	100	!defining array address
+
+	.equ
+100:	.word	23,11,0f,ac,5f,fa,03,bb,df,6a
+
+	.text
+start:	sethi	n	%r1	!element counter
+	sethi	array	%r2	!array address 
+	nop
+loop:	ld	[%r2]	%r3
+	nop	
+	add	%r2	4	%r2
+	sub	%r1	1	%r1
+	bne	loop	
+	nop
+end:	ta	0
+
+
+_____
+
+!	
+!	
+!	
+!	
+
+	.data
+n:	.word	0a	!number of elements in array
+array:	.word	100	!defining array address
+
+	.equ
+100:	.word	23,11,0f,ac,5f,fa,03,bb,df,6a
+
+	.text
+start:	sethi	array	%r1	!element counter
+	sethi	n	%r2	!array address 
+	umul	%r2	4	%r3	
+	add	%r1	%r3	%r4	!calculate array last index 
+loop:	nop
+	nop	
+	add	%r2	4	%r2
+	sub	%r1	1	%r1
+	bne	loop	
+	nop
+end:	ta	0
+
+_____-_--_--__-----
+!	
+!	
+!	
+!	
+
+	.data
+n:	.word	0a	!number of elements in array
+array:	.word	100	!defining array address
+
+	.equ
+100:	.word	23,11,0f,ac,5f,fa,03,bb,df,6a
+
+	.text
+start:	sethi	array	%r1		!array address 
+	sethi	n	%r2		!number of elements
+	umul	%r2	4	%r3
+	nop
+	add	%r1	%r3	%r3	!last address location
+	sethi	0	%r4		!counter i
+loop:	xor	%r6	%r6	%r6	
+	xor	%r6	%r5	%r6	!minIndex=i
+	xor	%r5	%r5	%r5	
+	xor	%r5	%r4	%r5	!counter j=i
+	add	%r4	1	%r4
+loop2:	nop
+	sub	%r2	%r4	%r0
+	bne	loop
+	nop
+end:	ta	0
+
+
+
+---_-_-_-_-_-_-_
+!	
+!	
+!	
+!	
+
+	.data
+n:	.word	5	!number of elements in array
+array:	.word	100	!defining array address
+
+	.equ
+100:	.word	23,11,0f,ac,5f
+
+	.text
+start:	sethi	array	%r1		!array address 
+	sethi	n	%r2		!number of elements
+	umul	%r2	4	%r3
+	sethi	0	%r4		!counter i
+	sethi	0	%r5		!counter j
+loop:	xor	%r6	%r6	%r6	
+	xor	%r6	%r5	%r6	!minIndex=i
+	xor	%r5	%r5	%r5	
+	xor	%r5	%r4	%r5	!counter j=i	
+loop2:	sethi	array	%r1
+	add	%r1	%r5	%r1	
+	ld	[%r1]	%r7		!array[j]
+	add	%r5	4	%r5
+	sub	%r3	%r5	%r0
+	bne	loop2
+	nop
+	add	%r4	4	%r4
+	sub	%r3	%r4	%r0
+	bne	loop
+	nop
+end:	ta	0
+
+
+
+----	---	---			---
+
+!	
+!	
+!	
+!	
+
+	.data
+n:	.word	4	!number of elements in array (counting from zero)
+array:	.word	1000	!defining array address
+
+	.equ
+1000:	.word	23,11,0f,ac,5f
+
+	.text
+start:	sethi	array	%r1		!array address 
+	sethi	n	%r2		!number of elements
+	umul	%r2	4	%r3
+	sethi	0	%r4		!counter i
+	sethi	0	%r5		!counter j
+loop:	sethi	0	%r6
+	xor	%r6	%r5	%r6	!minIndex=i
+	sethi	0	%r5	
+	xor	%r5	%r4	%r5	!counter j=i	
+loop2:	sethi	array	%r1
+	add	%r1	%r5	%r1	
+	ld	[%r1]	%r7		!array[j]
+	sethi	array	%r1
+	add	%r1	%r6	%r1
+	ld	[%r1]	%r8		!array[minIndex]
+	nop
+	sub	%r7	%r8	%r10	!check if, by array[j]-array[minIndex]
+	bge	notIf
+	nop
+	sethi	0	%r6
+	add	%r6	%r5	%r6	!minIndex=j
+notIf:	add	%r5	4	%r5
+	sub	%r3	%r5	%r10
+	bne	loop2
+	nop
+	sethi	array	%r1		!swap arr[i],arr[minindex]
+	add	%r1	%r4	%r1	!array[i]
+	ld	[%r1]	%r9
+	nop		
+	st	%r8	[%r1]
+	sethi	array	%r1
+	add	%r1	%r6	%r1
+	st	%r9	[%r1]
+	add	%r4	4	%r4
+	sub	%r3	%r4	%r10
+	bne	loop
+	nop
+end:	ta	0

@@ -1,0 +1,48 @@
+12 tane feature: An evolutionary approach to tetris'ten
+
+1. Pile Height
+2. Holes
+3. Connectd Holes
+4. Removed Lines
+5. Altitude Difference
+6. Maximum Well Depth
+7. Sum of all Wells (CF)
+8. Landing Height (PD)
+9. Blocks (CF)
+10. Weighted Blocks (CF)
+11. Row Transitions (PD)
+12. Column Transitions (PD)
+
+
+2382
+-135028
+-48491
+-74343
+59739
+-72528
+-61591
+13344
+-19737
+-47653
+-50015
+-144688
+
+
+
+-62709
+-30271
+0
+-48621
+35395
+-12
+-43810
+0
+0
+-4041
+-44262
+-5832
+
+
+
+
+

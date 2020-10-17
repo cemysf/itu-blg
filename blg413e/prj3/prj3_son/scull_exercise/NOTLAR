@@ -1,0 +1,34 @@
+#compile:
+	make
+
+#load:
+	insmod ./scull.ko [parametre (scull_quantum=65536..)]
+
+#get major number:
+	grep scull /proc/devices
+
+#create device node(s):
+	mknod /dev/scull0 c 250 0
+	mknod /dev/scull1 c 250 1
+	...
+
+#control
+	lsmod
+	dmesg|tail	
+
+#write to device
+	echo test > /dev/scull0
+	strace cp <file> /dev/scull0 		#strace: trace sys calls
+
+#read from device
+	cat /dev/scull0
+
+#unload module
+	rmmod scull
+
+
+-------------------------
+ls -l /dev/scull0: 	.... 250, 0 .... 	(major, minor numbers)
+
+major number: identifies the driver associated with the device
+minor number: used by the kernel to determine exactly which device is being referred to

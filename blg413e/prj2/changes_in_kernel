@@ -1,0 +1,52 @@
+Changed kernel files:
+	/include/linux/sched.h
+	/include/linux/init_task.h
+	/kernel/fork.c
+	/fs/proc/base.c
+
+Diff commands for these files:
+
+
+itucs@ubuntu:~/Desktop/linux-source-3.13.0$ diff include/linux/sched.h ../kernel_unchanged/sched.h 
+1052d1051
+< 
+1467,1470c1466
+< 
+< 	///	system prog. proj2 edit
+< 	int casper;
+< };	
+---
+> };
+
+
+itucs@ubuntu:~/Desktop/linux-source-3.13.0$ diff include/linux/init_task.h ../kernel_unchanged/init_task.h 
+175d174
+< 	.casper	= 0,						\
+
+
+itucs@ubuntu:~/Desktop/linux-source-3.13.0$ diff kernel/fork.c ../kernel_unchanged/fork.c 
+1359,1361d1358
+< 	/// blg413 prj2
+< 	p->casper=0;
+< 
+1691,1695d1687
+< 
+< 
+< 	///system prog. proj2 edit
+< 	p->casper = 0;
+< 
+
+
+itucs@ubuntu:~/Desktop/linux-source-3.13.0$ diff fs/proc/base.c ../kernel_unchanged/base.c 
+591,597d590
+< 	//blg413e prj2
+< 	struct cred *task_cred = get_task_cred(task);
+< 	if(	  task->casper == 3 || 
+< 		((task->casper == 1)&&(task_cred->euid.val != current_euid().val)) || 
+< 		((task->casper == 2)&&(task_cred->egid.val != current_egid().val)) )
+< 		return 0;
+< 
+2959c2952
+< 		if (!has_pid_permissions(ns, iter.task, 2) || iter.task->casper != 0)
+---
+> 		if (!has_pid_permissions(ns, iter.task, 2))

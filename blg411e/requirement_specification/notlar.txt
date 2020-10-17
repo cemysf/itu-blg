@@ -1,0 +1,29 @@
+http://deseng.ryerson.ca/dokuwiki/design:usage_scenario
+http://www.usability.gov/how-to-and-tools/methods/use-cases.html
+http://www.visual-paradigm.com/VPGallery/diagrams/UseCase.html
+
+
+online diagram tool:	
+https://www.lucidchart.com/pages/landing/use_case_diagram_tool?utm_source=google&utm_medium=cpc&utm_campaign=use_case_diagram_tool_other_turkey&gclid=CK3xw8mIkMkCFQ26GwodeaAIcw
+	i724312@trbvm.com
+	qwertyasd
+
+
+1-package sender requests drone delivery for her/his package
+//2-p.s. fills a form which indicates receiver address
+2-drone crew prepares the drone and loads the package 
+3-operator sends coordinates of destination to the drone from command control center
+4-drone calculates trajectory for given destination
+5-drone moves to the destination, while checking for any kind of failure
+6-if the drone detects failure, it sends a failure message to control center
+7-operator receives failure message, sends a recovery team if required
+8-if the drone arrives to destination and delivers package without failure, it sends "successful delivery" message to control center
+9-drone follows same trajectory backward to return the base
+10-
+
+
+
+//returns to the base, informs control center with "returned" message if no 
+
+
+

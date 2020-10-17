@@ -1,0 +1,11 @@
+
+{% extends "layout.html" %}
+{% block title %}Search Team{% endblock %}
+{% block content %}
+
+  <form action="/searchteam" method="post">
+  Search text : <input type="text" name="textstr"><br>
+  <input type="submit" value="Submit">
+</form>
+
+{% endblock %}

@@ -1,0 +1,46 @@
+	jmp $4000
+	.org $4000
+	lds #$4200	;stack pointer at $4200
+	ldx #$4100	;address of the array is $4100
+	ldaa #$0a	;size of array
+	stx $0010	;address of the array stored in $10
+	staa $12	;size of array stored in $12
+l1	staa 0,x	;initializing the array
+	inx	
+	deca
+	cmpa #$0
+	bne l1
+	ldx #$4100
+
+;;;	BUBBLE SORT	;;;
+	ldaa $12	;outer loop iterator i=n to 0
+b1	ldx #$4100	;array iterator is index register
+	ldab $12
+	decb		;inner loop iterator j=n-1 to 0
+b2	nop		;nop used to prevent pipeline conflict
+	inx		;iterate in array
+	psha		;push a and b to stack
+	pshb
+	ldab 0,x	;b=array[j+1]
+	dex
+	ldaa 0,x	;a=array[j]
+	cba
+	ble next	;continue if a[j]<=a[j+1]
+	staa $40f0	;store a in memory (for swap)
+	tba		;copy content of b to a
+	ldab $40f0	;load a from memory to b
+	staa 0,x
+	inx
+	stab 0,x
+
+next	nop		;nop used to prevent pipeline conflict
+	pulb		;restore b and a from stack
+	pula
+	decb
+	cmpb #$0	;check inner loop condition
+	bne b2
+	deca
+	cmpa #$0
+	bne b1		;check outer loop condition
+	swi
+	wai		;wait for key when program ends (only for simulator)

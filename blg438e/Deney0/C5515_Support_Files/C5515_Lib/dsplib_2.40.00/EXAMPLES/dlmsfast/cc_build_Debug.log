@@ -1,0 +1,8 @@
+----------------------------  dlmsfast.pjt - Debug  ----------------------------
+[dlmsfast_T.C] "C:\CCStudio_v3.2\C5500\cgtools\bin\cl55" -g -q -fr"C:/TiDoc/c55dsplib/dsplib/EXAMPLES/dlmsfast/Debug" -i"../../include" -d"_DEBUG" -v5510:2 -@"Debug.lkf" "dlmsfast_T.C"
+
+[Linking...] "C:\CCStudio_v3.2\C5500\cgtools\bin\cl55" -@"Debug.lkf"
+<Linking>
+
+Build Complete,
+  0 Errors, 0 Warnings, 0 Remarks.

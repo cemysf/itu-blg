@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Messages>
+	<message code="001" value="tr:=XML dosyasını okumaya çalışırken bir hata oluştu.;;en:=Error while reading XML file."/>
+	<message code="002" value="tr:=Parametre sayısı hatalı. Beklenen parametre sayısı ;;en:=Parameter count is different than expected. Required "/>
+	<message code="003" value="tr:=Komutta bilinmeyen parametreler var.;;en:=There are unknown parameter(s)."/>
+	<message code="004" value="tr:=Parametre onluk sisteme göre bir sayı olmalıdır.;;en:=Parameter must be a decimal."/>
+	<message code="005" value="tr:=Parametre sıfır ve birlerden oluşan ikili sistemde olmalıdır.;;en:=Parameter must be a binary only with zeros and ones."/>
+	<message code="006" value="tr:=Parametre yalnıca 0-9 ve A-F içerek on altılık düzende olmalıdır.;;en:=Parameter must be a hex only with 0-9 and A-F."/>
+	<message code="007" value="tr:=Parametre erişilebilir bir saklayıcı olmalıdır. Beklenen aralık R0-R;;en:=Parameter must be a register between R0 and R"/>
+	<message code="008" value="tr:=Parametre bir sayı veya saklayıcı değil.;;en:=Parameter is not a register or decimal, hex, or binary number."/>
+	<message code="009" value="tr:=S2 parametresini bulmaya çalışırken bilinmeyen bir hata oluştu.;;en:=Undefined error while trying to get operand S2."/>
+	<message code="010" value="tr:=Parametre (Rs)S2 formatında olmalıdır.;;en:=Parameter must be formatted like (Rs)S2."/>
+	<message code="011" value="tr:=Parametre (Rd)S2 formatında olmalıdır.;;en:=Parameter must be formatted like (Rd)S2."/>
+	<message code="012" value="tr:=Parametre S2(Rs) formatında olmalıdır.;;en:=Parameter must be formatted like S2(Rs)."/>
+	<message code="013" value="tr:=Y parametresini bulmaya çalışırken bilinmeyen bir hata oluştu.;;en:=Undefined error while trying to get operand Y."/>
+	<message code="014" value="tr:=Nesne bulunamadı! Öncelikle bir nesne belirtmelisiniz.;;en:=No object found! You must select an object first."/>
+	<message code="015" value="tr:=Verilen anahtar bulunamadı! Anahtar: ;;en:=No matching key found! Input key: "/>
+	<message code="016" value="tr:=Anahtar değeri boş olamaz!;;en:=Key cannot be null!"/>
+	<message code="017" value="tr:=Bu belge daha önce açılmış.;;en:=File is already open."/>
+	<message code="018" value="tr:=Değişikliklerin gerçekleşmesi için programı yeniden başlatmalısınız.;;en:=You need to restart program to activate the changes."/>	
+	<message code="019" value="tr:=Program tamamlandı.;;en:=Program over."/>
+	<message code="020" value="tr:=START etiketinin öncesinde bir etiket tanımlanamaz.;;en:=There cannot be another label before START."/>
+	<message code="021" value="tr:=Bu tanımlanmış bir komut değildir: ;;en:=This is not a defined command: "/>
+	<message code="022" value="tr:=İş hattındaki çakışma vardır ve programın çalışmasına devam etmesi için NOP komutu eklenecektir. Lütfen programınızı tekrar yazarak bu sorunu çözün.;;en:=Because of pipeline hazard system will add NOP command to make your program keep running. Please rewrite your program to fix that problem."/>
+</Messages>

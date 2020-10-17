@@ -1,0 +1,66 @@
+http://www.cs.berkeley.edu/~satishr/cs273/
+https://www.cs.rit.edu/~ark/251/
+
+***********	http://web.mst.edu/~ercal/387/387.html		****************
+
+***		https://computing.llnl.gov/tutorials/parallel_comp/		***
+
+
+http://mpitutorial.com/tutorials/
+
+
+
+------------------------------------
+ödev 1
+
+	shared memory
+	Teslim Başlangıcı 22 Şubat 2016 00:00 	Teslim Bitişi 29 Şubat 2016 23:00 	Ödevi Yükle
+	Ödev Açıklaması
+
+	A reader/writer application will be implemented  to run in a Unix based operating system using C with 2 reader and 2 writer processes 		communicating over a circular list in a shared memory. The first writer writes in only odd numbered cells and only the first reader 		reads these values. Similarly the second writer writes in only even numbered cells and only the second reader reads these values.
+
+	Please note that a testing environment may require a fifth process to check the content of the circular list. 
+
+	No report is required but sufficient inline comments are expected. 
+
+ödev 2
+
+	message passing
+	Teslim Başlangıcı 22 Şubat 2016 00:00 	Teslim Bitişi 29 Şubat 2016 23:00 	Ödevi Yükle
+	Ödev Açıklaması
+
+	A group based messaging system is expected to be implemented via message passing mechanisms. The essential operations to be 		implemented are:
+
+	users:
+
+	registration to a server
+
+	signing out from a server 
+
+	listing the messaging groups 
+
+	signing in/out to/from a messaging group
+
+	sending/automatically receiving messages to/from messaging groups 
+
+ 
+	admin:
+
+	book keeping of the users and the messaging groups
+
+	 
+
+	No reports are expected but sufficient inline codes are required.
+
+
+
+
+--------------------
+http://beej.us/guide/bgipc/output/html/multipage/index.html	
+http://www.tldp.org/LDP/lpg/node27.html#SECTION00742000000000000000
+
+https://www.cs.cf.ac.uk/Dave/C/node25.html
+
+
+kitap:
+https://www.cs.usfca.edu/~peter/ipp/

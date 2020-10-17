@@ -1,0 +1,33 @@
+--------------------------------
+REQUIREMENTS SPECIFICATION NOTES
+--------------------------------
+
+* ONLY ONE PERSON FROM EACH GROUP SHOULD SUBMIT THIS REPORT
+* Each title and subtitle must start with a drawing/chart/table (except 1 introduction).
+* Each title and subtitle must contain the detailed explanation of all items in the drawing/chart/table.
+* Explanations should be itemized (no paragraphs).
+* If you are unfamiliar to a term in this document, it is your responsibility to search and learn it.
+
+-----------------------------------
+REQUIREMENTS SPECIFICATION CONTENTS
+-----------------------------------
+
+COVER PAGE
+	Course information, report name, project title, group name and members, date etc.
+
+1. INTRODUCTION
+	Goal, contents and organization of the document.
+	
+2. USAGE SCENARIO [30]
+	2.1 User types - List of user profiles of the software
+	2.2 Use Case Diagram - One diagram for each software requirement, Example: http://upload.wikimedia.org/wikipedia/commons/1/1d/Use_case_restaurant_model.svg
+	2.3 Use Cases - A use case for each epic in your project plan also containing alternative flows, Example: http://en.wikipedia.org/wiki/Use_case#Examples
+
+3. EARLY SYSTEM MODELS [30]
+	3.1 Conceptual model -  For the system domain, Example: http://www.pling.org.uk/cs/msdimg/exampleconceptualmodel.png
+	3.2 Flow diagrams - One diagram for each use case in 2.3, you can use a flowchart or business process model. Example: http://en.wikipedia.org/wiki/Business_Process_Model_and_Notation#Examples_of_business_process_diagrams
+	
+4. USER STORIES [40]
+	This is the most important section of your report. For each component in your project plan, you should create a subsection. 
+	4.x 	User stories for the component. Number of user stories for a component should be consistent with the component size. User stories should be numbered and mapped to components.
+			Format: Short description using 1-2 sentences and specification in Gherkin format: https://github.com/cucumber/cucumber/wiki/Gherkin

@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+{% block title %}Player List{% endblock %}
+{% block content %}
+	<h2>Player List</h2>
+	<style>
+		#tbl tr td,th{
+			padding:5px;
+			text-align: center;
+		}
+	</style>
+
+	{% if IsAdmin == True %}
+	<a style="font-weight:Bold" href="{{ url_for('addplayer') }}">Add player</a>
+	{% endif %}
+	<a style="font-weight:Bold" href="{{ url_for('searchplayer') }}">Search player</a>
+
+	<table border="1" id="tbl" >
+	<tr>
+		<th>Player ID</th>
+		<th>Player Name</th>
+	</tr>
+		{% for player in Players %}
+			<tr>
+				<td>{{ player.ID }}</td>
+				<td>{{ player.Name }}</td>
+				{% if IsAdmin == True %}
+				<td>
+				<a href="{{ url_for('playerdelete',id = player.ID) }}">Delete player</a>
+				</td>
+				<td>
+				<a href="{{ url_for('updateplayer',id = player.ID) }}">Update player</a>
+				</td>
+				{% endif %}
+				<td>
+					<a href="{{ url_for('addplayercomment',id = player.ID) }}">Add comment for this player</a>
+				</td>
+				<td>
+					<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal{{ player.ID }}">Comments</button>
+					<div id="myModal{{ player.ID }}" class="modal fade" role="dialog">
+  						<div class="modal-dialog">
+  							<div class="modal-content">
+      							<div class="modal-header">
+        							<button type="button" class="close" data-dismiss="modal">&times;</button>
+        							<h4 class="modal-title">Check comments for {{ player.Name }} </h4>
+	      						</div>
+    	  						<div class="modal-body">
+	    	  						{% for comment in player.Comments %}
+        							<p>{{ comment }}</p>
+        							{% endfor %}
+	      						</div>
+    	  						<div class="modal-footer">
+        							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      							</div>
+	    					</div>
+  						</div>
+					</div>
+				</td>
+			</tr>
+		{% endfor %}
+	</table>
+{% endblock %}

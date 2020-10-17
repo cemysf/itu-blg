@@ -1,0 +1,4 @@
+-z -q -c -o"./Debug/cifft32.out" -x -i"../.." -i"C:/CCStudio_v3.2/C5500/rtdx/lib" -i"C:/CCStudio_v3.2/C5500/csl/lib" -i"C:/CCStudio_v3.2/C5500/xdais/lib" -i"C:/CCStudio_v3.2/bios_5_21/packages/ti/bios/lib" -i"C:/CCStudio_v3.2/C5500/cgtools/lib" -l"rts55.lib" -l"55xdsp.lib"
+"C:\TiDoc\c55dsplib\dsplib\EXAMPLES\cifft32\Debug\cifft32_t.obj"
+"C:\TiDoc\c55dsplib\dsplib\EXAMPLES\cifft32\Debug\LTEST.obj"
+"C:\TiDoc\c55dsplib\dsplib\EXAMPLES\cifft32\cfft32.cmd"

@@ -1,0 +1,225 @@
+******************************************************************************
+         TMS320C55x COFF Linker PC v3.4.0                      
+******************************************************************************
+>> Linked Thu Oct 12 10:48:13 2006
+
+OUTPUT FILE NAME:   <./Debug/cfft32.out>
+ENTRY POINT SYMBOL: "_c_int00"  address: 00014000
+
+
+MEMORY CONFIGURATION
+
+         name            origin    length      used     unused   attr    fill
+                        (bytes)   (bytes)    (bytes)   (bytes)
+----------------------  --------  ---------  --------  --------  ----  --------
+  MMR                   00000000   000000c0  00000000  000000c0  RWIX
+  SPRAM                 000000c0   00000020  00000000  00000020  RWIX
+  DARAM0                00000100   00003f00  000007d0  00003730  RWIX
+  DARAM1                00004000   00004000  0000209a  00001f66  RWIX
+  DARAM2                00008000   00004000  00000000  00004000  RWIX
+  DARAM3                0000c000   00004000  00000800  00003800  RWIX
+  SARAM0                00010000   00004000  00001046  00002fba  RWIX
+  SARAM1                00014000   00008000  00000418  00007be8  RWIX
+  SARAM3                0001c000   00004000  00000800  00003800  RWIX
+  SARAM4                00020000   00004000  00000000  00004000  RWIX
+  SARAM5                00024000   00004000  00000000  00004000  RWIX
+  SARAM6                00028000   00004000  00000000  00004000  RWIX
+  SARAM7                0002c000   00004000  00000000  00004000  RWIX
+  SARAM8                00030000   00004000  00000000  00004000  RWIX
+  SARAM9                00034000   00004000  00000000  00004000  RWIX
+  SARAM10               00038000   00004000  00000000  00004000  RWIX
+  SARAM11               0003c000   00004000  00000000  00004000  RWIX
+  SARAM12               00040000   00004000  00000000  00004000  RWIX
+  SARAM13               00044000   00004000  00000000  00004000  RWIX
+  SARAM14               00048000   00004000  00000000  00004000  RWIX
+  SARAM15               0004c000   00004000  00000000  00004000  RWIX
+  CE0                   00050000   003b0000  00000000  003b0000  RWIX
+  CE1                   00400000   00400000  00000000  00400000  RWIX
+  CE2                   00800000   00400000  00000000  00400000  RWIX
+  CE3                   00c00000   003f8000  00000000  003f8000  RWIX
+  PDROM                 00ff8000   00007f00  00000000  00007f00  RWIX
+  VECS                  00ffff00   00000100  00000100  00000000  RWIX
+
+
+SECTION ALLOCATION MAP
+(Addresses surrounded by []'s are displayed for convenience only!)
+
+output                                                          attributes/
+section   page  orgn(bytes) orgn(words) len(bytes) len(words)   input sections
+--------  ----  ----------- ----------- ---------- ----------   --------------
+.stack       0   [ 00000100 ]  00000080          *   000001f4   UNINITIALIZED
+
+.sysstack 
+*            0   [ 000004e8 ]  00000274          *   000001f4   UNINITIALIZED
+
+.sysmem      0   [ 00004000 ]  00002000          *   00000000   UNINITIALIZED
+
+.const       0   [ 00004000 ]  00002000          *   00000000   UNINITIALIZED
+
+.cio         0   [ 00004000 ]  00002000          *   00000000   UNINITIALIZED
+
+.data        0   [ 00004000 ]  00002000          *   00001000   
+                 [ 00004000 ]  00002000          *   00001000   55xdsp.lib : twiddle32.obj (.data:twiddle32)
+
+.bss         0   [ 00006000 ]  00003000          *   0000004d   UNINITIALIZED
+                 [ 00006000 ]  00003000          *   00000046   rts55.lib : exit.obj (.bss)
+                 [ 0000608c ]  00003046          *   00000004             : _lock.obj (.bss)
+                 [ 00006094 ]  0000304a          *   00000002   55xdsp.lib : cfft32_noscale.obj (.bss)
+                 [ 00006098 ]  0000304c          *   00000001   cfft32_t.obj (.bss)
+
+files        0   [ 00008000 ]  00004000          *   00000000   UNINITIALIZED
+
+statvar      0   [ 00008000 ]  00004000          *   00000000   UNINITIALIZED
+
+statarry     0   [ 00008000 ]  00004000          *   00000000   UNINITIALIZED
+
+tempvar      0   [ 00008000 ]  00004000          *   00000000   UNINITIALIZED
+
+temparry     0   [ 00008000 ]  00004000          *   00000000   UNINITIALIZED
+
+.inputcopy 
+*            0   [ 0000c000 ]  00006000          *   00000000   UNINITIALIZED
+
+.input       0   [ 0000c000 ]  00006000          *   00000400   UNINITIALIZED
+                 [ 0000c000 ]  00006000          *   00000400   cfft32_t.obj (.input)
+
+.cinit       0   [ 00010000 ]  00008000          *   00000823   
+                 [ 00010000 ]  00008000          *   0000080a   cfft32_t.obj (.cinit)
+                 [ 00011014 ]  0000880a          *   0000000e   rts55.lib : exit.obj (.cinit)
+                 [ 00011030 ]  00008818          *   0000000a             : _lock.obj (.cinit)
+                 [ 00011044 ]  00008822          *   00000001   --HOLE-- [fill = 0]
+
+.text        0     00014000  [ 0000a000 ] 00000418          *   
+                   00014000  [ 0000a000 ] 0000004a          *   rts55.lib : boot.obj (.text)
+                   0001404a  [ 0000a025 ] 00000097          *             : exit.obj (.text)
+                   000140e1  [ 0000a070+] 00000007          *             : exit.obj (.text:CIO_breakpoint)
+                   000140e8  [ 0000a074 ] 00000002          *             : vectors.obj (.text)
+                   000140ea  [ 0000a075 ] 00000010          *             : _lock.obj (.text)
+                   000140fa  [ 0000a07d ] 0000002a          *             : args_main.obj (.text)
+                   00014124  [ 0000a092 ] 0000006b          *             : autoinit.obj (.text)
+                   0001418f  [ 0000a0c7+] 00000048          *   cfft32_t.obj (.text)
+                   000141d7  [ 0000a0eb+] 0000007a          *   LTEST.obj (.text)
+                   00014251  [ 0000a128+] 00000075          *   55xdsp.lib : cbrev32.obj (.text)
+                   000142c6  [ 0000a163 ] 00000151          *              : cfft32_noscale.obj (.text)
+                   00014417  [ 0000a20b+] 00000001          *   --HOLE-- [fill = 20]
+
+.twiddle32 
+*            0   [ 0001c000 ]  0000e000          *   00000000   UNINITIALIZED
+
+.test        0   [ 0001c000 ]  0000e000          *   00000400   UNINITIALIZED
+                 [ 0001c000 ]  0000e000          *   00000400   cfft32_t.obj (.test)
+
+vectors      0     00ffff00  [ 007fff80 ] 00000100          *   
+                   00ffff00  [ 007fff80 ] 00000100          *   rts55.lib : vectors.obj (vectors)
+
+
+GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
+
+abs. value/
+byte addr   word addr   name
+---------   ---------   ----
+00000001                $TI_capability$C5500$MemoryModel
+00000001                $TI_capability_requires_rev2
+            00003000    .bss
+            00002000    .data
+00014000                .text
+000140e2                C$$EXIT
+00ffff00                _Reset
+000003e8                __STACK_SIZE
+000003e8                __SYSSTACK_SIZE
+ffffffff                ___binit__
+            00003000    ___bss__
+ffffffff                ___c_args__
+            00008000    ___cinit__
+            00002000    ___data__
+            00003000    ___edata__
+            0000304d    ___end__
+00014418                ___etext__
+ffffffff                ___pinit__
+00014000                ___text__
+000140fa                __args_main
+            00003042    __cleanup_ptr
+            00003044    __dtors_ptr
+            00003046    __lock
+000140f8                __nop
+000140f1                __register_lock
+000140ea                __register_unlock
+            00000080    __stack
+            00000274    __sysstack
+            00003048    __unlock
+000140e1                _abort
+00014099                _atexit
+00014124                _auto_init
+00014000                _c_int00
+00014251                _cbrev32
+000142c6                _cfft32_NOSCALE
+            0000304c    _eflagi
+0001404a                _exit
+000141d7                _ltest
+0001418f                _main
+            0000e000    _rtest
+            00006000    _x
+ffffffff                binit
+            00008000    cinit
+            00003000    edata
+            0000304d    end
+00014418                etext
+ffffffff                pinit
+            00002000    twiddle32
+
+
+GLOBAL SYMBOLS: SORTED BY Symbol Address 
+
+abs. value/
+byte addr   word addr   name
+---------   ---------   ----
+00000001                $TI_capability_requires_rev2
+00000001                $TI_capability$C5500$MemoryModel
+            00000080    __stack
+000003e8                __STACK_SIZE
+000003e8                __SYSSTACK_SIZE
+            00000274    __sysstack
+            00002000    .data
+            00002000    ___data__
+            00002000    twiddle32
+            00003000    edata
+            00003000    ___edata__
+            00003000    .bss
+            00003000    ___bss__
+            00003042    __cleanup_ptr
+            00003044    __dtors_ptr
+            00003046    __lock
+            00003048    __unlock
+            0000304c    _eflagi
+            0000304d    end
+            0000304d    ___end__
+            00006000    _x
+            00008000    ___cinit__
+            00008000    cinit
+00014000                .text
+00014000                _c_int00
+00014000                ___text__
+0001404a                _exit
+00014099                _atexit
+000140e1                _abort
+000140e2                C$$EXIT
+000140ea                __register_unlock
+000140f1                __register_lock
+000140f8                __nop
+000140fa                __args_main
+00014124                _auto_init
+0001418f                _main
+000141d7                _ltest
+00014251                _cbrev32
+000142c6                _cfft32_NOSCALE
+00014418                ___etext__
+00014418                etext
+            0000e000    _rtest
+00ffff00                _Reset
+ffffffff                pinit
+ffffffff                ___binit__
+ffffffff                binit
+ffffffff                ___pinit__
+ffffffff                ___c_args__
+
+[48 symbols]

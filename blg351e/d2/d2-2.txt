@@ -1,0 +1,28 @@
+	ldaa #$25
+	staa $0100
+	ldx #$0100
+	stx $4000	;write address to $4000
+	ldx #$0
+
+	ldx $4000
+	ldab 0,x
+	ldaa #$aa
+	staa 0,x
+	cmpa 0,x
+	bne fail
+	ldaa #$55
+	staa 0,x
+	cmpa 0,x
+	bne fail
+	ldaa #$01
+	staa $4002
+	swi
+	wai
+
+fail	clra
+	staa $4002
+	swi
+	wai
+
+
+	

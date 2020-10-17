@@ -1,0 +1,116 @@
+#include <linux/module.h>
+#include <linux/init.h>
+#include <linux/fs.h>
+#include <linux/kdev_t.h>
+#include <linux/cdev.h>
+#include <linux/slab.h>
+#include <linux/errno.h>
+
+MODULE_LICENSE("Dual BSD/GPL");
+MODULE_AUTHOR("cem");
+
+int major=0;
+int minor=0;
+int count=1;
+dev_t device_no=0;
+int return_val=0;	// return 0 if nothing goes wrong..
+
+struct file_operations fops = {
+	.owner = THIS_MODULE,
+	// TODO: fonksiyonlar yazılacak
+//	.read = readFunct,
+//	.ioctl = ioctlFunct,
+};
+
+struct range_dev{
+	struct cdev cdev;
+	/// TODO: diğer datalar..
+
+};
+struct range_dev *device_ptr;
+
+
+
+static void rangeSetup(int index)
+{
+	int devno=MKDEV(major, minor+index);
+	int err_no;
+
+	cdev_init(&device_ptr->cdev, &fops);
+	device_ptr->cdev.ops = &fops;
+	device_ptr->cdev.owner = THIS_MODULE;
+	err_no = cdev_add(&device_ptr->cdev, devno, 1);
+	if (err_no!=0)
+		printk(KERN_ALERT "blg413e prj3 - (ERROR:%d) cannot register devno:%d index:%d\n",err_no, devno, index);
+	else
+		printk(KERN_ALERT "blg413e prj3 - (INFO) registered devno:%d index:%d\n",devno, index);
+
+}
+
+
+//ssize_t readFunct(struct file *filp, char __user *buffer, size_t, loff_t *)
+//{
+
+//}
+
+/// ioctlFunct
+
+
+int initModule(void)
+{
+	int i;					// loop iterator
+	printk(KERN_ALERT "blg413e prj3 - (INFO) initializing module\n"); 
+
+	// dynamically allocate device numbers
+	// device_no: holds the first number in allocation (if allocation is successfull)
+	// minor: requested first minor (usually 0)
+	// count: total number of continious device numbers requested
+	return_val= alloc_chrdev_region(&device_no, minor, count, "range");
+	major=MAJOR(device_no);
+	if (return_val!=0)
+	{
+		printk(KERN_ALERT "blg413e prj3 - (ERROR:%d) cannot initialize module\n",return_val);
+		return return_val;
+	}
+	
+	// allocate memory for devices
+	device_ptr = kmalloc(count * sizeof(struct range_dev), GFP_KERNEL);
+	if (device_ptr==NULL)
+	{
+		return_val = -ENOMEM;
+		printk(KERN_ALERT "blg413e prj3 - (ERROR:%d) cannot allocate memory\n",return_val);	
+		return return_val;
+	}
+	memset(device_ptr, 0, count * sizeof(struct range_dev));
+	
+	// register devices
+	for(i=0; i<count; i++)
+	{
+		rangeSetup(i);
+	}
+
+
+	printk(KERN_ALERT "blg413e prj3 - (INFO) initialized with major:%d\n", major);	
+	return return_val;
+}
+
+void exitModule(void)
+{
+	dev_t devno = MKDEV(major, minor);
+	int i;
+	
+	if(device_ptr!=NULL)
+	{
+		for(i=0; i< count; i++)
+			cdev_del(&device_ptr[i].cdev);
+		kfree(device_ptr);
+	}
+	
+	
+	unregister_chrdev_region(devno, count);
+	printk(KERN_ALERT "blg413e prj3 - (INFO) exit module major:%d\n", major); 
+}
+
+module_init(initModule);
+module_exit(exitModule);
+

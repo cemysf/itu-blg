@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1427918861 source:/home/cya/dev_/ders_temp/312_odev2/main.c
+	<stdio.h>
+	<stdlib.h>
+	<pthread.h>
+	<sys/ipc.h>
+	<sys/sem.h>
+	<sys/types.h>
+	<signal.h>
+

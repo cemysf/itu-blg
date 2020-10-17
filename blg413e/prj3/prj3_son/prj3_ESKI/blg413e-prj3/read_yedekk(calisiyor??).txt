@@ -1,0 +1,36 @@
+{
+	 struct range_dev *dev = filp->private_data;
+    //int i, *array, n_int;
+    ssize_t retval = 0;
+ 
+
+ //   if (down_interruptible(&dev->sem))
+   //     return -ERESTARTSYS;
+ 
+ /*   
+    n_int = count / sizeof(int);
+    
+    if(n_int * dev->step + dev->counter > dev->end){
+		n_int = dev->end - dev->counter / dev->step;
+	} 
+    
+    array = kmalloc(n_int*sizeof(int), GFP_KERNEL);
+    
+    for(i=0;i<n_int;i++){
+		array[i] = i*dev->step+dev->counter;
+	}
+*/
+    if (copy_to_user(buf, &dev->counter, sizeof(int))){//(buf, array, n_int * sizeof(int))) {
+        retval = -EFAULT;
+        goto out;
+    }
+
+    printk(KERN_ALERT "blg413e prj3 - (INFO) range_read, counter=%d\n", dev->counter);
+	dev->counter += 1; //= array[n_int-1] + dev->step;
+	retval = sizeof(int);
+
+  //out:
+  	//kfree(array);
+  //  up(&dev->sem);
+    return retval;
+}

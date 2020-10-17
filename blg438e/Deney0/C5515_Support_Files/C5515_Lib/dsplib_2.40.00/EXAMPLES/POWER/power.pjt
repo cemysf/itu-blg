@@ -1,0 +1,36 @@
+; Code Composer Project File, Version 2.0 (do not modify or remove this line)
+
+[Project Settings]
+ProjectDir="C:\TiDoc\c55dsplib\dsplib\EXAMPLES\POWER\"
+ProjectType=Executable
+CPUFamily=TMS320C55XX
+Tool="Compiler"
+Tool="CustomBuilder"
+Tool="DspBiosBuilder"
+Tool="Linker"
+Config="Debug"
+Config="Release"
+
+[Source Files]
+Source="LTEST.C"
+Source="POWER_T.C"
+Source="55x.cmd"
+
+["Compiler" Settings: "Debug"]
+Options=-g -q -fr"C:\TiDoc\c55dsplib\dsplib\EXAMPLES\POWER\Debug" -i"..\..\include" -d"_DEBUG"
+
+["Compiler" Settings: "Release"]
+Options=-q -o2 -fr"C:\TiDoc\c55dsplib\dsplib\EXAMPLES\POWER\Release"
+
+["DspBiosBuilder" Settings: "Debug"]
+Options=-v55
+
+["DspBiosBuilder" Settings: "Release"]
+Options=-v55
+
+["Linker" Settings: "Debug"]
+Options=-q -c -o".\Debug\power.out" -x -i"..\.." -l"55xdsp.lib" -l"rts55.lib"
+
+["Linker" Settings: "Release"]
+Options=-q -c -o".\Release\power.out" -x
+

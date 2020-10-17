@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block title %}Search Tournament{% endblock %}
+{% block content %}
+
+  <form action="/searchtournament" method="post">
+  Search text : <input type="text" name="textstr"><br>
+  <input type="submit" value="Submit">
+</form>
+
+{% endblock %}

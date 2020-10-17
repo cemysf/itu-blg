@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block title %}Movie Edit Form{% endblock %}
+{% block content %}
+<form action="{{ url_for('movies_page') }}" method="post"> <table>
+<tr> <th>Title:</th> <td>
+<input type="text" name="title" required autofocus /> </td>
+</tr> <tr>
+<th>Year:</th> <td>
+<input type="text" name="year" size="4" /> </td>
+</tr>
+</table>
+<input value="Save" name="save" type="submit" />
+</form>
+{% endblock %}

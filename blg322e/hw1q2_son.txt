@@ -1,0 +1,69 @@
+!	BLG 322 HW 1 - Question 2
+!	Delta with 'nop' commands
+!	Cem Yusuf Aydogdu - 150120251
+!	
+!	A program to sort an array 
+!	with selection sort algoritm
+!	
+!	%r1	adress register
+!	%r2	number of elements (counting from zero)
+!	%r3	data size * number of elements (for loop check)
+!	%r4	counter i
+!	%r5	counter j
+!	%r6	minIndex
+!	%r7	array[j]
+!	%r8	array[minIndex]
+!	%r9	array[i]
+!	%r10	arbitrary register to check branch conditions
+!
+!	Solved Hazards	(line numbers start from '.data')
+!	Line	Type		Explanation
+!	16	Data		Sub command takes %r8 before loading from memory
+!	19	Control		PC loads next instruction before determining target
+!	25	Control		PC loads next instruction before determining target
+!	36	Control		PC loads next instruction before determining target
+
+	.data
+n:	.word	a		!number of elements in array (count from one)
+array:	.word	1000		!defining array address
+
+	.equ
+1000:	.word	23,11,0f,ac,5f,fa,03,bb,df,6a	!array elements
+
+	.text
+start:	sethi	array	%r1		!array address 
+	sethi	n	%r2		
+	sub	%r2	1	%r2	!number of elements
+	umul	%r2	4	%r3	!calculate boundary
+loop:	sethi	0	%r6
+	xor	%r6	%r5	%r6	!minIndex=i
+	sethi	0	%r5	
+	xor	%r5	%r4	%r5	!counter j=i	
+loop2:	sethi	array	%r1
+	add	%r1	%r5	%r1	
+	ld	[%r1]	%r7		!array[j]
+	sethi	array	%r1
+	add	%r1	%r6	%r1
+	ld	[%r1]	%r8		!array[minIndex]
+	nop
+	sub	%r7	%r8	%r10	!check if, by array[j]-array[minIndex]
+	bge	notIf
+	nop
+	sethi	0	%r6
+	add	%r6	%r5	%r6	!minIndex=j
+notIf:	add	%r5	4	%r5
+	sub	%r3	%r5	%r10
+	bne	loop2
+	nop
+	sethi	array	%r1		!swapping arr[i],arr[minindex]
+	add	%r1	%r4	%r1	
+	ld	[%r1]	%r9		!array[i]	
+	st	%r8	[%r1]
+	sethi	array	%r1
+	add	%r1	%r6	%r1
+	st	%r9	[%r1]
+	add	%r4	4	%r4
+	sub	%r3	%r4	%r10
+	bne	loop
+	nop
+end:	ta	0

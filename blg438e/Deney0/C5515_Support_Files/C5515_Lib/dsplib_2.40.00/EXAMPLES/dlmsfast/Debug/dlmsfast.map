@@ -1,0 +1,273 @@
+******************************************************************************
+         TMS320C55x COFF Linker PC v3.4.0                      
+******************************************************************************
+>> Linked Thu Oct 12 12:15:40 2006
+
+OUTPUT FILE NAME:   <./Debug/dlmsfast.out>
+ENTRY POINT SYMBOL: "_c_int00"  address: 00014000
+
+
+MEMORY CONFIGURATION
+
+         name            origin    length      used     unused   attr    fill
+                        (bytes)   (bytes)    (bytes)   (bytes)
+----------------------  --------  ---------  --------  --------  ----  --------
+  MMR                   00000000   000000c0  00000000  000000c0  R IX
+  DARAM1                000000c0   00001f40  00000a16  0000152a  RW X
+  DARAM2                00002000   00002000  00000028  00001fd8  RW X
+  DARAM3                00004000   00002000  0000001a  00001fe6  RW X
+  DARAM4                00006000   00002000  00000000  00002000  RW X
+  DARAM5                00008000   00002000  00000000  00002000  RW X
+  DARAM6                0000a000   00002000  00000000  00002000  RW X
+  DARAM7                0000c000   00002000  00000000  00002000  RW X
+  DARAM8                0000e000   00002000  00000000  00002000  RW X
+  SARAM0                00010000   00004000  0000019a  00003e66  RWIX
+  SARAM1                00014000   00004000  00000a93  0000356d  RWIX
+  SARAM2                00018000   00004000  00000000  00004000  RWIX
+  SARAM3                0001c000   00004000  00000000  00004000  RWIX
+  SARAM4                00020000   00004000  00000000  00004000  RWIX
+  SARAM5                00024000   00004000  00000000  00004000  RWIX
+  SARAM6                00028000   00004000  00000000  00004000  RWIX
+  SARAM7                0002c000   00004000  00000000  00004000  RWIX
+  SARAM8                00030000   00004000  00000000  00004000  RWIX
+  SARAM9                00034000   00004000  00000000  00004000  RWIX
+  SARAM10               00038000   00004000  00000000  00004000  RWIX
+  SARAM11               0003c000   00004000  00000000  00004000  RWIX
+  SARAM12               00040000   00004000  00000000  00004000  RWIX
+  SARAM13               00044000   00004000  00000000  00004000  RWIX
+  SARAM14               00048000   00004000  00000000  00004000  RWIX
+  SARAM15               0004c000   00004000  00000000  00004000  RWIX
+  CE0                   00050000   003b0000  00000000  003b0000  RWIX
+  CE1                   00400000   00400000  00000000  00400000  RWIX
+  CE2                   00800000   00400000  00000000  00400000  RWIX
+  CE3                   00c00000   003f8000  00000000  003f8000  RWIX
+  PDROM                 00ff8000   00007f00  00000000  00007f00  RWIX
+  VECS                  00ffff00   00000100  00000100  00000000  RWIX
+
+
+SECTION ALLOCATION MAP
+(Addresses surrounded by []'s are displayed for convenience only!)
+
+output                                                          attributes/
+section   page  orgn(bytes) orgn(words) len(bytes) len(words)   input sections
+--------  ----  ----------- ----------- ---------- ----------   --------------
+.sysmem      0   [ 000000c0 ]  00000060          *   00000000   UNINITIALIZED
+
+.data        0   [ 000000c0 ]  00000060          *   00000000   UNINITIALIZED
+
+.stack       0   [ 000000c0 ]  00000060          *   000001f4   UNINITIALIZED
+
+.sysstack 
+*            0   [ 000004a8 ]  00000254          *   000001f4   UNINITIALIZED
+
+.bss         0   [ 00000890 ]  00000448          *   00000121   UNINITIALIZED
+                 [ 00000890 ]  00000448          *   000000d6   dlmsfast_T.obj (.bss)
+                 [ 00000a3c ]  0000051e          *   00000046   rts55.lib : exit.obj (.bss)
+                 [ 00000ac8 ]  00000564          *   00000004             : _lock.obj (.bss)
+                 [ 00000ad0 ]  00000568          *   00000001   55xdsp.lib : dlmsfast.obj (.bss)
+
+.const       0   [ 00000ad4 ]  0000056a          *   00000002   
+                 [ 00000ad4 ]  0000056a          *   00000002   rts55.lib : fltlid.obj (.const)
+
+files        0   [ 00002000 ]  00001000          *   00000000   UNINITIALIZED
+
+statvar      0   [ 00002000 ]  00001000          *   00000000   UNINITIALIZED
+
+statarry     0   [ 00002000 ]  00001000          *   00000000   UNINITIALIZED
+
+tempvar      0   [ 00002000 ]  00001000          *   00000000   UNINITIALIZED
+
+temparry     0   [ 00002000 ]  00001000          *   00000000   UNINITIALIZED
+
+.coeffs      0   [ 00002000 ]  00001000          *   00000014   UNINITIALIZED
+                 [ 00002000 ]  00001000          *   00000014   dlmsfast_T.obj (.coeffs)
+
+.dbuffer     0   [ 00004000 ]  00002000          *   0000000d   UNINITIALIZED
+                 [ 00004000 ]  00002000          *   0000000d   dlmsfast_T.obj (.dbuffer)
+
+.cinit       0   [ 00010000 ]  00008000          *   000000cd   
+                 [ 00010000 ]  00008000          *   000000b4   dlmsfast_T.obj (.cinit)
+                 [ 00010168 ]  000080b4          *   0000000e   rts55.lib : exit.obj (.cinit)
+                 [ 00010184 ]  000080c2          *   0000000a             : _lock.obj (.cinit)
+                 [ 00010198 ]  000080cc          *   00000001   --HOLE-- [fill = 0]
+
+.text        0     00014000  [ 0000a000 ] 00000a93          *   
+                   00014000  [ 0000a000 ] 0000004a          *   rts55.lib : boot.obj (.text)
+                   0001404a  [ 0000a025 ] 00000097          *             : exit.obj (.text)
+                   000140e1  [ 0000a070+] 00000007          *             : exit.obj (.text:CIO_breakpoint)
+                   000140e8  [ 0000a074 ] 00000002          *             : vectors.obj (.text)
+                   000140ea  [ 0000a075 ] 00000010          *             : _lock.obj (.text)
+                   000140fa  [ 0000a07d ] 0000002a          *             : args_main.obj (.text)
+                   00014124  [ 0000a092 ] 0000006b          *             : autoinit.obj (.text)
+                   0001418f  [ 0000a0c7+] 000000f2          *   dlmsfast_T.obj (.text)
+                   00014281  [ 0000a140+] 00000077          *   FTEST.obj (.text)
+                   000142f8  [ 0000a17c ] 00000077          *   LTEST.obj (.text)
+                   0001436f  [ 0000a1b7+] 00000061          *   TEST.obj (.text)
+                   000143d0  [ 0000a1e8 ] 00000212          *   rts55.lib : cmpd.obj (.text)
+                   000145e2  [ 0000a2f1 ] 0000002a          *             : fixdi.obj (.text)
+                   0001460c  [ 0000a306 ] 00000079          *             : fixdli.obj (.text)
+                   00014685  [ 0000a342+] 0000000c          *             : fltid.obj (.text)
+                   00014691  [ 0000a348+] 0000006c          *             : fltlid.obj (.text)
+                   000146fd  [ 0000a37e+] 00000014          *             : subd.obj (.text)
+                   00014711  [ 0000a388+] 0000022d          *             : addd.obj (.text)
+                   0001493e  [ 0000a49f ] 00000154          *   55xdsp.lib : dlmsfast.obj (.text)
+                   00014a92  [ 0000a549 ] 00000001          *   --HOLE-- [fill = 20]
+
+isrs         0   [ 00018000 ]  0000c000          *   00000000   UNINITIALIZED
+
+vectors      0     00ffff00  [ 007fff80 ] 00000100          *   
+                   00ffff00  [ 007fff80 ] 00000100          *   rts55.lib : vectors.obj (vectors)
+
+
+GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
+
+abs. value/
+byte addr   word addr   name
+---------   ---------   ----
+00000001                $TI_capability$C5500$MemoryModel
+00000001                $TI_capability_requires_rev2
+            00000448    .bss
+            00000060    .data
+00014000                .text
+000140e2                C$$EXIT
+00ffff00                _Reset
+000003e8                __STACK_SIZE
+000003e8                __SYSSTACK_SIZE
+ffffffff                ___binit__
+            00000448    ___bss__
+ffffffff                ___c_args__
+            00008000    ___cinit__
+            00000060    ___data__
+            00000060    ___edata__
+            00000569    ___end__
+00014a93                ___etext__
+ffffffff                ___pinit__
+00014000                ___text__
+00014711                __addd
+000140fa                __args_main
+            00000560    __cleanup_ptr
+000145a2                __cmpd
+            00000562    __dtors_ptr
+00014564                __eqld
+000145e2                __fixdi
+0001460c                __fixdli
+00014685                __fltid
+00014691                __fltlid
+0001450f                __geqd
+000144b9                __gtrd
+00014461                __leqd
+            00000564    __lock
+0001440e                __lssd
+000143d0                __neqd
+000140f8                __nop
+000140f1                __register_lock
+000140ea                __register_unlock
+            00000060    __stack
+000146fd                __subd
+            00000254    __sysstack
+            00000566    __unlock
+000140e1                _abort
+00014099                _atexit
+00014124                _auto_init
+00014000                _c_int00
+            00002000    _dbuffer
+            0000047a    _des
+0001493e                _dlmsfast
+            0000051d    _eflagh
+            0000051c    _eflagr
+            0000051a    _error
+0001404a                _exit
+00014281                _ftest
+            00001000    _h
+            000004ac    _htest
+            0000051b    _i
+000142f8                _ltest
+0001418f                _main
+            000004e8    _r
+            000004b6    _rtest
+0001436f                _test
+            00000448    _x
+ffffffff                binit
+            00008000    cinit
+            00000060    edata
+            00000569    end
+00014a93                etext
+ffffffff                pinit
+
+
+GLOBAL SYMBOLS: SORTED BY Symbol Address 
+
+abs. value/
+byte addr   word addr   name
+---------   ---------   ----
+00000001                $TI_capability_requires_rev2
+00000001                $TI_capability$C5500$MemoryModel
+            00000060    edata
+            00000060    __stack
+            00000060    ___edata__
+            00000060    ___data__
+            00000060    .data
+000003e8                __SYSSTACK_SIZE
+000003e8                __STACK_SIZE
+            00000254    __sysstack
+            00000448    _x
+            00000448    .bss
+            00000448    ___bss__
+            0000047a    _des
+            000004ac    _htest
+            000004b6    _rtest
+            000004e8    _r
+            0000051a    _error
+            0000051b    _i
+            0000051c    _eflagr
+            0000051d    _eflagh
+            00000560    __cleanup_ptr
+            00000562    __dtors_ptr
+            00000564    __lock
+            00000566    __unlock
+            00000569    ___end__
+            00000569    end
+            00001000    _h
+            00002000    _dbuffer
+            00008000    cinit
+            00008000    ___cinit__
+00014000                ___text__
+00014000                .text
+00014000                _c_int00
+0001404a                _exit
+00014099                _atexit
+000140e1                _abort
+000140e2                C$$EXIT
+000140ea                __register_unlock
+000140f1                __register_lock
+000140f8                __nop
+000140fa                __args_main
+00014124                _auto_init
+0001418f                _main
+00014281                _ftest
+000142f8                _ltest
+0001436f                _test
+000143d0                __neqd
+0001440e                __lssd
+00014461                __leqd
+000144b9                __gtrd
+0001450f                __geqd
+00014564                __eqld
+000145a2                __cmpd
+000145e2                __fixdi
+0001460c                __fixdli
+00014685                __fltid
+00014691                __fltlid
+000146fd                __subd
+00014711                __addd
+0001493e                _dlmsfast
+00014a93                ___etext__
+00014a93                etext
+00ffff00                _Reset
+ffffffff                pinit
+ffffffff                ___binit__
+ffffffff                ___pinit__
+ffffffff                binit
+ffffffff                ___c_args__
+
+[69 symbols]

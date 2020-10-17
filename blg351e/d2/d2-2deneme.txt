@@ -1,0 +1,1 @@
+	jmp $4000	.org $4000	;program starts at address $4000	ldaa #$0a	staa $12	;write size to $12	ldx #$4100	;array address is $4100	stx $10		;write array address to $10l1	staa 0,x	;write numbers to array	inx	deca	cmpa #$0	bne l1	swi	

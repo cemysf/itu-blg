@@ -1,0 +1,76 @@
+kullanılan repo:
+https://chromium.googlesource.com/chromium/src/build/
+
+
+kaynaklar
+https://git-scm.com/book/tr/v2/Git-Basics-Viewing-the-Commit-History
+https://www.atlassian.com/git/tutorials/git-log/filtering-the-commit-history
+https://gist.github.com/varemenos/e95c2e098e657c7688fd				/// git log in json
+
+
+toplam commit sayısı:
+git rev-list --all --count
+
+dosyayı düzenleyenler:
+git log  --pretty=format:"%cn" -- [dosya_adı]
+
+
+developer isim listesi(tekrarsız)
+//TODO: iki veya üç isimlilerde awk patlıyor!!!
+git log --pretty=format:"%cn" | sort | uniq > commiter_isim_listesi.txt
+
+
+developer sayı ve isim (isim sıralı)
+git log --pretty=format:"%cn" | sort | uniq --count > commits_sayı_isim.txt
+	
+	
+developer sayı ve isim (sayı sıralı)
+git log --pretty=format:"%cn" | sort | uniq --count | sort -nr > commits_sayısıralı_isim.txt
+
+
+### dosyalarla birlikte dizinleri de basıyor!!!
+###dizindeki dosyaların adları: (sonuna "sed -n 'p;$='" eklersen toplam sayısını verir)
+###ls -ld $(find .) | awk '{print $9}' | sed 's/^..//' > dosya_listesi.txt
+
+sadece dosyalar (klasörsüz)
+ls -ldp $(find .) | grep -v '/$' | awk '{print $9}' | sed 's/^..//' > dosya_listesi_klasorsuz.txt
+
+
+belirtilen dosyanın toplam commit sayısı
+git log --oneline -- [dosyaadı] | wc -l
+
+file contribute sayılarına göre olan dosyayı sıralama
+sort -k 1 -n -r denemeasd_topfilelist.txt -o denemeasd_topfilelist_SORTED.txt
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ls -ldp $(find .) | grep -v '/$' | awk '{print $9}' | sed 's/^..//' > 440_F_Filelist.txt
+
+git log --pretty=format:"%cn" | sort | uniq > 440_F_Developerlist_Alphabetic.txt
+
+git log --pretty=format:"%cn" | sort | uniq --count | sort -nr > 440_F_Developerlist_Numeric.txt
+
+./440_findCommitCountsOfFiles.sh > 440_F_FilesCommitCounts.txt
+
+sort -k 1 -n -r 440_F_FilesCommitCounts.txt -o 440_F_FilesCommitCounts_sorted.txt 
+
+./440_findTopStatistics.sh > 440_FO_TopDevelopers_80.txt
+
+./440_findTopStatistics.sh > 440_FO_TopFiles_80.txt
+
+
+
+

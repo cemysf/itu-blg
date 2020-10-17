@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1413039285 source:/home/cya/dev_/ders_temp/hw2Veri/main.cpp
+	<iostream>
+	<cstring>
+

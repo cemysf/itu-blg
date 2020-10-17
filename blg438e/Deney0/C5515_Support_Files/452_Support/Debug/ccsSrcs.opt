@@ -1,0 +1,1 @@
+"../AIC_func.c" "../LCD_FCN.c" "../main.c" "../sar.c" "../usbstk5515.c" "../usbstk5515_gpio.c" "../usbstk5515_i2c.c" "../usbstk5515_led.c" 

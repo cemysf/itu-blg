@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block title %}Authors{% endblock %}
+{% block content %}
+	<h2>Authors</h2>
+	<style>
+		#tbl tr td,th{
+			padding:5px;
+			text-align: center;
+		}
+	</style>
+
+	<table border="1" id="tbl">
+	<tr>
+		<th>Author Student ID</th>
+		<th>Author Name</th>
+		<th>Author Work Description</th>
+	</tr>
+		{% for author in authorlist %}
+			<tr>
+				<td>{{ author.ID }}</td>
+				<td>{{ author.Name }}</td>
+				<td>{{ author.WorkDescription }}</td>
+			</tr>
+		{% endfor %}
+	</table>
+{% endblock %}

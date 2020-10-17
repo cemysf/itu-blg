@@ -1,0 +1,33 @@
+;	jmp $4100
+;	.org $4100
+;	ldaa #$a9	;key
+;	staa $11
+;	ldaa #$b3	;cipher text
+;	staa $12
+;	clra
+
+;;;	part2	;;;
+	ldaa $12
+	eora $11	;cipter text ^ key
+	tab
+	anda #%00001111
+	rola
+	rola
+	rola
+	rola
+	andb #%11110000
+	rorb
+	rorb
+	rorb
+	rorb
+	stab $09
+	oraa $09
+	tab
+	anda #%10101010
+	rora
+	andb #%01010101
+	rolb
+	stab $09
+	oraa $09
+	staa $13
+	swi

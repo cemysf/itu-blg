@@ -1,0 +1,17 @@
+;;;		Part 2		;;;
+			clr R7
+			clr R6
+			mov.b R7,&P1OUT
+LOOP		bit.b #0000001b,&P2IN
+			jnz ON
+			jmp LOOP
+;OFF			bic.b	#0000100b,&P1OUT
+;			jmp LOOP
+ON			bit.b #0000001b,&P2IN
+			jnz ON
+			inc.b R7
+			mov.b R7,&P1OUT
+			mov.w #10000, R6
+TIMER		dec.w R6
+			jnz TIMER
+			jmp LOOP

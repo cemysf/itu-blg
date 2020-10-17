@@ -1,0 +1,36 @@
+--------------------------
+TEST SPECIFICATION NOTES
+--------------------------
+
+* ONLY ONE PERSON FROM EACH GROUP SHOULD SUBMIT THIS REPORT
+* Each title and subtitle must start with a drawing/chart/table.
+* Each title and subtitle must contain the detailed explanation of all items in the drawing/chart/table.
+* Explanations should be itemized (no paragraphs).
+* If you are unfamiliar to a term in this document, it is your responsibility to search and learn it.
+
+-----------------------------
+TEST SPECIFICATION CONTENTS
+-----------------------------
+
+COVER PAGE
+	Course information, report name, project title, group name and members, date etc.
+
+1. INTRODUCTION
+	Goal, contents and organization of the document.
+
+2. TEST PLAN
+	2.1 Testing Strategy - Explain which testing strategy you choose and your motivation. See course slides for testing strategies.
+	2.2 Test Subjects - Consider the component diagram (3.2) in design specification. Explain which data is subject to integration testing.
+	2.3 Equivalence Partitioning - Partition valid and invalid input values into equivalence classes. See course slides for examples.
+
+3. UNIT TESTS
+	3.1 Test Cases - List your test cases and map them to user stories.
+	3.2 Scripts - Give the "script for unit testing" table for each scenario. Each table should contain the following columns: Test number, description, sample input, required mocks, expected result. See course slides for examples.
+
+4. ADDITIONAL TESTS
+	Explain test cases and tools for each special test if it applies to your project.
+		4.1 Security testing
+		4.2 Performance testing
+		4.3 Load/Stress testing
+		4.4 Acceptance testing
+		See course slides for more strategies if needed.

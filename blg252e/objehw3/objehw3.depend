@@ -1,0 +1,36 @@
+# depslib dependency file v1.0
+1430237199 source:/home/cya/dev_/ders_temp/objehw3/cruise.cpp
+	<iostream>
+	"cruise.h"
+
+1430237200 source:/home/cya/dev_/ders_temp/objehw3/flight.cpp
+	<iostream>
+	"flight.h"
+
+1430760159 source:/home/cya/dev_/ders_temp/objehw3/main.cpp
+	<iostream>
+	<cstdlib>
+	<ctime>
+	<string>
+	"trip.h"
+	"cruise.h"
+	"flight.h"
+
+1430759825 /home/cya/dev_/ders_temp/objehw3/trip.h
+	<iostream>
+	<string>
+
+1430759172 /home/cya/dev_/ders_temp/objehw3/cruise.h
+	"trip.h"
+
+1430759796 /home/cya/dev_/ders_temp/objehw3/flight.h
+	"trip.h"
+
+1430663997 source:/home/cya/dev_/ders_temp/objehw3/trip.cpp
+	<iostream>
+	"trip.h"
+
+1430663802 /home/cya/dev_/ders_temp/objehw3/trip.cpp
+	<iostream>
+	"trip.h"
+

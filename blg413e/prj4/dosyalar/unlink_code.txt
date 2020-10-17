@@ -1,0 +1,53 @@
+static int psk_unlink(const char *path)
+{
+	//int retval;
+	/*
+	int index = findFileName(path);
+	char filename[PATH_MAX];
+	IptcDataSet * ds;
+	*/
+
+	printf("---unlink---\n");
+
+	// find the tag value 
+	char tag_file[256];
+	findTag(tag_file,path);
+	printf("tag file: %s\n", tag_file);
+	printf("path: %s\n", path);
+	printf("keyword path: %s\n", keyword_path);
+	// find the tag type (keywords or subjects)
+	if(strncmp(keyword_path, path, 9)==0)
+	{
+		printf("tag type is keywords!!\n");
+		IptcData *d;
+		IptcDataSet * ds;
+		IptcRecord record;
+		IptcTag tag;
+		char directory_path[PATH_MAX];
+
+		int index = findFileName(path);
+		
+		file_pathTranslation(path+index,directory_path);
+
+		d = iptc_data_new_from_jpeg (directory_path);
+		
+		if(!d){
+			return 0;
+		}			
+		
+		if (iptc_tag_find_by_name ("Keywords", &record, &tag) < 0) {
+			return 0;
+		}
+
+		ds = iptc_data_get_dataset (d, record, tag);
+		if (!ds) {
+			return 0;
+		}
+
+		printf("dataset->data: %s\n", ds->data);
+
+		///iptc_data_remove_dataset (d, ds);
+		//iptc_dataset_set_data(ds, tag_file, strlen(tag_file), IPTC_DONT_VALIDATE);
+		///iptc_dataset_unref (ds);
+	}
+}

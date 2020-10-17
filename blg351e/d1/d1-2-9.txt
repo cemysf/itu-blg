@@ -1,0 +1,41 @@
+	jmp $4000
+	.org $4000	;program starts at address $4000
+	ldx #$4100
+	clra
+l1	staa 0,x	;write numbers 0 to 9 in starting array adress $4100
+	inx	
+	inca
+	cmpa #$0a
+	blt l1
+	ldx #$4300	;odd array starts from $4300
+	stx $5002	;store odd array's address at $5002
+	ldx #$4200	;even array starts from $4200
+	stx $5004	;store odd array's address at $5004
+	clra	
+	clrb
+	ldx #$4100
+loop	ldaa 0,x	;main loop of the program
+	rora		;rotate the number to check carry bit
+	bcs tek		;if the carry bit is 1, then the number is odd
+	bra cift	;else, it is even
+ret	ldx $5000
+	inx		;increment main array's iterator
+	incb
+	cmpb #$0a	;check loop condition
+	blt loop
+	wai		;(for simulator) to stop when the program ends, not required for the kit
+	swi
+tek	rola		;rotate again to correct the number
+	stx $5000	;store address of main array's iterator at $5000
+	ldx $5002	;load the iterator for odd array
+	staa 0,x	;write the number to odd array
+	inx		;increment the iterator
+	stx $5002	;store address of odd array's iterator at $5002
+	bra ret
+cift	rola		;rotate again to correct the number
+	stx $5000	;store address of main array's iterator at $5000
+	ldx $5004	;load the iterator for even array
+	staa 0,x	;write the number to even array
+	inx		;increment the iterator
+	stx $5004	;store address of even array's iterator at $5004
+	bra ret

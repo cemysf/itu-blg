@@ -1,0 +1,31 @@
+http://wps.prenhall.com/chet_beasley_modeleccom_9/63/16142/4132489.cw/index.html
+
+http://www.tutorvista.com/content/physics/physics-iv/communication-systems/communication-systemsindex.php
+
+
+Wireless Communication Systems: From RF Subsystems to 4G Enabling Technologies
+
+
+Digital and Analog Communication Systems, 6th Edition
+
+http://www.magnadesignnet.com/en/booth/technote/ofdm/page2.php
+
+http://www.cwins.wpi.edu/publications/pown/
+
+
+http://www.cdt21.com/resources/Modulation/modulation_ASK.asp
+http://www.cdt21.com/resources/Modulation/modulation_FSK.asp
+http://www.cdt21.com/resources/Modulation/modulation_PSK.asp
+
+http://www.eecs.yorku.ca/course_archive/2010-11/F/3213/CSE3213_07_ShiftKeying_F2010.pdf
+CSE 3213:   Communication Networks
+*
+Fall 2010
+York University
+
+
+http://electronicdesign.com/communications/understanding-modern-digital-modulation-techniques#2
+
+http://www.radio-electronics.com/info/rf-technology-design/quadrature-amplitude-modulation-qam/8qam-16qam-32qam-64qam-128qam-256qam.php
+
+http://www.slideshare.net/abdurrehmanabdurrehman391/chap-05-dsn?next_slideshow=1

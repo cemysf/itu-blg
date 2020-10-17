@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ITURisc>
+	<Properties>
+		<CommandLength>32</CommandLength>
+		<MemorySize>32768</MemorySize>
+		<MemorySizePerLine>16</MemorySizePerLine>
+		<Pipeline>1</Pipeline>
+		<RegisterCount>138</RegisterCount>
+		<RegisterBitCount>8</RegisterBitCount>
+		<WindowCount>7</WindowCount>
+		<WindowRegisterCount>32</WindowRegisterCount>
+		<GlobalRegisterCount>10</GlobalRegisterCount>
+		<LocalRegisterCount>10</LocalRegisterCount>
+		<SharedRegisterCount>12</SharedRegisterCount>
+		<MaximumCmdParamCount>3</MaximumCmdParamCount>
+		<DefaultStartLabel>START</DefaultStartLabel>
+		<NoOperationCommand>NOP</NoOperationCommand>
+	</Properties>
+
+	<CommandList>
+		<command name="NOP" binary="00000000" definition="" mask="" flags="" binformat="1" exception="" length="0"></command>
+
+		<command name="ADD"	binary="00000010" definition="Rd = Rs + S2;" mask="Rs,S2,Rd" flags="Z;N;C" binformat="1" exception="" length="32"></command>
+		<command name="ADDC" binary="00000011" definition="Rd = Rs + S2 + Cr;" mask="Rs,S2,Rd" flags="Z;N;C" binformat="1" exception="" length="32"></command>
+		<command name="SUB"	binary="00000100" definition="Rd = Rs - S2;" mask="Rs,S2,Rd" flags="Z;N;C" binformat="1" exception="" length="32"></command>
+		<command name="SUBC" binary="00000101" definition="Rd = Rs - S2 - Cr;" mask="Rs,S2,Rd" flags="Z;N;C" binformat="1" exception="" length="32"></command>
+		<command name="SUBR" binary="00000110" definition="Rd = S2 - Rs;" mask="Rs,S2,Rd" flags="Z;N;C" binformat="1" exception="" length="32"></command>
+		<command name="SUBCR" binary="00000111" definition="Rd = S2 - Rs - Cr;" mask="Rs,S2,Rd" flags="Z;N;C" binformat="1" exception="" length="32"></command>
+		<command name="AND"	binary="00001000" definition="Rd = Rs &amp; S2;" mask="Rs,S2,Rd" flags="Z;N;C" binformat="1" exception="" length="32"></command>
+		<command name="OR" binary="00001001" definition="Rd = Rs | S2;" mask="Rs,S2,Rd" flags="Z;N;C" binformat="1" exception="" length="32"></command>
+		<command name="XOR" binary="00001010" definition="Rd = Rs ^ S2;" mask="Rs,S2,Rd" flags="Z;N;C" binformat="1" exception="" length="32"></command>
+		<command name="SLL" binary="00001011" definition="Rd = Rs &lt;&lt; S2;" mask="Rs,S2,Rd" flags="Z;N;C" binformat="1" exception="u" length="32"></command>
+		<command name="SRL" binary="00001100" definition="Rd = Rs &gt;&gt; S2;" mask="Rs,S2,Rd" flags="Z;N;C" binformat="1" exception="u" length="32"></command>
+		<command name="SRA" binary="00001101" definition="Rd = Rs &gt;&gt; S2;" mask="Rs,S2,Rd" flags="Z;N;C" binformat="1" exception="" length="32"></command>
+
+		<command name="LDL" binary="00010000" definition="Rd = M[Rs+S2]" mask="(Rs)S2,Rd" flags="Z" binformat="1" exception="" length="32"></command>
+		<command name="LDSU" binary="00010001" definition="Rd = M[Rs+S2]" mask="(Rs)S2,Rd" flags="Z" binformat="1" exception="u" length="16"></command>
+		<command name="LDSS" binary="00010010" definition="Rd = M[Rs+S2]" mask="(Rs)S2,Rd" flags="Z" binformat="1" exception="" length="16"></command>
+		<command name="LDBU" binary="00010011" definition="Rd = M[Rs+S2]" mask="(Rs)S2,Rd" flags="Z" binformat="1" exception="u" length="8"></command>
+		<command name="LDBS" binary="00010100" definition="Rd = M[Rs+S2]" mask="(Rs)S2,Rd" flags="Z" binformat="1" exception="" length="8"></command>
+		<command name="STL" binary="00010101" definition="M[Rs+S2] = Rd" mask="(Rs)S2,Rd" flags="Z" binformat="1" exception="" length="32"></command>
+		<command name="STS" binary="00010110" definition="M[Rs+S2] = Rd" mask="(Rs)S2,Rd" flags="Z" binformat="1" exception="" length="16"></command>
+		<command name="STB" binary="00010111" definition="M[Rs+S2] = Rd" mask="(Rs)S2,Rd" flags="Z" binformat="1" exception="" length="8"></command>
+		
+		<command name="GETPSW" binary="00100000" definition="Rd = PSW" mask="Rd" flags="" binformat="1" exception="" length="32"></command>
+		<command name="PUTPSW" binary="00100001" definition="PSW = Rs" mask="Rs" flags="" binformat="1" exception="" length="32"></command>
+
+		<command name="CALL" binary="01000001" definition="Rd = PC; lPC = Rs+S2; lCWP = CWP+1;" mask="S2(Rs),Rd" flags="" binformat="1" exception="" length="32"></command>
+		<command name="CALLR" binary="01000010" definition="Rd = PC; lPC = PC+Y; lCWP = CWP+1;" mask="Y,Rd" flags="" binformat="2" exception="" length="32"></command>
+		<command name="RET" binary="01000011" definition="lPC = Rd+S2; lCWP = CWP-1;" mask="(Rd)S2" flags="" binformat="1" exception="" length="32"></command>
+		<command name="JMP" binary="01000100" definition="lPC = Rs+S2;" mask="COND,S2(Rs)" flags="" binformat="3" exception="" length="32"></command>
+		<command name="JMPR" binary="01000101" definition="lPC = PC+Y;" mask="COND,Y" flags="" binformat="2" exception="" length="32"></command>
+	</CommandList>
+	
+	<ConditionList>
+		<condition name="BR" binary="00000" condition="1==1"></condition>
+		<condition name="BNE" binary="00001" condition="Z==0"></condition>
+		<condition name="BEQ" binary="00010" condition="Z==1"></condition>
+	</ConditionList>
+</ITURisc>

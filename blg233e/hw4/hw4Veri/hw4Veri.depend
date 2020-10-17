@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1417369248 source:/home/cya/dev_/ders_temp/hw4Veri/main.cpp
+	<iostream>
+	"datastr.h"
+
+1417544892 /home/cya/dev_/ders_temp/hw4Veri/datastr.h
+	<fstream>
+	<cstdio>
+	<cstdlib>
+	<cstring>
+

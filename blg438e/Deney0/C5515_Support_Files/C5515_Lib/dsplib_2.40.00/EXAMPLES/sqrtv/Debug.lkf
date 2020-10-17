@@ -1,0 +1,4 @@
+-z -q -c -o"./Debug/sqrtv.out" -x -i"../.." -i"C:/CCStudio_v3.2/C5500/rtdx/lib" -i"C:/CCStudio_v3.2/C5500/csl/lib" -i"C:/CCStudio_v3.2/C5500/xdais/lib" -i"C:/CCStudio_v3.2/bios_5_21/packages/ti/bios/lib" -i"C:/CCStudio_v3.2/C5500/cgtools/lib" -l"55xdsp.lib" -l"rts55.lib"
+"C:\TiDoc\c55dsplib\dsplib\EXAMPLES\sqrtv\Debug\SQRTV_T.obj"
+"C:\TiDoc\c55dsplib\dsplib\EXAMPLES\sqrtv\Debug\TEST.obj"
+"C:\TiDoc\c55dsplib\dsplib\EXAMPLES\sqrtv\55x.cmd"

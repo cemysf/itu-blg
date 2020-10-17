@@ -1,0 +1,14 @@
+	jmp yukle
+	swi
+ 
+
+yukle	ldaa #$6f	;hex 10 sayýsýný yükle ( #data) # olmazsa 0x0010daki yükler ( $address )
+		ldx #$0
+loop	tab			;b<-a
+		lsrb
+		aba			;a<-a+b
+		staa $50,x
+		inx
+		bcc loop
+		rts
+

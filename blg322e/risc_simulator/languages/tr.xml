@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RISCSimulator lang="tr">
+
+	<form id="1" name="frmMain" value="RISC Benzetim Programı">
+		<object parent_id="1" name="dockPanel" value="Sürüklenebilir Panel" />
+		<object parent_id="1" name="toolBar" value="Araç Kutusu" />
+		<object parent_id="1" name="mainMenu" value="Ana Menü" />
+		<object parent_id="1" name="statusBar" value="Durum Çubuğu" />
+		<object parent_id="1" name="menuItemFile" value="Dosya" />
+		<object parent_id="1" name="menuItemNew" value="Yeni" />
+		<object parent_id="1" name="menuItemOpen" value="Aç..." />
+		<object parent_id="1" name="menuItemSave" value="Kaydet" />
+		<object parent_id="1" name="menuItemClose" value="Kapat" />
+		<object parent_id="1" name="menuItemCloseAll" value="Tümünü Kapat" />
+		<object parent_id="1" name="menuItemExit" value="Çıkış" />
+		<object parent_id="1" name="menuItemEdit" value="Düzen" />		
+		<object parent_id="1" name="menuItemView" value="Görünüm" />
+		<object parent_id="1" name="menuItemRegisters" value="Saklayıcı Listesi" />
+		<object parent_id="1" name="menuItemLabels" value="Etiket Listesi" />
+		<object parent_id="1" name="menuItemDebug" value="Hata Ayıklayıcı" />
+		<object parent_id="1" name="menuItemMemory" value="Bellek Haritası" />
+		<object parent_id="1" name="menuItemApplicationLang" value="Uygulama Dili" />
+		<object parent_id="1" name="menuItemTurkish" value="Türkçe" />
+		<object parent_id="1" name="menuItemEnglish" value="İngilizce" />
+		<object parent_id="1" name="menuItemAssemblyLang" value="Derleyici Dili" />
+		<object parent_id="1" name="menuItemITURisc" value="ITU Risc" />
+		<object parent_id="1" name="menuItemSchemaNew" value="Yeni Stil Görünüm" />		
+		<object parent_id="1" name="menuItemSchemaOld" value="Eski Stil Görünüm" />
+		<object parent_id="1" name="menuItemHelp" value="Yardım" />
+		<object parent_id="1" name="menuItemAbout" value="Simülasyon Hakkında" />
+		<object parent_id="1" name="menuItemBuild" value="Derle" />
+		<object parent_id="1" name="menuItemStartDebugging" value="Derlemeye Başla" />
+		<object parent_id="1" name="menuItemRun" value="Çalıştır" />
+		<object parent_id="1" name="menuItemStepByStep" value="Adım Adım Çalıştır" />
+		<object parent_id="1" name="menuItemCheckPipelineHazard" value="Veri Bağımlılığına Bak" />
+
+		<object parent_id="1" name="toolBarButtonNew" value="Yeni" />
+		<object parent_id="1" name="toolBarButtonOpen" value="Aç..." />
+		<object parent_id="1" name="toolBarButtonRegisters" value="Saklayıcı Listesi" />
+		<object parent_id="1" name="toolBarButtonDebug" value="Hata Ayıklayıcı" />
+		<object parent_id="1" name="toolBarButtonMemory" value="Bellek Haritası" />
+		<object parent_id="1" name="toolBarButtonLabels" value="Etiket Listesi" />
+	</form>
+
+	<form id="2" name="frmDebug" value="Hata Ayıklayıcı">
+		<object parent_id="2" name="gridError" value="" />
+		<object parent_id="2" name="colLineNum" value="#" />
+		<object parent_id="2" name="colLine" value="Satır" />
+		<object parent_id="2" name="colDefinition" value="Açıklama" />
+	</form>
+
+	<form id="3" name="frmLabels" value="Etiket Listesi">
+		<object parent_id="3" name="gridListLabels" value="" />
+		<object parent_id="3" name="colId" value="#" />
+		<object parent_id="3" name="colLabel" value="Etiket" />
+		<object parent_id="3" name="colValue" value="Değer" />
+		<object parent_id="3" name="colComment" value="Açıklama" />
+	</form>
+
+	<form id="4" name="frmMemory" value="Bellek Haritası">
+		<object parent_id="4" name="colStatusRegisterName" value="Bayraklar" />
+		<object parent_id="4" name="colStatusRegisterValue" value="Değer" />
+		
+		<object parent_id="4" name="colPipelinePipe" value="Hat No" />
+		<object parent_id="4" name="colPipelineValue" value="Değer" />
+		<object parent_id="4" name="colPipelineString" value="Kod" />
+	</form>
+
+	<form id="5" name="frmRegisters" value="Saklayıcı Listesi">
+		<object parent_id="5" name="gridRegisters" value="" />
+		<object parent_id="5" name="colWindow" value="Pencere" />
+		<object parent_id="5" name="colValue" value="Değer" />
+		<object parent_id="5" name="colGlobal" value="Global" />
+	</form>
+
+</RISCSimulator>

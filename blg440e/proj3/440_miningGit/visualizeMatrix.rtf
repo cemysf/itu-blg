@@ -1,0 +1,36 @@
+{\rtf1\ansi\deff0\deftab720{\fonttbl{\f0\fnil\fcharset1 Bitstream Vera Sans;}{\f1\fnil\fcharset1 Bitstream Vera Serif;}{\f2\fnil\fcharset1 Bitstream Vera Sans Mono;}}{\colortbl\red0\green0\blue0;\red255\green255\blue255;\red128\green128\blue128;\red0\green127\blue0;\red0\green127\blue127;\red127\green0\blue127;\red0\green0\blue127;\red127\green0\blue0;\red0\green0\blue255;\red127\green127\blue127;\red224\green192\blue224;\red64\green112\blue144;\red128\green80\blue0;\red192\green192\blue192;\red255\green0\blue0;}
+\f0\fs18\cf0 \f1\cf3 #! /usr/bin/env python\f0\fs20\cf2 \par
+\f1\fs18\cf3 # -*- coding: utf-8 -*-\f0\fs20\cf2 \par
+\par
+\cf6\b import\cf2\b0  \fs18\cf0 matplotlib\fs20\b .\fs18\b0 pyplot\fs20\cf2  \cf6\b as\cf2\b0  \fs18\cf0 plt\fs20\cf2 \par
+\cf6\b import\cf2\b0  \fs18\cf0 numpy\fs20\cf2  \cf6\b as\cf2\b0  \fs18\cf0 np\fs20\cf2 \par
+\par
+\fs18\cf0 input_file\fs20\b =\f2\fs18\cf5\b0 "440_FO_Matrix.txt"\f0\fs20\cf2 \par
+\par
+\fs18\cf0 matrix\fs20\b =[]\cf2\b0 \par
+\par
+\f1\fs18\cf3 # Read file into an array\f0\fs20\cf2 \par
+\cf6\b with\cf2\b0  \fs18\cf0 open\fs20\b (\fs18\b0 input_file\fs20\b )\cf2\b0  \cf6\b as\cf2\b0  \fs18\cf0 f\fs20\b :\cf2\b0 \par
+        \cf6\b for\cf2\b0  \fs18\cf0 line\fs20\cf2  \cf6\b in\cf2\b0  \fs18\cf0 f\fs20\b :\cf2\b0 \par
+                \fs18\cf0 matrix\fs20\b .\fs18\b0 append\fs20\b (\fs18\b0 line\fs20\b .\fs18\b0 split\fs20\b ())\cf2\b0 \par
+\par
+\f1\fs18\cf3 # Copy matrix into numpy array\f0\fs20\cf2 \par
+\fs18\cf0 numpy_array\fs20\b =\fs18\b0 np\fs20\b .\fs18\b0 array\fs20\b (\fs18\b0 matrix\fs20\b ,\cf2\b0  \fs18\cf0 dtype\fs20\b =\fs18\b0 np\fs20\b .\fs18\b0 float\fs20\b )\cf2\b0 \par
+\par
+\f1\fs18\cf3 # Plot numpy array\f0\fs20\cf2 \par
+\fs18\cf0 fig\fs20\cf2  \cf0\b =\cf2\b0  \fs18\cf0 plt\fs20\b .\fs18\b0 figure\fs20\b ()\cf2\b0 \par
+\fs18\cf0 ax\fs20\b =\cf2\b0  \fs18\cf0 fig\fs20\b .\fs18\b0 add_subplot\fs20\b (\cf4\b0 1\cf0\b ,\cf4\b0 1\cf0\b ,\cf4\b0 1\cf0\b )\cf2\b0 \par
+\fs18\cf0 ax\fs20\b .\fs18\b0 imshow\fs20\b (\fs18\b0 numpy_array\fs20\b ,\cf2\b0  \fs18\cf0 cmap\fs20\b =\fs18\b0 plt\fs20\b .\fs18\b0 cm\fs20\b .\fs18\b0 Greens\fs20\b ,\cf2\b0  \fs18\cf0 origin\fs20\b =\f2\fs18\cf5\b0 "lower"\f0\fs20\cf0\b )\cf2\b0 \par
+\fs18\cf0 ax\fs20\b .\fs18\b0 xaxis\fs20\b .\fs18\b0 tick_top\fs20\b ()\cf2\b0 \par
+\fs18\cf0 ax\fs20\b .\fs18\b0 spines\fs20\b [\f2\fs18\cf5\b0 'top'\f0\fs20\cf0\b ].\fs18\b0 set_visible\fs20\b (\fs18\b0 False\fs20\b )\cf2\b0 \par
+\fs18\cf0 ax\fs20\b .\fs18\b0 spines\fs20\b [\f2\fs18\cf5\b0 'right'\f0\fs20\cf0\b ].\fs18\b0 set_visible\fs20\b (\fs18\b0 False\fs20\b )\cf2\b0 \par
+\fs18\cf0 ax\fs20\b .\fs18\b0 spines\fs20\b [\f2\fs18\cf5\b0 'bottom'\f0\fs20\cf0\b ].\fs18\b0 set_visible\fs20\b (\fs18\b0 False\fs20\b )\cf2\b0 \par
+\fs18\cf0 ax\fs20\b .\fs18\b0 spines\fs20\b [\f2\fs18\cf5\b0 'left'\f0\fs20\cf0\b ].\fs18\b0 set_visible\fs20\b (\fs18\b0 False\fs20\b )\cf2\b0 \par
+\fs18\cf0 plt\fs20\b .\fs18\b0 gca\fs20\b ().\fs18\b0 invert_yaxis\fs20\b ()\cf2\b0 \par
+\par
+\f1\fs18\cf3 # Show and write\f0\fs20\cf2 \par
+\fs18\cf0 plt\fs20\b .\fs18\b0 show\fs20\b ()\cf2\b0 \par
+\fs18\cf0 fig\fs20\b .\fs18\b0 savefig\fs20\b (\f2\fs18\cf5\b0 "adjMatrix_output.png"\f0\fs20\cf0\b ,\cf2\b0  \fs18\cf0 dpi\fs20\b =\cf4\b0 350\cf0\b )\cf2\b0 \par
+\par
+\par
+}

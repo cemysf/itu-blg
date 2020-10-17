@@ -1,0 +1,515 @@
+#ifndef SYSTEMMANAGER_H_INCLUDED
+#define SYSTEMMANAGER_H_INCLUDED
+
+#include <string>
+#include <iostream>
+
+using namespace std;
+
+class Seat
+{
+    int rowNumber;
+    char column;
+    bool booked;
+    friend class FlightSection;
+
+    public:
+        //Seat(int r, bool b=false): rowNumber(r) {booked=b;}
+//        void setRow(int r) {rowNumber= r;}
+//        void setColumn(char ch) {column = ch;}
+//        void setBook(bool b=false) {booked = b;}
+};
+
+
+
+class FlightSection
+{
+    const int rows,cols,seatClass;
+    Seat *seatArray;
+    FlightSection *next;
+
+    friend class SystemManager;
+    friend class Flight;
+    public:
+        FlightSection(int r, int c, int s);
+        ~FlightSection();
+};
+
+FlightSection::FlightSection(int r, int c, int s) : rows(r), cols(c), seatClass(s)
+{
+    next=NULL;
+
+    seatArray = new Seat[rows * cols];
+
+    for(int i=0;i<rows;i++)
+    {
+        for(int j=0;j<cols;j++)
+        {
+            seatArray[i*rows + j].rowNumber = i+1;
+            seatArray[i*rows + j].column = j+1;
+            seatArray[i*rows + j].booked = false;
+        }
+    }
+
+
+
+//    //creating seat array
+//    seatArray = new Seat*[rows];
+//    for(int i=0;i<rows;i++)
+//    {
+//        seatArray[i]=new Seat[cols];
+//    }
+//
+//    //initializing seats
+//    for(int i=0;i<rows;i++)
+//    {
+//        for(int j=0;j<cols;j++)
+//            ((seatArray[rows])[cols]).booked = false;
+//    }
+
+
+}
+
+FlightSection::~FlightSection()
+{
+//    for(int i=0;i<rows;i++)
+//        delete[] seatArray[i];
+
+    delete[] seatArray;
+
+}
+
+class Airport
+{
+    string name;
+    Airport *next;
+    friend class SystemManager;
+
+    public:
+        Airport(const string &n){ name = n; next=NULL; }
+};
+
+class Flight
+{
+    string id;
+    int yy, mm, dd;         //year,month,day
+
+    Airport *origin_airport;
+    Airport *dest_airport;
+
+    FlightSection *head_section;
+    Flight *next;
+    friend class SystemManager;
+    friend class Airline;
+    public:
+        Flight(const string &flight_id,int year,int month,int day); //{ id = flight_id; head_section=NULL; next=NULL; }
+        ~Flight();
+
+};
+
+Flight::Flight(const string &flight_id,int year,int month,int day )
+{
+    id = flight_id;
+    yy = year;    mm = month;    dd = day;
+
+    origin_airport=NULL;    dest_airport=NULL;
+
+    head_section=NULL;  next=NULL;
+}
+
+Flight::~Flight()
+{
+    FlightSection *temp;
+    while(head_section)
+    {
+        temp = head_section;
+        head_section=head_section->next;
+        delete temp;
+    }
+}
+
+
+class Airline
+{
+    string name;
+    Flight *head_flight;
+    Airline *next;
+    friend class SystemManager;
+
+    public:
+        Airline(const string &n){ name = n; head_flight=NULL; next=NULL; }
+        ~Airline();
+};
+
+Airline::~Airline()
+{
+    Flight *temp;
+    while(head_flight)
+    {
+        temp = head_flight;
+        head_flight=head_flight->next;
+        delete temp;
+    }
+
+}
+
+
+class SystemManager
+{
+    Airport *head_airport;
+    Airline *head_airline;
+
+    public:
+        SystemManager() { head_airline=NULL; head_airport=NULL; }
+
+        bool createAirport(const string &n);
+        bool createAirline(const string &n);
+        bool createFlight(const string &aname,const string &orig, const string &dest,int year,int month,int day, const string &id);
+        //(const string &aname, string orig, string dest,int year,int month,int day, string id);
+        bool createSection(const string &air,const string &flID, int rows, int cols, int s);
+        void displaySystemDetails();
+        ~SystemManager();
+
+};
+
+bool SystemManager::createAirport(const string &n)
+{
+    if(n.size() != 3)
+    {
+        cerr << "ERROR:Airport name is wrong in size" << endl;
+        return false;
+    }
+
+
+    Airport *new_airport, *traverse;
+
+    if(head_airport)        //if list not empty
+    {
+        traverse = head_airport;
+        while(traverse)
+        {
+            if(n.compare(traverse->name) == 0)
+            {
+                cerr << "ERROR:Airport '"<< n <<  "' already exists" << endl;
+                return false;
+            }
+
+            else if(traverse->next == NULL)
+                break;
+
+            else traverse=traverse->next;
+        }
+
+        new_airport = new Airport(n);
+        if(!new_airport)
+        {
+            cerr << "ERROR:Memory allocation failed" << endl;
+            return false;
+        }
+
+        traverse->next = new_airport;
+        new_airport->next = NULL;
+
+    }
+    else        // if list empty
+    {
+        new_airport = new Airport(n);
+        if(!new_airport)
+        {
+            cerr << "ERROR:Memory allocation failed" << endl;
+            return false;
+        }
+
+        head_airport = new_airport;
+        head_airport->next = NULL;
+    }
+
+    return true;
+}
+
+bool SystemManager::createAirline(const string &n)
+{
+    Airline *new_airline, *traverse;
+
+    if(head_airline)        //if list not empty
+    {
+        traverse = head_airline;
+        while(traverse)
+        {
+            if( n.compare(traverse->name) == 0)
+            {
+                cerr << "ERROR:Airline '"<< n <<  "' already exists" << endl;
+                return false;
+            }
+
+            else if(traverse->next == NULL)
+                break;
+
+            else traverse=traverse->next;
+        }
+
+        new_airline = new Airline(n);
+        if(!new_airline)
+        {
+            cerr << "ERROR:Memory allocation failed" << endl;
+            return false;
+        }
+
+        traverse->next = new_airline;
+        new_airline->next = NULL;
+
+    }
+    else        // if list empty
+    {
+        new_airline = new Airline(n);
+        if(!new_airline)
+        {
+            cerr << "ERROR:Memory allocation failed" << endl;
+            return false;
+        }
+
+        head_airline = new_airline;
+        head_airline->next = NULL;
+    }
+
+    return true;
+
+
+
+}
+
+bool SystemManager::createFlight(const string &aname,const string &orig, const string &dest,int year,int month,int day, const string &id)
+{
+    Airline *airline = head_airline;
+    Airport *airport_orig = head_airport;
+    Airport *airport_dest = head_airport;
+
+    while(airline)
+    {
+        if(aname.compare(airline->name)==0)
+            break;
+        airline=airline->next;
+    }
+
+    if(airline==NULL)
+    {
+        cerr << "ERROR while creating flight:(id="<< id <<")Airline not found" << endl;
+        return false;
+    }
+
+    while(airport_orig)
+    {
+        if(orig.compare(airport_orig->name)==0)
+            break;
+        airport_orig=airport_orig->next;
+    }
+
+    if(airport_orig==NULL)
+    {
+        cerr << " ERROR while creating flight:(id="<< id <<")Origin airport not found" << endl;
+        return false;
+    }
+
+    while(airport_dest)
+    {
+        if(dest.compare(airport_dest->name)==0)
+            break;
+        airport_dest=airport_dest->next;
+    }
+
+    if(airport_dest==NULL)
+    {
+        cerr << " ERROR while creating flight:(id="<< id <<")Destination airport not found" << endl;
+        return false;
+    }
+
+    if(airport_dest->name.compare(airport_orig->name) == 0)
+    {
+        cerr << " ERROR while creating flight:(id="<< id <<")Origin and destination are same" << endl;
+        return false;
+    }
+
+
+    Flight *newFlight = new Flight(id,year,month,day);
+    newFlight->origin_airport = airport_orig;
+    newFlight->dest_airport = airport_dest;
+
+    Flight *traverse = airline->head_flight;
+    if(traverse)       //not the first flight of airline
+    {
+        while(traverse->next != NULL)
+        {
+            traverse = traverse->next;
+        }
+        traverse->next = newFlight;
+    }
+    else
+        airline->head_flight = newFlight;
+
+    return true;
+
+}
+
+bool SystemManager::createSection(const string &air,const string &flID, int rows, int cols, int s)
+{
+    Airline *airline = head_airline;
+
+    while(airline)
+    {
+        if(air.compare(airline->name)==0)
+            break;
+        airline=airline->next;
+    }
+
+    if(airline==NULL)
+    {
+        cerr << "ERROR while creating section:(flID="<< flID <<")Airline not found" << endl;
+        return false;
+    }
+
+    Flight *flight = airline->head_flight;
+
+    while(flight)
+    {
+        if(flID.compare(flight->id)==0)
+            break;
+        flight=flight->next;
+    }
+
+    if(flight==NULL)
+    {
+        cerr << "ERROR while creating section:(flID="<< flID <<")Flight not found" << endl;
+        return false;
+    }
+
+    FlightSection *traverse = flight->head_section;
+
+    while(traverse)
+    {
+        if(traverse->seatClass == s)
+        {
+            cerr << "ERROR while creating section:(flID="<< flID <<")Section already exists" << endl;
+            return false;
+        }
+        traverse=traverse->next;
+    }
+
+
+    FlightSection *newSect = new FlightSection(rows,cols,s);
+    if(traverse)
+    {
+        while(traverse->next != NULL)
+        {
+            traverse = traverse->next;
+        }
+        traverse->next = newSect;
+    }
+    else
+        flight->head_section = newSect;
+
+    return true;
+}
+
+void SystemManager::displaySystemDetails()
+{
+    cout << "---Airports---" << endl;
+    Airport *traverse_airports = head_airport;
+    while(traverse_airports != NULL)
+    {
+        cout << traverse_airports->name << endl;
+        traverse_airports=traverse_airports->next;
+    }
+    cout << endl;
+
+    Airline *traverse_airlines = head_airline;
+    //Flight *traverse_flights = NULL;
+    //FlightSection *traverse_flSect = NULL;
+    //string sections[] = {"Business\0","First\0","Economy\0"};   //hata
+
+    cout << "---Airlines---" << endl;
+    while(traverse_airlines != NULL)
+    {
+        cout << traverse_airlines->name << endl;
+        if(traverse_airlines->head_flight != NULL)  //if this airline has flights
+        {
+            Flight *traverse_flights = traverse_airlines->head_flight;
+            cout << string(5,' ') <<"--Flights--" << endl;
+
+            cout << string(5,' ') <<"Orig" << "\t" << "Dest" << "\t" << "Year"<< "\t" << "Month" << "\t" << "Day"<< "\t" << "ID"<<endl;
+            while(traverse_flights != NULL)
+            {
+                cout << string(5,' ') << traverse_flights->origin_airport->name << "\t" << traverse_flights->dest_airport->name << "\t"
+                << traverse_flights->yy << "\t" << traverse_flights->mm << "\t" << traverse_flights->dd
+                << "\t" << traverse_flights->id << endl;
+
+                cout << string(8,' ') <<"--Sections--" << endl;
+                cout << string(8,' ') <<"Class" << "\t\t" << "Rows" << "\t" << "Columns"<< endl;
+                FlightSection *traverse_flSect = traverse_flights->head_section;
+                while(traverse_flSect != NULL)
+                {
+                    string s_class;
+                    switch(traverse_flSect->seatClass)
+                    {
+                        case 1: s_class="Business";
+                            break;
+                        case 2: s_class="First";
+                            break;
+                        case 3: s_class="Economy";
+                            break;
+                    }
+
+                    cout << string(8,' ') << s_class << "\t"
+                    << traverse_flSect->rows << "\t" << traverse_flSect->cols << endl;
+
+                    ///
+
+                    traverse_flSect = traverse_flSect->next;
+                    //cout << endl;
+                }
+
+                traverse_flights=traverse_flights->next;
+                cout << endl;
+            }
+
+        }
+        traverse_airlines=traverse_airlines->next;
+        cout << endl;
+    }
+    cout << endl;
+
+//    cout << "---   Airlines   ---" << endl;
+//    traverse_airlines = head_airline;
+//    Flight *traverse_flights = traverse_airlines->head_flight;
+//    while(traverse_flights != NULL && traverse_airlines !=NULL)
+//    {
+//        cout << traverse_airlines->name << endl;
+//        traverse_airlines=traverse_airlines->next;
+//    }
+//    cout << endl;
+
+
+
+}
+
+SystemManager::~SystemManager()
+{
+    Airport *temp_airport;
+    while(head_airport)
+    {
+        temp_airport=head_airport;
+        head_airport=head_airport->next;
+        delete temp_airport;
+    }
+
+    Airline *temp_airline;
+    while(head_airline)
+    {
+        temp_airline=head_airline;
+        head_airline=head_airline->next;
+        delete temp_airline;
+    }
+}
+
+
+#endif // SYSTEMMANAGER_H_INCLUDED
+

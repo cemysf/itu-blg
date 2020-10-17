@@ -1,0 +1,1 @@
+"../drivers/csl_irqplug.asm" "../drivers/usbstk5515.c" "../drivers/usbstk5515_gpio.c" "../drivers/usbstk5515_led.c" "../drivers/vectors.asm" 

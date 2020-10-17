@@ -1,0 +1,220 @@
+
+//  BLG312E Operating Systems
+//  HW 2
+//  Cem Yusuf Aydoğdu
+//  150120251
+//
+//  Notes:
+//  File name should be given as command line argument    ( ./output_file inputFile.txt )
+//
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <pthread.h>
+#include <sys/ipc.h>
+#include <sys/sem.h>
+#include <sys/types.h>
+#include <signal.h>
+
+#define SEMKEY 12
+int mutex_sem, count_sem;
+
+///*  starting data structure  */
+    typedef struct queue_node Node;
+    struct queue_node       //patient
+    {
+        int data, patient_number;
+        Node *next;
+    };
+
+    typedef struct queue_list       //waiting room
+    {
+        Node *front, *back;
+
+        //void initList();
+        //void enqueue(int val);
+        //int dequeue();
+    }Queue;
+
+    void initList(Queue *q)
+    {
+        q->front = NULL;
+        q->back = NULL;
+    }
+
+    void enqueue(Queue *q, int val, int number)
+    {
+        Node *newnode = (Node *)malloc(sizeof(Node));
+        newnode->data = val;
+        newnode->patient_number = number;
+        if(q->front == NULL)
+        {
+            q->back = newnode;
+            q->front = newnode;
+        }        //newnode->next = NULL;
+        else
+        {
+            q->back->next = newnode;
+            q->back = newnode;
+        }        //newnode->next = q->head;
+
+        //q->head = newnode;
+    }
+
+    void dequeue(Queue *q, int *data, int *number)
+    {
+        //int temp = q->front->data;
+        *data = q->front->data;
+        *number = q->front->patient_number;
+        Node *tempnode = q->front;
+
+        q->front = q->front->next;
+        free(tempnode);
+
+        //return temp;
+    }
+
+    int isEmpty(Queue *q)
+    {
+        if(q->front == NULL) return 1;
+        else return 0;
+    }
+
+    Queue waitingRoom;
+///*  ending data structure  */
+
+void sem_wait(int semid, int val)   //decrement
+{
+    struct sembuf sem;
+    sem.sem_num=0;
+    sem.sem_op= -1*val;
+    sem.sem_flg=1;
+    semop(semid,&sem,1);
+}
+void sem_signal(int semid, int val) //increment
+{
+    struct sembuf sem;
+    sem.sem_num=0;
+    sem.sem_op=val;     //val neg: allocate res., pos:release res.,
+    sem.sem_flg=1;
+    semop(semid, &sem, 1);
+}
+
+//void mysignal(int signum){ printf("Signal received: %d\n",signum); }
+//
+//void mysigset(int num)
+//{
+//    struct sigaction sigact;
+//    sigact.sa_handler = (void *) mysignal;
+//    sigact.sa_flags = 0;
+//    sigaction(num, &sigact, NULL);
+//}
+
+void * nurse_function(void *ptr)
+{
+    int var,count=1;
+
+    while(fscanf((FILE *)ptr,"%d\n",&var) == 1 )
+    {
+        sem_wait(mutex_sem,1);
+        printf("nurse: %d. patient: %d \n",count,var);
+        enqueue(&waitingRoom,var,count++);
+        sleep(2);
+        //pthread_kill()
+        sem_signal(mutex_sem,1);
+    }
+
+
+//    //printf(" %s\n", (char *) ptr);
+//    int var;
+//    //while(!feof((FILE *)ptr))
+//   // {
+//    sem_wait(sem_id,1);
+//        fscanf((FILE *)ptr, "%d\n", &var);
+//        printf("  nurse: %d\n",var);
+//  //  }
+//    sem_signal(sem_id,1);
+//    //printf("nurse!\n");
+    //kill()
+    pthread_exit(NULL);
+}
+
+void * doctor_function(void *ptr)
+{
+    //printf(" %s\n", (char *) ptr);
+    wait();
+
+    int var=0,numb=0;
+    while(!isEmpty(&waitingRoom))
+    {
+        //printf("---sem val: %d",semctl(mutex_sem,0,GETVAL,0));
+        sem_wait(mutex_sem,1);
+       // printf("---sem val: %d",semctl(mutex_sem,0,GETVAL,0));
+            dequeue(&waitingRoom,&var,&numb);
+            printf("doc1: %d. patient,  %d\n",numb,var);
+
+            //fscanf((FILE *)ptr, "%d\n", &var);
+            //printf(" doc1: %d\n",var);
+        sem_signal(mutex_sem,1);
+       // printf("---sem val: %d",semctl(mutex_sem,0,GETVAL,0));
+    }
+    //printf("doct1!\n");
+    pthread_exit(NULL);
+}
+
+
+
+
+int main(int argc, char *argv[])
+{
+    if(argc != 2)
+    {
+        printf("Enter filename as command line argument");
+        exit(-1);
+
+    }
+
+    pthread_t nurse, doctor1, doctor2;
+    //char *chars[] = { "nurse" ,"doc1", "doct2" };
+    initList(&waitingRoom);
+    FILE *fp = fopen(argv[1], "r");
+    if( fp == NULL)
+    {
+        printf("File error. Program exits");
+        exit(-1);
+    }
+
+    //mysignal(12);
+
+    //create semaphore
+    mutex_sem = semget(SEMKEY, 1, 0700|IPC_CREAT);     //key, number of sems., flag
+
+    //set value of sem. to 1
+    semctl(mutex_sem,0,SETVAL,1);
+
+
+
+    if(pthread_create(&nurse, NULL, nurse_function, fp))     //pthread_t address, attributes, funct pointer, funct arguments
+    {
+        printf("nurse thread hata");
+        exit(-1);
+    }
+
+    if(pthread_create(&doctor1, NULL, doctor_function, NULL))
+    {
+        printf("doct1 hata");
+        exit(-1);
+    }
+    if(pthread_create(&doctor2, NULL, doctor_function, NULL))
+    {
+        printf("doct2 hata");
+        exit(-1);
+    }
+
+    sleep(200);
+
+    semctl(mutex_sem,0,IPC_RMID,0);
+
+    fclose(fp);
+    pthread_exit(NULL);
+}

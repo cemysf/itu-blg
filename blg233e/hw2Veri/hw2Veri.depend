@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1413142605 source:c:\users\cya\desktop\hw2veri\main.cpp
+	<iostream>
+	<cstdarg>
+
+1413215163 source:x:\dev_\hw2veri\main.cpp
+	<iostream>
+	<cstring>
+	<cstdarg>
+

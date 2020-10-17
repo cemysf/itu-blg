@@ -1,0 +1,32 @@
+---kernel içindeki düzenlemeler---
+
+struct task_struct		:	/include/linux/sched.h:1051		(casper eklendi)
+
+INIT_TASK: 	 /include/linux/init_task.h:175 	(.casper=0,	\)
+
+copy_process:		/kernel/fork.c:1359	(p->casper=0;)
+
+///* iptal	*///	proc_pid_readdir		 /fs/proc/base.c:2952		( || iter.task->casper != 0 )	
+
+has_pid_permissions:		/fs/proc/base.c:591		eklenen:
+	struct cred *task_cred = get_task_cred(task);
+	if(	  task->casper == 3 || 
+			((task->casper == 1)&&(task_cred->euid.val != current_euid().val)) || 
+			((task->casper == 2)&&(task_cred->egid.val != current_egid().val)) )
+			return 0;
+
+
+---System call ile ilgili---
+/mycall altında setcasper.c ve Makefile oluşturuldu (makefile içinde obj-y := setcasper.o )
+ana dizinde Makefile, 540. satır		<-		 "core-y		:= usr/ mycall/"
+arch/x86/syscalls/syscall_32.tbl, dosya sonu		<-		"355 i386	setcasper		set_casper"
+include/linux/syscalls.h:   asmlinkage long set_casper(pid_t pid, int value), dosya sonu(#endif öncesi)		<-		asmlinkage long set_casper(pid_t pid, int value);
+
+---derleme---
+make localmodconfig
+make-kpkg clean
+fakeroot make-kpkg --initrd --append-to-version=-custom kernel_image kernel_headers
+
+
+*** diğer notlar ***
+$$: bash pid göster

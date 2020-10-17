@@ -1,0 +1,130 @@
+static int psk_unlink(const char *path)
+{
+	int retval;
+
+	///printf("---unlink---\n");
+
+	// find the tag value 
+	char tag_value[256];
+	findTag(tag_value,path);
+	///printf("tag value: %s\n", tag_value);
+	///printf("path: %s\n", path);
+	///printf("keyword path: %s\n", keyword_path);
+			
+	IptcData *d;
+	IptcDataSet *ds;		//contains tag type (ds->tag) and tag value(ds->data)
+	IptcRecord record;		//enum
+	IptcTag tag;			//enum
+	char input_filename[PATH_MAX];
+	int index = findFileName(path);
+	
+	file_pathTranslation(path+index,input_filename);
+
+	//
+	///printf("translated path: %s\n", input_filename);
+
+	d = iptc_data_new_from_jpeg (input_filename);
+	
+	if(!d){
+		return 0;
+	}			
+	
+	// datayı ekrana bas
+	printf("---old data---\n");
+	iptc_data_dump(d,0);
+
+	if(strncmp(keyword_path, path, 9)==0)
+	{
+		printf("tag type is keywords!!\n");
+		if (iptc_tag_find_by_name ("Keywords", &record, &tag) < 0) {
+			return 0;
+		}
+	}
+
+	if(strncmp(subjects_path, path, 9)==0)
+	{
+		printf("tag type is subjects!!\n");
+		if (iptc_tag_find_by_name ("SubjectRef", &record, &tag) < 0) {
+			return 0;
+		}
+	}
+
+
+	ds = NULL;
+	ds = iptc_data_get_next_dataset(d, ds, record, tag);	//iptc_data_get_next_dataset gets first dataset when ds is null initially
+	
+	// iterate datasets until finding the right one
+	while(strcmp(tag_value, ds->data) != 0)
+	{
+		ds = iptc_data_get_next_dataset(d, ds, record, tag);
+		if(ds == NULL)
+			return 0;
+	}
+
+	printf("dataset->data: %s\n", ds->data);
+
+	retval = iptc_data_remove_dataset (d, ds);		// return 0 if success
+	iptc_dataset_unref (ds);
+
+	// datayı ekrana bas
+	printf("---new data---\n");
+	iptc_data_dump(d,0);
+
+	
+
+	// 
+	unsigned char * iptc_buf = NULL;
+	unsigned char outbuf[256*256];
+	int ps3_len, iptc_off, iptc_len;
+	FILE *infile, *outfile;
+	char temp_filename[strlen(input_filename)+8];
+
+	iptc_data_sort (d);
+
+	// save the modified data to iptc_buf
+	if (iptc_data_save(d, &iptc_buf, &iptc_len) < 0) {
+		fprintf (stderr, "Failed to generate IPTC bytestream\n");
+		return 1;
+	}
+
+	// create new ps3 header from scract (into outbuf)
+	ps3_len = iptc_jpeg_ps3_save_iptc (NULL, ps3_len, iptc_buf, iptc_len, outbuf, sizeof(outbuf));
+	iptc_data_free_buf (d, iptc_buf);
+	if (ps3_len < 0) {
+		fprintf (stderr, "Failed to generate PS3 header\n");
+		return 1;
+	}
+
+	infile = fopen(input_filename, "r");
+	if (!infile) {
+		fprintf (stderr, "Can't reopen input file: %s\n", input_filename);
+		return 1;
+	}
+
+	sprintf (temp_filename, "%s.%d", input_filename, getpid());
+	outfile = fopen(temp_filename, "w");
+	if (!outfile) {
+		fprintf (stderr, "Can't open temp file\n");
+		return 1;
+	}
+
+	// take old file, remove existing header, add new ps3 header
+	retval = iptc_jpeg_save_with_ps3 (infile, outfile, outbuf, ps3_len);
+	fclose (infile);
+	fclose (outfile);
+	if (retval < 0) {
+		unlink (temp_filename);
+		fprintf (stderr, "Failed to save image\n");
+		return 1;
+	}
+
+	if (rename (temp_filename, input_filename) < 0) {
+		fprintf (stderr, "Failed to save image\n");
+		unlink (temp_filename);
+		return 1;
+	}
+	fprintf (stderr, "Image saved\n");
+	
+	
+	return retval;
+}

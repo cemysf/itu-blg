@@ -1,0 +1,129 @@
+Sal, 29 Eyl 2015 17:34:55 +0300 
+	ccs6 yükle(windowsa), mailden gelecek driver vb bilgileri bekle
+	
+
+#include <stdint.h>
+#include "usbstk5515_led.h"
+
+/* CPU clock speed (100MHz) */
+#define CPU_CLOCK_HZ       100000000U
+
+/* system clock ticking rate (number of TINT interrupts per second */
+#define BSP_TICKS_PER_SEC  100U
+
+#define TINT_EVENT         4U
+
+#define C55X_IER0          ((unsigned int volatile *)0x0000)
+#define C55X_IER1          ((unsigned int volatile *)0x0045)
+
+#define IVPD               ((ioport unsigned int volatile *)0x0049)
+#define IVPH               ((ioport unsigned int volatile *)0x004A)
+
+#define EBSR               ((ioport unsigned int volatile *)0x1C00)
+#define PSRCR              ((ioport unsigned int volatile *)0x1C04)
+#define PRCR               ((ioport unsigned int volatile *)0x1C05)
+
+#define CPU_TIM0_CTRL      ((ioport unsigned int volatile *)0x1890)		//TCR timer2 control register
+#define CPU_TIM0_PLWR      ((ioport unsigned int volatile *)0x1892)		//TIMPRD1 timer2 period register1	(16 bit)
+#define CPU_TIM0_PHWR      ((ioport unsigned int volatile *)0x1893)		//TIMPRD2 timer2 period register2		"
+#define CPU_TIM0_CLWR      ((ioport unsigned int volatile *)0x1894)		//TIMCNT1 timer2 counter register1		"
+#define CPU_TIM0_CHWR      ((ioport unsigned int volatile *)0x1895)		//TIMCNT2 timer2 counter register2		"
+#define CPU_TIM0_IER       ((ioport unsigned int volatile *)0x1896)		// ??
+#define CPU_TIMINT_AGGR    ((ioport unsigned int volatile *)0x1c14)		//TIAFR timer interrupt agression flag register
+#define CPU_PRCR           ((ioport unsigned int volatile *)0x1c05)		// ??
+
+void AIC_write2(Int16 data_right, Int16 data_left);
+Int16 USBSTK5515_I2C_init( );
+void AIC_init(void);
+
+// CSL asm functions
+extern void VECSTART(void);
+extern int  IRQ_plug(uint16_t eventID, void (*isrPtr)(void));
+
+Int16 right = 0;
+Int16 left = 0;
+Int16 yak = 0;
+
+/*..........................................................................*/
+// interrupt periyodu 98ms => frekans 10.2Hz
+interrupt void TINT_isr(void) {
+    static uint16_t ctr = 1U;
+
+    *CPU_TIM0_IER     = 0x0001U;             /* clear Timer0 interrupt flag */
+    *CPU_TIMINT_AGGR |= 0x0001U;                        /* clear Timer0 bit */
+
+
+    AIC_read2(&right, &left);
+
+/*
+    if(yak == 0)
+    {
+    	yak = 1;
+        USBSTK5515_ULED_on(0U);
+    }
+    else
+    {
+    	yak = 0;
+        USBSTK5515_ULED_off(0U);
+    }
+*/
+
+/*
+    if (--ctr == 0) {
+        static uint16_t is_on = 1U;
+        ctr =BSP_TICKS_PER_SEC / 2;	//100/2 = 50, 50 * 98ms = 4.9s
+        if (is_on) {
+            USBSTK5515_ULED_off(0U);
+       }
+        else {
+            USBSTK5515_ULED_on(0U);
+        }
+        is_on = !is_on;
+    }
+*/
+
+}
+/*..........................................................................*/
+void main(void) {
+
+    USBSTK5515_init();            /* initialize BSL */
+    USBSTK5515_I2C_init();
+
+    AIC_init();
+
+
+    _disable_interrupts();
+
+    *C55X_IER0 = 0U;
+    *C55X_IER1 = 0U;
+
+    *IVPD = (uint16_t)((uint32_t)&VECSTART >> 8);
+    *IVPH = (uint16_t)((uint32_t)&VECSTART >> 8);
+
+
+    IRQ_plug(TINT_EVENT, &TINT_isr);
+
+
+    // 5s için
+    //*CPU_TIM0_CTRL   = 0x802EU;		// timer enabled, PSCDIV=1011b (decimal(PSCDIV) +1 = 12, 2^12=4096ya böluyor, 100MHz/4096=24.4kHz) ,AUTORELOAD=1,START=1
+    //*CPU_TIM0_PLWR   = (98304000 / 4096U)/10;		// =2400 (sayılar decimal alınırsa), 2400/24.4kHz=98ms
+
+    *CPU_TIM0_CTRL	 = 0x802EU;		// 100MHz/4096=24,4kHz
+    *CPU_TIM0_PHWR   = (98304000 / 4096U)/2000U;			// 12,2/24,4kHz =0,5ms => 2kHz
+    *CPU_TIM0_CLWR   = 0x0000U;
+    *CPU_TIM0_CHWR   = 0x0000U;
+    *CPU_TIMINT_AGGR = 0x0007U;
+    *CPU_TIM0_IER    = 0x0001U;
+    *CPU_TIM0_CTRL  |= 0x0001U;
+
+    *C55X_IER0      |= 1U << TINT_EVENT;
+
+    _enable_interrupts();
+
+
+    while(1)
+    {
+    	AIC_write2(right, left);
+
+    }
+}

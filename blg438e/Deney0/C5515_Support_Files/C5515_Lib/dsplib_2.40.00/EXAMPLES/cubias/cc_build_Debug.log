@@ -1,0 +1,9 @@
+-----------------------------  cubias.pjt - Debug  -----------------------------
+[CUBIAS_T.C] "C:\CCStudio_v3.2\C5500\cgtools\bin\cl55" -g -q -fr"C:/TiDoc/c55dsplib/dsplib/EXAMPLES/cubias/Debug" -i"../../include" -d"_DEBUG" -@"Debug.lkf" "CUBIAS_T.C"
+"CUBIAS_T.C", line 30: warning: variable "of" was set but never used
+
+[Linking...] "C:\CCStudio_v3.2\C5500\cgtools\bin\cl55" -@"Debug.lkf"
+<Linking>
+
+Build Complete,
+  0 Errors, 1 Warnings, 0 Remarks.

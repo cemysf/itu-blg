@@ -1,0 +1,33 @@
+body {
+  background-color: white;
+  color: #6F6F6F;
+  font-family: 'Droid Sans', 'Helvetica', 'sans';
+  font-size: 12pt;
+  margin: 2ex 2em;
+}
+
+h1, h2, h3, h4 {
+  color: #E9601A;
+}
+
+a {
+  color: #6F6F6F;
+  text-decoration: underline;
+}
+
+div#datetime {
+  font-size: 80%;
+  text-align: right;
+}
+
+.footer {
+    position:fixed;
+    bottom:0px;
+    height:30px;
+    width:100%;
+    background-color:#171717;
+    color:white;
+}
+.footer_content{
+    text-align: center;
+}

@@ -1,0 +1,34 @@
+compiling: obj file oluşumu
+linking: obj fileların birleştirilmesi, obj filelar içinde bulunmayan fonksiyon çağrılarının bağlanması
+
+object file: makine kodu içerir (compiler oluşturur)
+executable:  linklenen object filelardan oluşan çalıştırılabilir dosya (linker oluşturur)
+
+
+nasm:
+the netwide assembler
+	-f : output file format
+		elf32: executable and linkable format
+
+
+assembly içinde
+segment .data	; initialized veriler
+segment .bss		;uninitialized veriler
+segment .text		;kodların başladığı yer
+
+global <fonk_adı>	;başlangıç fonksiyonu
+
+fonksiyon:
+	push ebp			;fonksiyonu çağıranın ebp'sini tut
+	mov ebp,esp		; ebp<-esp
+
+	....
+	pop ebp		; fonksiyonu çağıranın ebp'sini getir
+	ret				;eax'ı döndürür
+
+stack yapısı:
+
+ebp 		<- esp,ebp
+ret addr 	<-ebp+4
+param1	<-ebp+8
+param2	<-ebp+12

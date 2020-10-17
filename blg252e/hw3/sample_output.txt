@@ -1,0 +1,68 @@
+Index out of bounds!
+***********************
+Trip transfer count:1
+1:Flight Name: Istanbul-Ankara #TK213 Cost: 186.5
+***********************
+Trip total cost: 186.5
+***********************
+
+***********************
+Trip transfer count:2
+1:Flight Name: Istanbul-Ankara #TK213 Cost: 186.5
+2:Flight Name: Ankara-Istanbul #TK312 Cost: 203.5
+***********************
+Trip total cost: 390
+***********************
+
+Discount out of range!
+***********************
+Trip transfer count:4
+1:Flight Name: Istanbul-Ankara #TK213 Cost: 186.5
+2:Flight Name: Ankara-Istanbul #TK312 Cost: 203.5
+3:Flight Name: Istanbul-Izmir #TK113 Cost: 183.5
+4:Flight Name: Izmir-Istanbul #TK311 Cost: 162.5
+***********************
+Trip total cost: 736
+Discount: %10
+Discount amount: -73.6
+Discounted cost: 662.4
+***********************
+
+***********************
+Trip transfer count:2
+1:***********************
+Trip transfer count:4
+1:Flight Name: Istanbul-Ankara #TK213 Cost: 186.5
+2:Flight Name: Ankara-Istanbul #TK312 Cost: 203.5
+3:Flight Name: Istanbul-Izmir #TK113 Cost: 183.5
+4:Flight Name: Izmir-Istanbul #TK311 Cost: 162.5
+***********************
+Trip total cost: 736
+Discount: %10
+Discount amount: -73.6
+Discounted cost: 662.4
+***********************
+2:***********************
+Trip transfer count:2
+1:Flight Name: Istanbul-Izmir #TK113 Cost: 183.5
+2:Flight Name: Izmir-Istanbul #TK311 Cost: 162.5
+***********************
+Trip total cost: 346
+***********************
+***********************
+Trip total cost: 1008.4
+Discount: %20
+Discount amount: -201.68
+Discounted cost: 806.72
+***********************
+
+***********************
+Trip transfer count:1
+1:Cruise Name: Istanbul-Izmir Cost: 180.2
+***********************
+Trip total cost: 180.2
+Discount: %15
+Discount amount: -27.03
+Discounted cost: 153.17
+***********************
+

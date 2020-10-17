@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+{% block title %}Tournament List{% endblock %}
+{% block content %}
+	<h2>Tournament List</h2>
+	<style>
+		#tbl tr td,th{
+			padding:5px;
+			text-align: center;
+		}
+	</style>
+	{% if IsAdmin == True %}
+	<a style="font-weight:Bold" href="{{ url_for('addtournament') }}">Add Tournament</a>
+	{% endif %}
+	<a style="font-weight:Bold" href="{{ url_for('searchtournament') }}">Search Tournament</a>
+
+	<table border="1" id="tbl">
+	<tr>
+		<th>Tournament ID</th>
+		<th>Tournament Name</th>
+	</tr>
+		{% for tournament in tournamentlist %}
+			<tr>
+				<td>{{ tournament.ID }}</td>
+				<td>{{ tournament.Name }}</td>
+				<td>
+				{% if IsAdmin == True %}
+				<a href="{{ url_for('tournamentdelete',id=tournament.ID) }}">Delete Tournament</a></td>
+				<td><a href="{{ url_for('updatetournament',id=tournament.ID) }}">Update Tournament</a></td>
+				{% endif %}
+				<td><a href="{{ url_for('addtournamentcomment',id=tournament.ID) }}">Add Comment</a></td>
+				<td>
+					<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal{{ tournament.ID }}">Comments</button>
+					<div id="myModal{{ tournament.ID }}" class="modal fade" role="dialog">
+  						<div class="modal-dialog">
+  							<div class="modal-content">
+      							<div class="modal-header">
+        							<button type="button" class="close" data-dismiss="modal">&times;</button>
+        							<h4 class="modal-title">Comments for {{ tournament.Name }} </h4>
+	      						</div>
+    	  						<div class="modal-body">
+	    	  						{% for comment in tournamentlist.Comments %}
+        								<p>{{ comment }}</p>
+        							{% endfor %}
+	      						</div>
+    	  						<div class="modal-footer">
+        							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      							</div>
+	    					</div>
+  						</div>
+					</div>
+				</td>
+			</tr>
+		{% endfor %}
+	</table>
+{% endblock %}
+

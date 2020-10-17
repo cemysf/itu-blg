@@ -1,0 +1,90 @@
+
+Proje konuları
+10 Şubat 2016 15:17
+
+2'li gruplar olarak aşağıdaki konulardan birinde projenizi yapmanız beklenmektedir. Proje çıktısı 3 parçadan oluşacaktır. 
+
+1. Rapor (Özetçe, Giriş, Sistem (Yöntemin Matematiksel Denklemler, Şekiller, Sistem Akış Şemaları ve Blok Diyagramlar ile anlatımı), Deneysel Sonuçlar (Sistemin performansını gösteren SNR vs. Bit rate tabloları veya grafikleri), Sonuçlar bölümlerinden oluşacaktır. 
+
+Yaklaşık 6-12 sayfa (tek satır 11 pt)
+
+2.  Sunum (soru cevap dahil 10 dakika, 10-20 slayt) Raporda sunulanların özeti olacaktır.
+
+3. Demo (sunum sonrasında 5 dakika audio veya visual olarak) Orijinal veri=>Encoder=>Bitstream, Bitstream=>Decoder=>Geriçatılan veri olarak gösterilecektir.
+
+ 3. hafta başında grupları Ekleve tez konunuzu belirlemeniz, 5. hafta başında bir paragraflık proje önerisini sisteme yüklemeniz gerekmektedir. Öneride kullanacağınız yazılımı kısaca tarif etmeniz beklenmektedir.Raporlar 13. hafta sonunda teslim edilecek. Sunumlar 14. hafta Salı günü 13:30-16:30 arası gerçekleştirilecektir.  Sunum takvimi 12. hafta sonunda veya 13. hafta başında ilan edilecektir.
+
+ Konular:
+
+1. H.264/AVC x264
+
+2.H.265/HEVC x265
+
+3.JPEG2000 Kakadu veya Jasper
+
+4. H.264/AVC Reference Software
+
+5. H.264/SVC Reference Software
+
+6. Motion JPEG2000 - JPEG2000 Part 3
+
+7. SPIHT /EZW DWT coders using wcompress of MATLAB
+
+8. MP3/AAC/MPEG-4 AAC coders
+
+9. G.729 CS-ACELP and G.723.1 MPC-MLQ/ACELP speeck codecs on Asterisk
+
+10.WDR/ASWDR DWT coders  using wcompress of MATLAB
+
+11.Region of interest image coding by JPEG2000 or SPIHT
+
+12. Frame rate up-conversion
+
+13. AVI/Quicktime formats
+
+14. H.265/HEVC  Scalability extension (SHVC)
+
+
+
+
+
+
+Topic of our project is H.264/AVC x264. 
+In this project, FFmpeg software will be used. 
+FFmpeg is a cross-platform open source multimedia framework which provides different functionalities such as encoder, decoder, transcoder, muxer, demuxer, streamer and player. FFmpeg supports H.264/AVC video coding format using x264 encoder and its native decoder.
+
+
+//FFmpeg uses x264 encoder and native decoder For H.264/AVC video coding format.
+
+
+//FFmpeg  will be used as demonstration software. For 
+
+
+
+
+====================================================================
+
+Ffmpeg Install With Libx264 
+http://blog.oneiroi.co.uk/linux/ffmpeg-install-with-libx264-h264/
+
+----------- ffmpeg -----------------
+https://trac.ffmpeg.org/wiki/Encode/H.264
+
+
+--- x264 ---
+not a codec, just encoder
+ widely used open source implementation of the heavily patent encumbered MPEG-4 AVC media format.
+
+http://www.x264.nl/x264_main.php
+http://www.videolan.org/developers/x264.html
+http://git.videolan.org/
+
+https://wiki.videolan.org/X264/			***
+
+http://download.videolan.org/pub/x264/binaries/linux-x86_64/
+
+
+--- libavcodec ---
+ffmpeg içindeki bir codec paketi, H.264/MPEG-4 AVC (native decoder, encoding through x264)
+
+http://ffmpeg.org/documentation.html

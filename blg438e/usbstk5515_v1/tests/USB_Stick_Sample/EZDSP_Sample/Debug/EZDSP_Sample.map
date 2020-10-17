@@ -1,0 +1,568 @@
+******************************************************************************
+              TMS320C55x Linker PC v4.3.5                      
+******************************************************************************
+>> Linked Tue Jun 22 10:39:40 2010
+
+OUTPUT FILE NAME:   <EZDSP_Sample.out>
+ENTRY POINT SYMBOL: "reset_isr"  address: 000317c4
+
+
+MEMORY CONFIGURATION
+
+         name            origin    length      used     unused   attr    fill
+                        (bytes)   (bytes)    (bytes)   (bytes)
+----------------------  --------  ---------  --------  --------  ----  --------
+  MMR                   00000000   000000c0  00000000  000000c0  RW  
+  DARAM                 000000c0   0000ff40  00000f84  0000efbc  RW  
+  SARAM                 00030000   0001e000  00001a1c  0001c5e4  RW  
+  EMIF_CS0              00050000   007b0000  00000000  007b0000  RW  
+  EMIF_CS2              00800000   00400000  00000000  00400000  RW  
+  EMIF_CS3              00c00000   00200000  00000000  00200000  RW  
+  EMIF_CS4              00e00000   00100000  00000000  00100000  RW  
+  EMIF_CS5              00f00000   000e0000  00000000  000e0000  RW  
+  SAROM_0               00fe0000   00008000  00000000  00008000  R  X
+  SAROM_1               00fe8000   00008000  00000000  00008000  R  X
+  SAROM_2               00ff0000   00008000  00000000  00008000  R  X
+  SAROM_3               00ff8000   00008000  00000000  00008000  R  X
+
+
+SECTION ALLOCATION MAP
+(Addresses surrounded by []'s are displayed for convenience only!)
+
+output                                                          attributes/
+section   page  orgn(bytes) orgn(words) len(bytes) len(words)   input sections
+--------  ----  ----------- ----------- ---------- ----------   --------------
+.stack       0   [ 000000c0 ]  00000060          *   000001f4   UNINITIALIZED
+                 [ 000000c0 ]  00000060          *   000001f4   --HOLE--
+
+.data        0   [ 000000c0 ]  00000060          *   00000000   UNINITIALIZED
+
+.sysstack 
+*            0   [ 000004a8 ]  00000254          *   000001f4   UNINITIALIZED
+                 [ 000004a8 ]  00000254          *   000001f4   --HOLE--
+
+.bss         0   [ 00000890 ]  00000448          *   000001a9   UNINITIALIZED
+                 [ 00000890 ]  00000448          *   00000124   dma.obj (.bss)
+                 [ 00000ad8 ]  0000056c          *   00000061   i2s.obj (.bss)
+                 [ 00000b9a ]  000005cd          *   00000014   rtc.obj (.bss)
+                 [ 00000bc2 ]  000005e1          *   00000001   timer.obj (.bss)
+                 [ 00000bc4 ]  000005e2          *   00000004   rts55x.lib : _lock.obj (.bss)
+                 [ 00000bcc ]  000005e6          *   00000004              : exit.obj (.bss)
+                 [ 00000bd4 ]  000005ea          *   00000003   main.obj (.bss)
+                 [ 00000bda ]  000005ed          *   00000003   sar.obj (.bss)
+                 [ 00000be0 ]  000005f0          *   00000001   usbstk5515bsl.lib : usbstk5515_i2c.obj (.bss)
+
+.cinit       0   [ 00000be2 ]  000005f1          *   0000011d   
+                 [ 00000be2 ]  000005f1          *   000000dc   dma.obj (.cinit)
+                 [ 00000d9a ]  000006cd          *   0000000c   main.obj (.cinit)
+                 [ 00000db2 ]  000006d9          *   0000000c   sar.obj (.cinit)
+                 [ 00000dca ]  000006e5          *   0000000a   rts55x.lib : _lock.obj (.cinit)
+                 [ 00000dde ]  000006ef          *   0000000a              : exit.obj (.cinit)
+                 [ 00000df2 ]  000006f9          *   00000008   rtc.obj (.cinit)
+                 [ 00000e02 ]  00000701          *   00000004   i2s.obj (.cinit)
+                 [ 00000e0a ]  00000705          *   00000004   timer.obj (.cinit)
+                 [ 00000e12 ]  00000709          *   00000004   usbstk5515bsl.lib : usbstk5515_i2c.obj (.cinit)
+                 [ 00000e1a ]  0000070d          *   00000001   --HOLE-- [fill = 0]
+
+.switch      0   [ 00000e1c ]  0000070e          *   00000014   
+                 [ 00000e1c ]  0000070e          *   00000014   rtc.obj (.switch)
+
+vector       0     00000f00  [ 00000780 ] 00000100          *   
+                   00000f00  [ 00000780 ] 00000100          *   vector.obj (vector)
+
+vectors      0     00001000  [ 00000800 ] 00000100          *   NOLOAD SECTION
+                   00001000  [ 00000800 ] 00000100          *   rts55x.lib : vectors.obj (vectors)
+
+.text        0     00030000  [ 00018000 ] 00001a1c          *   
+                   00030000  [ 00018000 ] 0000061a          *   oled_test.obj (.text)
+                   0003061a  [ 0001830d ] 000002ef          *   aic_test_i2c.obj (.text)
+                   00030909  [ 00018484+] 00000298          *   i2s_register.obj (.text)
+                   00030ba1  [ 000185d0+] 0000025a          *   dma.obj (.text)
+                   00030dfb  [ 000186fd+] 0000020e          *   main.obj (.text)
+                   00031009  [ 00018804+] 000001c9          *   usbstk5515bsl.lib : usbstk5515_led.obj (.text)
+                   000311d2  [ 000188e9 ] 00000192          *   sar.obj (.text)
+                   00031364  [ 000189b2 ] 00000156          *   usbstk5515bsl.lib : usbstk5515_gpio.obj (.text)
+                   000314ba  [ 00018a5d ] 00000146          *   rtc.obj (.text)
+                   00031600  [ 00018b00 ] 0000013e          *   usbstk5515bsl.lib : usbstk5515_i2c.obj (.text)
+                   0003173e  [ 00018b9f ] 00000086          *   i2s.obj (.text)
+                   000317c4  [ 00018be2 ] 0000007b          *   vector.obj (.text)
+                   0003183f  [ 00018c1f+] 00000063          *   timer.obj (.text)
+                   000318a2  [ 00018c51 ] 00000054          *   usbstk5515bsl.lib : usbstk5515.obj (.text)
+                   000318f6  [ 00018c7b ] 0000004d          *   rts55x.lib : autoinit.obj (.text)
+                   00031943  [ 00018ca1+] 0000004b          *              : args_main.obj (.text)
+                   0003198e  [ 00018cc7 ] 0000003e          *              : exit.obj (.text)
+                   000319cc  [ 00018ce6 ] 00000034          *              : boot.obj (.text)
+                   00031a00  [ 00018d00 ] 00000012          *              : _lock.obj (.text)
+                   00031a12  [ 00018d09 ] 00000007          *              : exit.obj (.text:CIO_breakpoint)
+                   00031a19  [ 00018d0c+] 00000002          *              : vectors.obj (.text)
+                   00031a1b  [ 00018d0d ] 00000001          *   --HOLE-- [fill = 20]
+
+
+GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
+
+abs. value/
+byte addr   word addr   name
+---------   ---------   ----
+00000002                $TI_capability$C5500$CallingConvention
+00000002                $TI_capability$C5500$MemoryModel
+00000001                $TI_capability_requires_rev3
+            00000448    .bss
+            00000060    .data
+00030000                .text
+00031a13                C$$EXIT
+0003061a                _AIC3254_init
+00030f46                _BlinkLED
+            000005cc    _Buf_Address
+            000005d6    _Buf_day
+            000005d3    _Buf_hour
+            000005d0    _Buf_min
+            000005d9    _Buf_month
+            000005cd    _Buf_sec
+            000005dc    _Buf_year
+00030f13                _ConfigPort
+            000005e0    _Conunt_RTC
+            00000568    _DMA_Count
+            0000056b    _DMA_Done
+            00000569    _Error_Count_L
+            0000056a    _Error_Count_R
+            000005df    _Flag_RTC
+00030f7d                _GenerateAudioTone
+0003125b                _Get_Sar_Key
+            0000056c    _I2S_RCV_L
+            0000059c    _I2S_RCV_R
+00030ead                _InitSystem
+000311d2                _Init_SAR
+00030020                _OSD9616_multiSend
+00030000                _OSD9616_send
+00000f00                _RST
+000315b2                _RTC_Isr
+            00000508    _RcvL_Sine
+            00000538    _RcvR_Sine
+000311ea                _Read_GPAIN1
+00001000                _Reset
+00030f1f                _SYS_GlobalIntDisable
+00030f1b                _SYS_GlobalIntEnable
+00031866                _StartTimer0
+0003183f                _Timer0Init
+0003186e                _Timer_isr
+00031462                _USBSTK5515_GPIO_getInput
+00031364                _USBSTK5515_GPIO_init
+00031368                _USBSTK5515_GPIO_setDirection
+000313e5                _USBSTK5515_GPIO_setOutput
+0003161f                _USBSTK5515_I2C_close
+00031600                _USBSTK5515_I2C_init
+000316c5                _USBSTK5515_I2C_read
+00031628                _USBSTK5515_I2C_reset
+00031636                _USBSTK5515_I2C_write
+00031009                _USBSTK5515_LED_init
+00031025                _USBSTK5515_LED_off
+00031014                _USBSTK5515_LED_on
+00031065                _USBSTK5515_ULED_getall
+00031036                _USBSTK5515_ULED_init
+0003115a                _USBSTK5515_ULED_off
+00031125                _USBSTK5515_ULED_on
+000310b7                _USBSTK5515_ULED_setall
+0003118d                _USBSTK5515_ULED_toggle
+000318e8                _USBSTK5515_init
+000318a2                _USBSTK5515_wait
+000318d6                _USBSTK5515_waitusec
+            00000448    _XmitL_Sine_1K
+            00000478    _XmitL_Sine_2K
+            000004a8    _XmitR_Sine_1K
+            000004d8    _XmitR_Sine_2K
+            00000254    __STACK_END
+000003e8                __STACK_SIZE
+000003e8                __SYSSTACK_SIZE
+ffffffff                ___binit__
+            00000448    ___bss__
+ffffffff                ___c_args__
+            000005f1    ___cinit__
+            00000060    ___data__
+            00000060    ___edata__
+            000005f1    ___end__
+00031a1c                ___etext__
+ffffffff                ___pinit__
+00030000                ___text__
+00031943                __args_main
+            000005e6    __cleanup_ptr
+            000005e8    __dtors_ptr
+            000005e2    __lock
+00031a10                __nop
+00031a08                __register_lock
+00031a00                __register_unlock
+            00000060    __stack
+            00000254    __sysstack
+            000005e4    __unlock
+00031a12                _abort
+000318f6                _auto_init
+000319cc                _c_int00
+0003157e                _convert_number_to_string
+00030b69                _disable_i2s0
+00030b77                _disable_i2s1
+00030b85                _disable_i2s2
+00030b93                _disable_i2s3
+00030ded                _enable_dma_int
+00030b31                _enable_i2s0
+00030b3f                _enable_i2s1
+00030b4d                _enable_i2s2
+00030b5b                _enable_i2s3
+000314ba                _enable_rtc_second_int
+0003198e                _exit
+            000005eb    _f1KToneOn
+            000005ec    _f2KToneOn
+            000005ea    _fSineWave
+            000005e1    _fTimer
+            000005f0    _i2c_timeout
+00030909                _i2s0_read_CR
+00030951                _i2s0_read_INTR
+00030957                _i2s0_read_INT_MASK
+00030963                _i2s0_read_RXL_LSW
+0003096f                _i2s0_read_RXL_MSW
+0003097b                _i2s0_read_RXR_LSW
+00030987                _i2s0_read_RXR_MSW
+00030915                _i2s0_read_SRGR
+00030921                _i2s0_read_TXL_LSW
+0003092d                _i2s0_read_TXL_MSW
+00030939                _i2s0_read_TXR_LSW
+00030945                _i2s0_read_TXR_MSW
+0003090f                _i2s0_write_CR
+0003095d                _i2s0_write_INT_MASK
+00030969                _i2s0_write_RXL_LSW
+00030975                _i2s0_write_RXL_MSW
+00030981                _i2s0_write_RXR_LSW
+0003098d                _i2s0_write_RXR_MSW
+0003091b                _i2s0_write_SRGR
+00030927                _i2s0_write_TXL_LSW
+00030933                _i2s0_write_TXL_MSW
+0003093f                _i2s0_write_TXR_LSW
+0003094b                _i2s0_write_TXR_MSW
+00030993                _i2s1_read_CR
+000309db                _i2s1_read_INTR
+000309e1                _i2s1_read_INT_MASK
+000309ed                _i2s1_read_RXL_LSW
+000309f9                _i2s1_read_RXL_MSW
+00030a05                _i2s1_read_RXR_LSW
+00030a11                _i2s1_read_RXR_MSW
+0003099f                _i2s1_read_SRGR
+000309ab                _i2s1_read_TXL_LSW
+000309b7                _i2s1_read_TXL_MSW
+000309c3                _i2s1_read_TXR_LSW
+000309cf                _i2s1_read_TXR_MSW
+00030999                _i2s1_write_CR
+000309e7                _i2s1_write_INT_MASK
+000309f3                _i2s1_write_RXL_LSW
+000309ff                _i2s1_write_RXL_MSW
+00030a0b                _i2s1_write_RXR_LSW
+00030a17                _i2s1_write_RXR_MSW
+000309a5                _i2s1_write_SRGR
+000309b1                _i2s1_write_TXL_LSW
+000309bd                _i2s1_write_TXL_MSW
+000309c9                _i2s1_write_TXR_LSW
+000309d5                _i2s1_write_TXR_MSW
+00030a1d                _i2s2_read_CR
+00030a65                _i2s2_read_INTR
+00030a6b                _i2s2_read_INT_MASK
+00030a77                _i2s2_read_RXL_LSW
+00030a83                _i2s2_read_RXL_MSW
+00030a8f                _i2s2_read_RXR_LSW
+00030a9b                _i2s2_read_RXR_MSW
+00030a29                _i2s2_read_SRGR
+00030a35                _i2s2_read_TXL_LSW
+00030a41                _i2s2_read_TXL_MSW
+00030a4d                _i2s2_read_TXR_LSW
+00030a59                _i2s2_read_TXR_MSW
+00030a23                _i2s2_write_CR
+00030a71                _i2s2_write_INT_MASK
+00030a7d                _i2s2_write_RXL_LSW
+00030a89                _i2s2_write_RXL_MSW
+00030a95                _i2s2_write_RXR_LSW
+00030aa1                _i2s2_write_RXR_MSW
+00030a2f                _i2s2_write_SRGR
+00030a3b                _i2s2_write_TXL_LSW
+00030a47                _i2s2_write_TXL_MSW
+00030a53                _i2s2_write_TXR_LSW
+00030a5f                _i2s2_write_TXR_MSW
+00030aa7                _i2s3_read_CR
+00030aef                _i2s3_read_INTR
+00030af5                _i2s3_read_INT_MASK
+00030b01                _i2s3_read_RXL_LSW
+00030b0d                _i2s3_read_RXL_MSW
+00030b19                _i2s3_read_RXR_LSW
+00030b25                _i2s3_read_RXR_MSW
+00030ab3                _i2s3_read_SRGR
+00030abf                _i2s3_read_TXL_LSW
+00030acb                _i2s3_read_TXL_MSW
+00030ad7                _i2s3_read_TXR_LSW
+00030ae3                _i2s3_read_TXR_MSW
+00030aad                _i2s3_write_CR
+00030afb                _i2s3_write_INT_MASK
+00030b07                _i2s3_write_RXL_LSW
+00030b13                _i2s3_write_RXL_MSW
+00030b1f                _i2s3_write_RXR_LSW
+00030b2b                _i2s3_write_RXR_MSW
+00030ab9                _i2s3_write_SRGR
+00030ac5                _i2s3_write_TXL_LSW
+00030ad1                _i2s3_write_TXL_MSW
+00030add                _i2s3_write_TXR_LSW
+00030ae9                _i2s3_write_TXR_MSW
+            000005ee    _keyCnt1
+            000005ef    _keyCnt2
+00030dfb                _main
+000300a9                _oled_test
+            000005ed    _preKey
+0003006c                _printLetter
+000314c6                _reset_RTC
+00030c76                _set_dma0_ch0_i2s0_Lout
+00030bb7                _set_dma0_ch0_stop
+00030d70                _set_dma0_ch1_i2s0_Rout
+00030be3                _set_dma0_ch1_stop
+00030bf9                _set_dma1_ch0_i2s2_Lout
+00030ba1                _set_dma1_ch0_stop
+00030cf3                _set_dma1_ch1_i2s2_Rout
+00030bcd                _set_dma1_ch1_stop
+0003176f                _set_i2s0_master
+000317a0                _set_i2s0_slave
+0003173e                _set_i2s2_master
+ffffffff                binit
+            000005f1    cinit
+            00000060    edata
+            000005f1    end
+00031a1c                etext
+ffffffff                pinit
+000317c4                reset_isr
+
+
+GLOBAL SYMBOLS: SORTED BY Symbol Address 
+
+abs. value/
+byte addr   word addr   name
+---------   ---------   ----
+00000001                $TI_capability_requires_rev3
+00000002                $TI_capability$C5500$CallingConvention
+00000002                $TI_capability$C5500$MemoryModel
+            00000060    .data
+            00000060    ___data__
+            00000060    ___edata__
+            00000060    __stack
+            00000060    edata
+000003e8                __STACK_SIZE
+000003e8                __SYSSTACK_SIZE
+            00000254    __STACK_END
+            00000254    __sysstack
+            00000448    .bss
+            00000448    _XmitL_Sine_1K
+            00000448    ___bss__
+            00000478    _XmitL_Sine_2K
+            000004a8    _XmitR_Sine_1K
+            000004d8    _XmitR_Sine_2K
+            00000508    _RcvL_Sine
+            00000538    _RcvR_Sine
+            00000568    _DMA_Count
+            00000569    _Error_Count_L
+            0000056a    _Error_Count_R
+            0000056b    _DMA_Done
+            0000056c    _I2S_RCV_L
+            0000059c    _I2S_RCV_R
+            000005cc    _Buf_Address
+            000005cd    _Buf_sec
+            000005d0    _Buf_min
+            000005d3    _Buf_hour
+            000005d6    _Buf_day
+            000005d9    _Buf_month
+            000005dc    _Buf_year
+            000005df    _Flag_RTC
+            000005e0    _Conunt_RTC
+            000005e1    _fTimer
+            000005e2    __lock
+            000005e4    __unlock
+            000005e6    __cleanup_ptr
+            000005e8    __dtors_ptr
+            000005ea    _fSineWave
+            000005eb    _f1KToneOn
+            000005ec    _f2KToneOn
+            000005ed    _preKey
+            000005ee    _keyCnt1
+            000005ef    _keyCnt2
+            000005f0    _i2c_timeout
+            000005f1    ___cinit__
+            000005f1    ___end__
+            000005f1    cinit
+            000005f1    end
+00000f00                _RST
+00001000                _Reset
+00030000                .text
+00030000                _OSD9616_send
+00030000                ___text__
+00030020                _OSD9616_multiSend
+0003006c                _printLetter
+000300a9                _oled_test
+0003061a                _AIC3254_init
+00030909                _i2s0_read_CR
+0003090f                _i2s0_write_CR
+00030915                _i2s0_read_SRGR
+0003091b                _i2s0_write_SRGR
+00030921                _i2s0_read_TXL_LSW
+00030927                _i2s0_write_TXL_LSW
+0003092d                _i2s0_read_TXL_MSW
+00030933                _i2s0_write_TXL_MSW
+00030939                _i2s0_read_TXR_LSW
+0003093f                _i2s0_write_TXR_LSW
+00030945                _i2s0_read_TXR_MSW
+0003094b                _i2s0_write_TXR_MSW
+00030951                _i2s0_read_INTR
+00030957                _i2s0_read_INT_MASK
+0003095d                _i2s0_write_INT_MASK
+00030963                _i2s0_read_RXL_LSW
+00030969                _i2s0_write_RXL_LSW
+0003096f                _i2s0_read_RXL_MSW
+00030975                _i2s0_write_RXL_MSW
+0003097b                _i2s0_read_RXR_LSW
+00030981                _i2s0_write_RXR_LSW
+00030987                _i2s0_read_RXR_MSW
+0003098d                _i2s0_write_RXR_MSW
+00030993                _i2s1_read_CR
+00030999                _i2s1_write_CR
+0003099f                _i2s1_read_SRGR
+000309a5                _i2s1_write_SRGR
+000309ab                _i2s1_read_TXL_LSW
+000309b1                _i2s1_write_TXL_LSW
+000309b7                _i2s1_read_TXL_MSW
+000309bd                _i2s1_write_TXL_MSW
+000309c3                _i2s1_read_TXR_LSW
+000309c9                _i2s1_write_TXR_LSW
+000309cf                _i2s1_read_TXR_MSW
+000309d5                _i2s1_write_TXR_MSW
+000309db                _i2s1_read_INTR
+000309e1                _i2s1_read_INT_MASK
+000309e7                _i2s1_write_INT_MASK
+000309ed                _i2s1_read_RXL_LSW
+000309f3                _i2s1_write_RXL_LSW
+000309f9                _i2s1_read_RXL_MSW
+000309ff                _i2s1_write_RXL_MSW
+00030a05                _i2s1_read_RXR_LSW
+00030a0b                _i2s1_write_RXR_LSW
+00030a11                _i2s1_read_RXR_MSW
+00030a17                _i2s1_write_RXR_MSW
+00030a1d                _i2s2_read_CR
+00030a23                _i2s2_write_CR
+00030a29                _i2s2_read_SRGR
+00030a2f                _i2s2_write_SRGR
+00030a35                _i2s2_read_TXL_LSW
+00030a3b                _i2s2_write_TXL_LSW
+00030a41                _i2s2_read_TXL_MSW
+00030a47                _i2s2_write_TXL_MSW
+00030a4d                _i2s2_read_TXR_LSW
+00030a53                _i2s2_write_TXR_LSW
+00030a59                _i2s2_read_TXR_MSW
+00030a5f                _i2s2_write_TXR_MSW
+00030a65                _i2s2_read_INTR
+00030a6b                _i2s2_read_INT_MASK
+00030a71                _i2s2_write_INT_MASK
+00030a77                _i2s2_read_RXL_LSW
+00030a7d                _i2s2_write_RXL_LSW
+00030a83                _i2s2_read_RXL_MSW
+00030a89                _i2s2_write_RXL_MSW
+00030a8f                _i2s2_read_RXR_LSW
+00030a95                _i2s2_write_RXR_LSW
+00030a9b                _i2s2_read_RXR_MSW
+00030aa1                _i2s2_write_RXR_MSW
+00030aa7                _i2s3_read_CR
+00030aad                _i2s3_write_CR
+00030ab3                _i2s3_read_SRGR
+00030ab9                _i2s3_write_SRGR
+00030abf                _i2s3_read_TXL_LSW
+00030ac5                _i2s3_write_TXL_LSW
+00030acb                _i2s3_read_TXL_MSW
+00030ad1                _i2s3_write_TXL_MSW
+00030ad7                _i2s3_read_TXR_LSW
+00030add                _i2s3_write_TXR_LSW
+00030ae3                _i2s3_read_TXR_MSW
+00030ae9                _i2s3_write_TXR_MSW
+00030aef                _i2s3_read_INTR
+00030af5                _i2s3_read_INT_MASK
+00030afb                _i2s3_write_INT_MASK
+00030b01                _i2s3_read_RXL_LSW
+00030b07                _i2s3_write_RXL_LSW
+00030b0d                _i2s3_read_RXL_MSW
+00030b13                _i2s3_write_RXL_MSW
+00030b19                _i2s3_read_RXR_LSW
+00030b1f                _i2s3_write_RXR_LSW
+00030b25                _i2s3_read_RXR_MSW
+00030b2b                _i2s3_write_RXR_MSW
+00030b31                _enable_i2s0
+00030b3f                _enable_i2s1
+00030b4d                _enable_i2s2
+00030b5b                _enable_i2s3
+00030b69                _disable_i2s0
+00030b77                _disable_i2s1
+00030b85                _disable_i2s2
+00030b93                _disable_i2s3
+00030ba1                _set_dma1_ch0_stop
+00030bb7                _set_dma0_ch0_stop
+00030bcd                _set_dma1_ch1_stop
+00030be3                _set_dma0_ch1_stop
+00030bf9                _set_dma1_ch0_i2s2_Lout
+00030c76                _set_dma0_ch0_i2s0_Lout
+00030cf3                _set_dma1_ch1_i2s2_Rout
+00030d70                _set_dma0_ch1_i2s0_Rout
+00030ded                _enable_dma_int
+00030dfb                _main
+00030ead                _InitSystem
+00030f13                _ConfigPort
+00030f1b                _SYS_GlobalIntEnable
+00030f1f                _SYS_GlobalIntDisable
+00030f46                _BlinkLED
+00030f7d                _GenerateAudioTone
+00031009                _USBSTK5515_LED_init
+00031014                _USBSTK5515_LED_on
+00031025                _USBSTK5515_LED_off
+00031036                _USBSTK5515_ULED_init
+00031065                _USBSTK5515_ULED_getall
+000310b7                _USBSTK5515_ULED_setall
+00031125                _USBSTK5515_ULED_on
+0003115a                _USBSTK5515_ULED_off
+0003118d                _USBSTK5515_ULED_toggle
+000311d2                _Init_SAR
+000311ea                _Read_GPAIN1
+0003125b                _Get_Sar_Key
+00031364                _USBSTK5515_GPIO_init
+00031368                _USBSTK5515_GPIO_setDirection
+000313e5                _USBSTK5515_GPIO_setOutput
+00031462                _USBSTK5515_GPIO_getInput
+000314ba                _enable_rtc_second_int
+000314c6                _reset_RTC
+0003157e                _convert_number_to_string
+000315b2                _RTC_Isr
+00031600                _USBSTK5515_I2C_init
+0003161f                _USBSTK5515_I2C_close
+00031628                _USBSTK5515_I2C_reset
+00031636                _USBSTK5515_I2C_write
+000316c5                _USBSTK5515_I2C_read
+0003173e                _set_i2s2_master
+0003176f                _set_i2s0_master
+000317a0                _set_i2s0_slave
+000317c4                reset_isr
+0003183f                _Timer0Init
+00031866                _StartTimer0
+0003186e                _Timer_isr
+000318a2                _USBSTK5515_wait
+000318d6                _USBSTK5515_waitusec
+000318e8                _USBSTK5515_init
+000318f6                _auto_init
+00031943                __args_main
+0003198e                _exit
+000319cc                _c_int00
+00031a00                __register_unlock
+00031a08                __register_lock
+00031a10                __nop
+00031a12                _abort
+00031a13                C$$EXIT
+00031a1c                ___etext__
+00031a1c                etext
+ffffffff                ___binit__
+ffffffff                ___c_args__
+ffffffff                ___pinit__
+ffffffff                binit
+ffffffff                pinit
+
+[227 symbols]

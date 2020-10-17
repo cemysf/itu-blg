@@ -1,0 +1,27 @@
+# depslib dependency file v1.0
+1414784490 source:x:\dev_\hw3datastr\hw3veri\main.cpp
+	<cstdlib>
+	<iostream>
+	<stdio.h>
+	"structs.h"
+
+1414784490 "
+
+1414784540 x:\dev_\hw3datastr\hw3veri\structs.h
+	<fstream>
+	<cstring>
+	<sstream>
+
+1414784540 
+
+1414784490 source:/home/cya/dev_/ders_temp/hw3datastr/hw3veri/main.cpp
+	<cstdlib>
+	<iostream>
+	<stdio.h>
+	"structs.h"
+
+1414784540 /home/cya/dev_/ders_temp/hw3datastr/hw3veri/structs.h
+	<fstream>
+	<cstring>
+	<sstream>
+

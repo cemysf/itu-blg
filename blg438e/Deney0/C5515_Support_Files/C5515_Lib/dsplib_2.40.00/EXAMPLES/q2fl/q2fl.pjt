@@ -1,0 +1,36 @@
+; Code Composer Project File, Version 2.0 (do not modify or remove this line)
+
+[Project Settings]
+ProjectDir="C:\TiDoc\c55dsplib\dsplib\EXAMPLES\q2fl\"
+ProjectType=Executable
+CPUFamily=TMS320C55XX
+Tool="Compiler"
+Tool="CustomBuilder"
+Tool="DspBiosBuilder"
+Tool="Linker"
+Config="Debug"
+Config="Release"
+
+[Source Files]
+Source="FTEST.C"
+Source="q2fl_t.c"
+Source="55x.cmd"
+
+["Compiler" Settings: "Debug"]
+Options=-g -q -fr"C:\TiDoc\c55dsplib\dsplib\EXAMPLES\q2fl\Debug" -i"..\..\include" -d"_DEBUG"
+
+["Compiler" Settings: "Release"]
+Options=-q -o2 -fr"C:\TiDoc\c55dsplib\dsplib\EXAMPLES\q2fl\Release"
+
+["DspBiosBuilder" Settings: "Debug"]
+Options=-v55
+
+["DspBiosBuilder" Settings: "Release"]
+Options=-v55
+
+["Linker" Settings: "Debug"]
+Options=-q -c -o".\Debug\q2fl.out" -x -i"..\.." -l"55xdsp.lib" -l"rts55.lib"
+
+["Linker" Settings: "Release"]
+Options=-q -c -o".\Release\q2fl.out" -x
+

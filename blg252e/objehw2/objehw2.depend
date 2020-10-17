@@ -1,0 +1,21 @@
+# depslib dependency file v1.0
+1428356366 source:/home/cya/dev_/ders_temp/objehw2/main.cpp
+	<iostream>
+	"hw2.h"
+
+1428789246 /home/cya/dev_/ders_temp/objehw2/hw2.h
+	<iostream>
+
+1429300630 source:/home/cya/dev_/ders_temp/objehw2/chess.cpp
+	"hw2.h"
+	<cstring>
+	<cmath>
+
+1429296614 source:/home/cya/dev_/ders_temp/objehw2/hw2.cpp
+	<iostream>
+	"hw2.h"
+
+1428779655 source:/home/cya/dev_/ders_temp/objehw2/hw2main.cpp
+	<iostream>
+	"hw2.h"
+

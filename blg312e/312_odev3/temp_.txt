@@ -1,0 +1,3 @@
+//printf("\txray check:. %d \n",semctl(xray_sem,0,GETVAL) );
+
+//printf("\tDepartment %d Doctor %c: Patient %d treated (t=%d, xray=%d)\n",index_child,(char *)ptr, numb, var, xray_stat);

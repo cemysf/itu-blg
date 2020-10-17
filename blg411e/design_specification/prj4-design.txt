@@ -1,0 +1,36 @@
+--------------------------
+DESIGN SPECIFICATION NOTES
+--------------------------
+
+* ONLY ONE PERSON FROM EACH GROUP SHOULD SUBMIT THIS REPORT
+* Each title and subtitle must start with a drawing/chart/table (except 1. and 2.2.).
+* Each title and subtitle must contain the detailed explanation of all items in the drawing/chart/table.
+* Explanations should be itemized (no paragraphs).
+* If you are unfamiliar to a term in this document, it is your responsibility to search and learn it.
+
+-----------------------------
+DESIGN SPECIFICATION CONTENTS
+-----------------------------
+
+COVER PAGE
+	Course information, report name, project title, group name and members, date etc.
+
+1. INTRODUCTION
+	Goal, contents and organization of the document.
+
+2. DATA MODEL
+	2.1 General Data Model - Entity relationship diagram for the data that is stored in a database. This diagram should be based on the conceptual model in Requirements Specification document. The relationships between these two models should be explained. http://en.wikipedia.org/wiki/Entity%E2%80%93relationship_model
+	2.2 Important Data Considerations - Information about other data format preferences (Ajax, JSON, XML, etc.).
+	2.3 Data Flow - Data Flow Diagram and its explanation. http://en.wikipedia.org/wiki/Data_flow_diagram
+
+3. SOFTWARE MODEL
+	3.1 System Architecture - Example: http://www.ipag.ch/sqlf/sqlF_SystemArchitecture.gif
+	3.2 Component (Package) Diagram - Inputs, outputs of each component and services should be included. http://en.wikipedia.org/wiki/Component_diagram
+	3.3 Class Diagrams - A class diagram for each component. http://en.wikipedia.org/wiki/Class_diagram
+	3.4 Sequence/Communication Diagrams - One of the two diagrams for each User Story in Requirements Specification. http://en.wikipedia.org/wiki/Sequence_diagram http://en.wikipedia.org/wiki/Communication_diagram
+
+4. USER INTERFACE MODEL
+	Important screen mock-ups that are mapped to user stories and project components. 
+		Choose 5 to 10 screens to demonstrate. 
+		Do not include similar screens multiple times.
+		You can use the rapid prototyping tools introduced in Recitation Session 2 as well as any other tools to prepare mock-ups (Bootstrap, Balsamiq, Fluid UI, Proto.io, UXPin etc.).

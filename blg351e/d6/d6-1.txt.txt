@@ -1,0 +1,27 @@
+			bis.b 	#11111111b,&P1DIR
+			bis.b	#00001000b,&P2DIR
+			bis.b	#00001000b,&P2OUT
+
+			mov		#array,R5
+			mov		#00h, R6
+
+Loop		mov.b	@R5,&P1OUT
+			call	#Delay
+			inc		R5
+			inc.b	R6
+			cmp		#0Ah,R6
+			jne		Loop
+			mov		#00h, R6
+			mov		#array,R5
+			jmp		Loop
+
+Delay		mov.w #0Ah,R14
+L2			mov.w #07A00h,R15
+L1			dec.w R15
+			jnz L1
+			dec.w R14
+			jnz L2
+			ret
+
+array 		.byte 00111111b, 00000110b, 01011011b, 01001111b, 01100110b, 01101101b, 01111101b, 00000111b, 01111111b, 01101111b ;contains 10 values
+lastElement

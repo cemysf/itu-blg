@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block title %}Tournament List{% endblock %}
+{% block content %}
+	<h2>Tournament List</h2>
+	<style>
+		#tbl tr td,th{
+			padding:5px;
+			text-align: center;
+		}
+	</style>
+
+	<a style="font-weight:Bold" href="{{ url_for('addtournament') }}">Add Tournament</a>
+
+	<table border="1" id="tbl">
+	<tr>
+		<th>Tournament Name</th>
+		<th>Tournament ID</th>
+	</tr>
+		{% for tournament in tournmentlist %}
+			<tr>
+				<td>{{ tournament.ID }}</td>
+				<td>{{ tournament.Name }}</td>
+				<td>
+				<a href="{{ url_for('tournamentdelete',id=city.ID) }}">Delete Tournament</a>
+				</td>
+			</tr>
+		{% endfor %}
+	</table>
+{% endblock %}
+

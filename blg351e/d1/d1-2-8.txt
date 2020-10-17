@@ -1,0 +1,39 @@
+	ldx #$4100
+	clra
+l1	staa 0,x
+	inx	
+	inca
+	cmpa #$0a
+	blt l1
+	ldx #$4300
+	stx $5002
+	ldx #$4200
+	stx $5004
+	clra	
+	clrb
+	ldx #$4100
+loop	ldaa 0,x
+	rora
+	bcs tek
+	bra cift
+ret	ldx $5000
+	inx
+	incb
+	cmpb #$0a
+	blt loop
+	wai
+	swi
+tek	rola
+	stx $5000
+	ldx $5002
+	staa 0,x
+	inx
+	stx $5002
+	bra ret
+cift	rola
+	stx $5000
+	ldx $5004
+	staa 0,x
+	inx
+	stx $5004
+	bra ret

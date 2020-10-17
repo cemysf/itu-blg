@@ -1,0 +1,626 @@
+; *****************************************************************************
+;
+; Supported Products
+;  XDS510USB
+;  XDS510USB-PLUS
+;  C2000 XDS510LC
+;  SDXDS560R
+;  DSK5416
+;  DSK5510   - All C55xx based DSK/EVM
+;  DSK6416   - All C64xx based DSK/EVM
+;  DSK6713
+;  DSK645x   - All C64xx-Plus based DSK/EVM
+;  eZdsp2800 - All C28xx based eZdsp
+;  eZ470
+;  XDS560v2u
+;
+; (C) Copyright 1998-2008 by Spectrum Digital Incorporated
+; All rights reserved
+;
+; *****************************************************************************
+;******************************************************************************
+; Version section
+;------------------------------------------------------------------------------
+[Version]
+Signature="$CHICAGO$"
+Provider=%S_Provider%
+DriverVer=12/05/2008,6.0.999.0
+CatalogFile.NTx86=sdusb2em_x86.cat
+Class=SDUSBEmulators
+ClassGUID={5EA49935-3617-468a-95C0-C2AAC353D35B}
+
+
+;******************************************************************************
+; Class Install section (optional)
+;------------------------------------------------------------------------------
+[ClassInstall32] 
+AddReg=_AddReg_ClassInstall
+
+; registry entries required for class 
+[_AddReg_ClassInstall]
+HKR,,,,"%S_DeviceClassDisplayName%"
+HKR,,Icon,,"-20"
+
+
+;******************************************************************************
+; Copy Files section
+;------------------------------------------------------------------------------
+[_CopyFiles_sys]
+sdusb2em.sys
+
+
+;******************************************************************************
+; Options
+;------------------------------------------------------------------------------
+[ControlFlags]
+; Advanced options can be specified here.
+; For details, refer to the Windows DDK documentation.
+
+
+;******************************************************************************
+; Destination Directories
+;------------------------------------------------------------------------------
+[DestinationDirs]
+DefaultDestDir  = 11    ; SYSTEM directory
+_CopyFiles_sys = 10,System32\Drivers
+
+
+;******************************************************************************
+; Disk Layout
+;------------------------------------------------------------------------------
+[SourceDisksNames]
+1=%S_DiskName%,,
+
+[SourceDisksFiles]
+sdusb2em.sys=1
+
+;******************************************************************************
+; NT Service sections 
+;------------------------------------------------------------------------------
+[_NT_AddService]
+DisplayName    = %S_ServiceDisplayName%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\System32\Drivers\%S_DriverName%.sys
+
+[_NT_EventLog]
+AddReg=_NT_EventLog_AddReg
+
+[_NT_EventLog_AddReg]
+HKR,,EventMessageFile,0x00020000,"%%SystemRoot%%\System32\IoLogMsg.dll;%%SystemRoot%%\System32\drivers\%S_DriverName%.sys"
+HKR,,TypesSupported,  0x00010001,7
+
+
+;******************************************************************************
+; Manufacturer section
+;------------------------------------------------------------------------------
+[Manufacturer]
+%S_Mfg%=_Devices
+
+
+;******************************************************************************
+; Device section
+;------------------------------------------------------------------------------
+[_Devices]
+%xds510usb_DeviceDesc%=xds510usb,           USB\Vid_0c55&Pid_0510
+%xds510usbplus_DeviceDesc%=xds510usbplus,   USB\Vid_0c55&Pid_0540
+%xds2000usb_DeviceDesc%=xds2000usb,         USB\Vid_0c55&Pid_2000
+%sdxds560r_DeviceDesc%=sdxds560r,           USB\Vid_0c55&Pid_0560
+%dsk5416_DeviceDesc%=dsk5416,               USB\Vid_0c55&Pid_5416
+%dsk5510_DeviceDesc%=dsk5510,               USB\Vid_0c55&Pid_5510
+%dsk6416_DeviceDesc%=dsk6416,               USB\Vid_0c55&Pid_6416
+%dsk6713_DeviceDesc%=dsk6713,               USB\Vid_0c55&Pid_6713
+%ez2800_DeviceDesc%=ez2800,                 USB\Vid_0c55&Pid_2812
+%ez470_DeviceDesc%=ez470,                   USB\Vid_0c55&Pid_0470
+%dsk645x_DeviceDesc%=dsk645x,               USB\Vid_0c55&Pid_6450
+%xds560v2u_DeviceDesc%=xds560v2u,           USB\Vid_0c55&Pid_0562
+
+;******************************************************************************
+; Install section ( xds510usb)
+;------------------------------------------------------------------------------
+[xds510usb.NTx86]
+CopyFiles=_CopyFiles_sys
+AddReg=xds510usb_AddReg_SW, xds510usb_Parameters_NT
+
+[xds510usb.NTx86.Services]
+AddService = %S_DriverName%, 0x00000002, _NT_AddService, _NT_EventLog
+
+[xds510usb.NTx86.HW]
+AddReg=xds510usb_AddReg_HW
+
+[xds510usb_AddReg_SW]
+HKLM,"%S_ConfigPath%",,,
+HKLM,"%S_ConfigPath%"\"%xds510usb_DeviceConfigPath%",,,
+
+[xds510usb_AddReg_HW]
+HKR,,DriverConfigurationPath,,\Registry\Machine\%S_ConfigPath%\%xds510usb_DeviceConfigPath%
+HKR,,DriverUserInterfaceGuid,,"{62B0261C-3C9A-4311-BBC1-20F67ED97932}"
+
+[xds510usb_Parameters_NT]
+HKLM,"%s_ConfigPath%"\"%xds510usb_DeviceConfigPath%",PowerStateOnOpen,0x00010001, 0
+HKLM,"%s_ConfigPath%"\"%xds510usb_DeviceConfigPath%",PowerStateOnClose,0x00010001, 0
+HKLM,"%s_ConfigPath%"\"%xds510usb_DeviceConfigPath%",MinPowerStateUsed,0x00010001, 3
+HKLM,"%s_ConfigPath%"\"%xds510usb_DeviceConfigPath%",MinPowerStateUnused,0x00010001, 3
+HKLM,"%s_ConfigPath%"\"%xds510usb_DeviceConfigPath%",EnableRemoteWakeup,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%xds510usb_DeviceConfigPath%",AbortPipesOnPowerDown,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%xds510usb_DeviceConfigPath%",UnconfigureOnClose,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%xds510usb_DeviceConfigPath%",ResetDeviceOnClose,0x00010001, 0
+HKLM,"%s_ConfigPath%"\"%xds510usb_DeviceConfigPath%",MaxIsoPackets,0x00010001, 512
+HKLM,"%s_ConfigPath%"\"%xds510usb_DeviceConfigPath%",ShortTransferOk,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%xds510usb_DeviceConfigPath%",RequestTimeout,0x00010001, 1000
+HKLM,"%S_ConfigPath%"\"%xds510usb_DeviceConfigPath%",SuppressPnPRemoveDlg,0x00010001, 1
+
+;******************************************************************************
+; Install section ( xds510usbplus )
+;------------------------------------------------------------------------------
+[xds510usbplus.NTx86]
+CopyFiles=_CopyFiles_sys
+AddReg=xds510usbplus_AddReg_SW, xds510usbplus_Parameters_NT
+
+[xds510usbplus.NTx86.Services]
+AddService = %S_DriverName%, 0x00000002, _NT_AddService, _NT_EventLog
+
+[xds510usbplus.NTx86.HW]
+AddReg=xds510usbplus_AddReg_HW
+
+[xds510usbplus_AddReg_SW]
+HKLM,"%S_ConfigPath%",,,
+HKLM,"%S_ConfigPath%"\"%xds510usbplus_DeviceConfigPath%",,,
+
+[xds510usbplus_AddReg_HW]
+HKR,,DriverConfigurationPath,,\Registry\Machine\%S_ConfigPath%\%xds510usbplus_DeviceConfigPath%
+HKR,,DriverUserInterfaceGuid,,"{9511726b-D708-4DFB-B178-958734F61F26}"
+
+[xds510usbplus_Parameters_NT]
+HKLM,"%s_ConfigPath%"\"%xds510usbplus_DeviceConfigPath%",PowerStateOnOpen,0x00010001, 0
+HKLM,"%s_ConfigPath%"\"%xds510usbplus_DeviceConfigPath%",PowerStateOnClose,0x00010001, 0
+HKLM,"%s_ConfigPath%"\"%xds510usbplus_DeviceConfigPath%",MinPowerStateUsed,0x00010001, 3
+HKLM,"%s_ConfigPath%"\"%xds510usbplus_DeviceConfigPath%",MinPowerStateUnused,0x00010001, 3
+HKLM,"%s_ConfigPath%"\"%xds510usbplus_DeviceConfigPath%",EnableRemoteWakeup,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%xds510usbplus_DeviceConfigPath%",AbortPipesOnPowerDown,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%xds510usbplus_DeviceConfigPath%",UnconfigureOnClose,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%xds510usbplus_DeviceConfigPath%",ResetDeviceOnClose,0x00010001, 0
+HKLM,"%s_ConfigPath%"\"%xds510usbplus_DeviceConfigPath%",MaxIsoPackets,0x00010001, 512
+HKLM,"%s_ConfigPath%"\"%xds510usbplus_DeviceConfigPath%",ShortTransferOk,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%xds510usbplus_DeviceConfigPath%",RequestTimeout,0x00010001, 1000
+HKLM,"%S_ConfigPath%"\"%xds510usbplus_DeviceConfigPath%",SuppressPnPRemoveDlg,0x00010001, 1
+
+
+;******************************************************************************
+; Install section ( xds2000usb )
+;------------------------------------------------------------------------------
+[xds2000usb.NTx86]
+CopyFiles=_CopyFiles_sys
+AddReg=xds2000usb_AddReg_SW, xds2000usb_Parameters_NT
+
+[xds2000usb.NTx86.Services]
+AddService = %S_DriverName%, 0x00000002, _NT_AddService, _NT_EventLog
+
+[xds2000usb.NTx86.HW]
+AddReg=xds2000usb_AddReg_HW
+
+[xds2000usb_AddReg_SW]
+HKLM,"%S_ConfigPath%",,,
+HKLM,"%S_ConfigPath%"\"%xds2000usb_DeviceConfigPath%",,,
+
+[xds2000usb_AddReg_HW]
+HKR,,DriverConfigurationPath,,\Registry\Machine\%S_ConfigPath%\%xds2000usb_DeviceConfigPath%
+HKR,,DriverUserInterfaceGuid,,"{882D5D18-384A-4a6a-83CF-2CAE674CDCC3}"
+
+[xds2000usb_Parameters_NT]
+HKLM,"%s_ConfigPath%"\"%xds2000usb_DeviceConfigPath%",PowerStateOnOpen,0x00010001, 0
+HKLM,"%s_ConfigPath%"\"%xds2000usb_DeviceConfigPath%",PowerStateOnClose,0x00010001, 0
+HKLM,"%s_ConfigPath%"\"%xds2000usb_DeviceConfigPath%",MinPowerStateUsed,0x00010001, 3
+HKLM,"%s_ConfigPath%"\"%xds2000usb_DeviceConfigPath%",MinPowerStateUnused,0x00010001, 3
+HKLM,"%s_ConfigPath%"\"%xds2000usb_DeviceConfigPath%",EnableRemoteWakeup,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%xds2000usb_DeviceConfigPath%",AbortPipesOnPowerDown,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%xds2000usb_DeviceConfigPath%",UnconfigureOnClose,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%xds2000usb_DeviceConfigPath%",ResetDeviceOnClose,0x00010001, 0
+HKLM,"%s_ConfigPath%"\"%xds2000usb_DeviceConfigPath%",MaxIsoPackets,0x00010001, 512
+HKLM,"%s_ConfigPath%"\"%xds2000usb_DeviceConfigPath%",ShortTransferOk,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%xds2000usb_DeviceConfigPath%",RequestTimeout,0x00010001, 1000
+HKLM,"%S_ConfigPath%"\"%xds2000usb_DeviceConfigPath%",SuppressPnPRemoveDlg,0x00010001, 1
+
+
+;******************************************************************************
+; Install section ( xds2000usb )
+;------------------------------------------------------------------------------
+[xds2000usb.NTx86]
+CopyFiles=_CopyFiles_sys
+AddReg=xds2000usb_AddReg_SW, xds2000usb_Parameters_NT
+
+[xds2000usb.NTx86.Services]
+AddService = %S_DriverName%, 0x00000002, _NT_AddService, _NT_EventLog
+
+[xds2000usb.NTx86.HW]
+AddReg=xds2000usb_AddReg_HW
+
+[xds2000usb_AddReg_SW]
+HKLM,"%S_ConfigPath%",,,
+HKLM,"%S_ConfigPath%"\"%xds2000usb_DeviceConfigPath%",,,
+
+[xds2000usb_AddReg_HW]
+HKR,,DriverConfigurationPath,,\Registry\Machine\%S_ConfigPath%\%xds2000usb_DeviceConfigPath%
+HKR,,DriverUserInterfaceGuid,,"{882D5D18-384A-4a6a-83CF-2CAE674CDCC3}"
+
+[xds2000usb_Parameters_NT]
+HKLM,"%s_ConfigPath%"\"%xds2000usb_DeviceConfigPath%",PowerStateOnOpen,0x00010001, 0
+HKLM,"%s_ConfigPath%"\"%xds2000usb_DeviceConfigPath%",PowerStateOnClose,0x00010001, 0
+HKLM,"%s_ConfigPath%"\"%xds2000usb_DeviceConfigPath%",MinPowerStateUsed,0x00010001, 3
+HKLM,"%s_ConfigPath%"\"%xds2000usb_DeviceConfigPath%",MinPowerStateUnused,0x00010001, 3
+HKLM,"%s_ConfigPath%"\"%xds2000usb_DeviceConfigPath%",EnableRemoteWakeup,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%xds2000usb_DeviceConfigPath%",AbortPipesOnPowerDown,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%xds2000usb_DeviceConfigPath%",UnconfigureOnClose,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%xds2000usb_DeviceConfigPath%",ResetDeviceOnClose,0x00010001, 0
+HKLM,"%s_ConfigPath%"\"%xds2000usb_DeviceConfigPath%",MaxIsoPackets,0x00010001, 512
+HKLM,"%s_ConfigPath%"\"%xds2000usb_DeviceConfigPath%",ShortTransferOk,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%xds2000usb_DeviceConfigPath%",RequestTimeout,0x00010001, 1000
+HKLM,"%S_ConfigPath%"\"%xds2000usb_DeviceConfigPath%",SuppressPnPRemoveDlg,0x00010001, 1
+
+;******************************************************************************
+; Install section ( sdxds560r)
+;------------------------------------------------------------------------------
+[sdxds560r.NTx86]
+CopyFiles=_CopyFiles_sys
+AddReg=sdxds560r_AddReg_SW, sdxds560r_Parameters_NT
+
+[sdxds560r.NTx86.Services]
+AddService = %S_DriverName%, 0x00000002, _NT_AddService, _NT_EventLog
+
+[sdxds560r.NTx86.HW]
+AddReg=sdxds560r_AddReg_HW
+
+[sdxds560r_AddReg_SW]
+HKLM,"%S_ConfigPath%",,,
+HKLM,"%S_ConfigPath%"\"%sdxds560r_DeviceConfigPath%",,,
+
+[sdxds560r_AddReg_HW]
+HKR,,DriverConfigurationPath,,\Registry\Machine\%S_ConfigPath%\%sdxds560r_DeviceConfigPath%
+HKR,,DriverUserInterfaceGuid,,"{FC81BDBB-7809-4f9d-843A-35F512EA85B7}"
+
+[sdxds560r_Parameters_NT]
+HKLM,"%s_ConfigPath%"\"%sdxds560r_DeviceConfigPath%",PowerStateOnOpen,0x00010001, 0
+HKLM,"%s_ConfigPath%"\"%sdxds560r_DeviceConfigPath%",PowerStateOnClose,0x00010001, 0
+HKLM,"%s_ConfigPath%"\"%sdxds560r_DeviceConfigPath%",MinPowerStateUsed,0x00010001, 3
+HKLM,"%s_ConfigPath%"\"%sdxds560r_DeviceConfigPath%",MinPowerStateUnused,0x00010001, 3
+HKLM,"%s_ConfigPath%"\"%sdxds560r_DeviceConfigPath%",EnableRemoteWakeup,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%sdxds560r_DeviceConfigPath%",AbortPipesOnPowerDown,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%sdxds560r_DeviceConfigPath%",UnconfigureOnClose,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%sdxds560r_DeviceConfigPath%",ResetDeviceOnClose,0x00010001, 0
+HKLM,"%s_ConfigPath%"\"%sdxds560r_DeviceConfigPath%",MaxIsoPackets,0x00010001, 512
+HKLM,"%s_ConfigPath%"\"%sdxds560r_DeviceConfigPath%",ShortTransferOk,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%sdxds560r_DeviceConfigPath%",RequestTimeout,0x00010001, 1000
+HKLM,"%S_ConfigPath%"\"%sdxds560r_DeviceConfigPath%",SuppressPnPRemoveDlg,0x00010001, 1
+
+;******************************************************************************
+; Install section ( dsk5416)
+;------------------------------------------------------------------------------
+[dsk5416.NTx86]
+CopyFiles=_CopyFiles_sys
+AddReg=dsk5416_AddReg_SW, dsk5416_Parameters_NT
+
+[dsk5416.NTx86.Services]
+AddService = %S_DriverName%, 0x00000002, _NT_AddService, _NT_EventLog
+
+[dsk5416.NTx86.HW]
+AddReg=dsk5416_AddReg_HW
+
+[dsk5416_AddReg_SW]
+HKLM,"%S_ConfigPath%",,,
+HKLM,"%S_ConfigPath%"\"%dsk5416_DeviceConfigPath%",,,
+
+[dsk5416_AddReg_HW]
+HKR,,DriverConfigurationPath,,\Registry\Machine\%S_ConfigPath%\%dsk5416_DeviceConfigPath%
+HKR,,DriverUserInterfaceGuid,,"{383F266A-51D0-4a0a-86E0-A461A5DCA351}"
+
+[dsk5416_Parameters_NT]
+HKLM,"%s_ConfigPath%"\"%dsk5416_DeviceConfigPath%",PowerStateOnOpen,0x00010001, 0
+HKLM,"%s_ConfigPath%"\"%dsk5416_DeviceConfigPath%",PowerStateOnClose,0x00010001, 0
+HKLM,"%s_ConfigPath%"\"%dsk5416_DeviceConfigPath%",MinPowerStateUsed,0x00010001, 3
+HKLM,"%s_ConfigPath%"\"%dsk5416_DeviceConfigPath%",MinPowerStateUnused,0x00010001, 3
+HKLM,"%s_ConfigPath%"\"%dsk5416_DeviceConfigPath%",EnableRemoteWakeup,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%dsk5416_DeviceConfigPath%",AbortPipesOnPowerDown,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%dsk5416_DeviceConfigPath%",UnconfigureOnClose,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%dsk5416_DeviceConfigPath%",ResetDeviceOnClose,0x00010001, 0
+HKLM,"%s_ConfigPath%"\"%dsk5416_DeviceConfigPath%",MaxIsoPackets,0x00010001, 512
+HKLM,"%s_ConfigPath%"\"%dsk5416_DeviceConfigPath%",ShortTransferOk,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%dsk5416_DeviceConfigPath%",RequestTimeout,0x00010001, 1000
+HKLM,"%S_ConfigPath%"\"%dsk5416_DeviceConfigPath%",SuppressPnPRemoveDlg,0x00010001, 1
+
+;******************************************************************************
+; Install section ( dsk5510 )
+;------------------------------------------------------------------------------
+[dsk5510.NTx86]
+CopyFiles=_CopyFiles_sys
+AddReg=dsk5510_AddReg_SW, dsk5510_Parameters_NT
+
+[dsk5510.NTx86.Services]
+AddService = %S_DriverName%, 0x00000002, _NT_AddService, _NT_EventLog
+
+[dsk5510.NTx86.HW]
+AddReg=dsk5510_AddReg_HW
+
+[dsk5510_AddReg_SW]
+HKLM,"%S_ConfigPath%",,,
+HKLM,"%S_ConfigPath%"\"%dsk5510_DeviceConfigPath%",,,
+
+[dsk5510_AddReg_HW]
+HKR,,DriverConfigurationPath,,\Registry\Machine\%S_ConfigPath%\%dsk5510_DeviceConfigPath%
+HKR,,DriverUserInterfaceGuid,,"{B7BFF9D9-9D56-4f24-A5C9-943077343F3C}"
+
+[dsk5510_Parameters_NT]
+HKLM,"%s_ConfigPath%"\"%dsk5510_DeviceConfigPath%",PowerStateOnOpen,0x00010001, 0
+HKLM,"%s_ConfigPath%"\"%dsk5510_DeviceConfigPath%",PowerStateOnClose,0x00010001, 0
+HKLM,"%s_ConfigPath%"\"%dsk5510_DeviceConfigPath%",MinPowerStateUsed,0x00010001, 3
+HKLM,"%s_ConfigPath%"\"%dsk5510_DeviceConfigPath%",MinPowerStateUnused,0x00010001, 3
+HKLM,"%s_ConfigPath%"\"%dsk5510_DeviceConfigPath%",EnableRemoteWakeup,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%dsk5510_DeviceConfigPath%",AbortPipesOnPowerDown,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%dsk5510_DeviceConfigPath%",UnconfigureOnClose,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%dsk5510_DeviceConfigPath%",ResetDeviceOnClose,0x00010001, 0
+HKLM,"%s_ConfigPath%"\"%dsk5510_DeviceConfigPath%",MaxIsoPackets,0x00010001, 512
+HKLM,"%s_ConfigPath%"\"%dsk5510_DeviceConfigPath%",ShortTransferOk,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%dsk5510_DeviceConfigPath%",RequestTimeout,0x00010001, 1000
+HKLM,"%S_ConfigPath%"\"%dsk5510_DeviceConfigPath%",SuppressPnPRemoveDlg,0x00010001, 1
+
+;******************************************************************************
+; Install section ( dsk6416 )
+;------------------------------------------------------------------------------
+[dsk6416.NTx86]
+CopyFiles=_CopyFiles_sys
+AddReg=dsk6416_AddReg_SW, dsk6416_Parameters_NT
+
+[dsk6416.NTx86.Services]
+AddService = %S_DriverName%, 0x00000002, _NT_AddService, _NT_EventLog
+
+[dsk6416.NTx86.HW]
+AddReg=dsk6416_AddReg_HW
+
+[dsk6416_AddReg_SW]
+HKLM,"%S_ConfigPath%",,,
+HKLM,"%S_ConfigPath%"\"%dsk6416_DeviceConfigPath%",,,
+
+[dsk6416_AddReg_HW]
+HKR,,DriverConfigurationPath,,\Registry\Machine\%S_ConfigPath%\%dsk6416_DeviceConfigPath%
+HKR,,DriverUserInterfaceGuid,,"{FB1B1D79-88B8-4718-ADDB-C809A5AADC68}"
+
+[dsk6416_Parameters_NT]
+HKLM,"%s_ConfigPath%"\"%dsk6416_DeviceConfigPath%",PowerStateOnOpen,0x00010001, 0
+HKLM,"%s_ConfigPath%"\"%dsk6416_DeviceConfigPath%",PowerStateOnClose,0x00010001, 0
+HKLM,"%s_ConfigPath%"\"%dsk6416_DeviceConfigPath%",MinPowerStateUsed,0x00010001, 3
+HKLM,"%s_ConfigPath%"\"%dsk6416_DeviceConfigPath%",MinPowerStateUnused,0x00010001, 3
+HKLM,"%s_ConfigPath%"\"%dsk6416_DeviceConfigPath%",EnableRemoteWakeup,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%dsk6416_DeviceConfigPath%",AbortPipesOnPowerDown,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%dsk6416_DeviceConfigPath%",UnconfigureOnClose,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%dsk6416_DeviceConfigPath%",ResetDeviceOnClose,0x00010001, 0
+HKLM,"%s_ConfigPath%"\"%dsk6416_DeviceConfigPath%",MaxIsoPackets,0x00010001, 512
+HKLM,"%s_ConfigPath%"\"%dsk6416_DeviceConfigPath%",ShortTransferOk,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%dsk6416_DeviceConfigPath%",RequestTimeout,0x00010001, 1000
+HKLM,"%S_ConfigPath%"\"%dsk6416_DeviceConfigPath%",SuppressPnPRemoveDlg,0x00010001, 1
+
+;******************************************************************************
+; Install section ( dsk6713 )
+;------------------------------------------------------------------------------
+[dsk6713.NTx86]
+CopyFiles=_CopyFiles_sys
+AddReg=dsk6713_AddReg_SW, dsk6713_Parameters_NT
+
+[dsk6713.NTx86.Services]
+AddService = %S_DriverName%, 0x00000002, _NT_AddService, _NT_EventLog
+
+[dsk6713.NTx86.HW]
+AddReg=dsk6713_AddReg_HW
+
+[dsk6713_AddReg_SW]
+HKLM,"%S_ConfigPath%",,,
+HKLM,"%S_ConfigPath%"\"%dsk6713_DeviceConfigPath%",,,
+
+[dsk6713_AddReg_HW]
+HKR,,DriverConfigurationPath,,\Registry\Machine\%S_ConfigPath%\%dsk6713_DeviceConfigPath%
+HKR,,DriverUserInterfaceGuid,,"{5AB646F0-EDD4-11D6-9BB5-00D0B73F8F63}"
+
+[dsk6713_Parameters_NT]
+HKLM,"%s_ConfigPath%"\"%dsk6713_DeviceConfigPath%",PowerStateOnOpen,0x00010001, 0
+HKLM,"%s_ConfigPath%"\"%dsk6713_DeviceConfigPath%",PowerStateOnClose,0x00010001, 0
+HKLM,"%s_ConfigPath%"\"%dsk6713_DeviceConfigPath%",MinPowerStateUsed,0x00010001, 3
+HKLM,"%s_ConfigPath%"\"%dsk6713_DeviceConfigPath%",MinPowerStateUnused,0x00010001, 3
+HKLM,"%s_ConfigPath%"\"%dsk6713_DeviceConfigPath%",EnableRemoteWakeup,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%dsk6713_DeviceConfigPath%",AbortPipesOnPowerDown,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%dsk6713_DeviceConfigPath%",UnconfigureOnClose,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%dsk6713_DeviceConfigPath%",ResetDeviceOnClose,0x00010001, 0
+HKLM,"%s_ConfigPath%"\"%dsk6713_DeviceConfigPath%",MaxIsoPackets,0x00010001, 512
+HKLM,"%s_ConfigPath%"\"%dsk6713_DeviceConfigPath%",ShortTransferOk,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%dsk6713_DeviceConfigPath%",RequestTimeout,0x00010001, 1000
+HKLM,"%S_ConfigPath%"\"%dsk6713_DeviceConfigPath%",SuppressPnPRemoveDlg,0x00010001, 1
+
+;******************************************************************************
+; Install section ( ez2800 )
+;------------------------------------------------------------------------------
+[ez2800.NTx86]
+CopyFiles=_CopyFiles_sys
+AddReg=ez2800_AddReg_SW, ez2800_Parameters_NT
+
+[ez2800.NTx86.Services]
+AddService = %S_DriverName%, 0x00000002, _NT_AddService, _NT_EventLog
+
+[ez2800.NTx86.HW]
+AddReg=ez2800_AddReg_HW
+
+[ez2800_AddReg_SW]
+HKLM,"%S_ConfigPath%",,,
+HKLM,"%S_ConfigPath%"\"%ez2800_DeviceConfigPath%",,,
+
+[ez2800_AddReg_HW]
+HKR,,DriverConfigurationPath,,\Registry\Machine\%S_ConfigPath%\%ez2800_DeviceConfigPath%
+HKR,,DriverUserInterfaceGuid,,"{E726F156-E078-4839-A330-39DBF33AB637}"
+
+[ez2800_Parameters_NT]
+HKLM,"%s_ConfigPath%"\"%ez2800_DeviceConfigPath%",PowerStateOnOpen,0x00010001, 0
+HKLM,"%s_ConfigPath%"\"%ez2800_DeviceConfigPath%",PowerStateOnClose,0x00010001, 0
+HKLM,"%s_ConfigPath%"\"%ez2800_DeviceConfigPath%",MinPowerStateUsed,0x00010001, 3
+HKLM,"%s_ConfigPath%"\"%ez2800_DeviceConfigPath%",MinPowerStateUnused,0x00010001, 3
+HKLM,"%s_ConfigPath%"\"%ez2800_DeviceConfigPath%",EnableRemoteWakeup,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%ez2800_DeviceConfigPath%",AbortPipesOnPowerDown,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%ez2800_DeviceConfigPath%",UnconfigureOnClose,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%ez2800_DeviceConfigPath%",ResetDeviceOnClose,0x00010001, 0
+HKLM,"%s_ConfigPath%"\"%ez2800_DeviceConfigPath%",MaxIsoPackets,0x00010001, 512
+HKLM,"%s_ConfigPath%"\"%ez2800_DeviceConfigPath%",ShortTransferOk,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%ez2800_DeviceConfigPath%",RequestTimeout,0x00010001, 1000
+HKLM,"%S_ConfigPath%"\"%ez2800_DeviceConfigPath%",SuppressPnPRemoveDlg,0x00010001, 1
+
+;******************************************************************************
+; Install section ( ez470 )
+;------------------------------------------------------------------------------
+[ez470.NTx86]
+CopyFiles=_CopyFiles_sys
+AddReg=ez470_AddReg_SW, ez470_Parameters_NT
+
+[ez470.NTx86.Services]
+AddService = %S_DriverName%, 0x00000002, _NT_AddService, _NT_EventLog
+
+[ez470.NTx86.HW]
+AddReg=ez470_AddReg_HW
+
+[ez470_AddReg_SW]
+HKLM,"%S_ConfigPath%",,,
+HKLM,"%S_ConfigPath%"\"%ez470_DeviceConfigPath%",,,
+
+[ez470_AddReg_HW]
+HKR,,DriverConfigurationPath,,\Registry\Machine\%S_ConfigPath%\%ez470_DeviceConfigPath%
+HKR,,DriverUserInterfaceGuid,,"{ED807F56-9929-4a90-88E0-490BD8725D86}"
+
+[ez470_Parameters_NT]
+HKLM,"%s_ConfigPath%"\"%ez470_DeviceConfigPath%",PowerStateOnOpen,0x00010001, 0
+HKLM,"%s_ConfigPath%"\"%ez470_DeviceConfigPath%",PowerStateOnClose,0x00010001, 0
+HKLM,"%s_ConfigPath%"\"%ez470_DeviceConfigPath%",MinPowerStateUsed,0x00010001, 3
+HKLM,"%s_ConfigPath%"\"%ez470_DeviceConfigPath%",MinPowerStateUnused,0x00010001, 3
+HKLM,"%s_ConfigPath%"\"%ez470_DeviceConfigPath%",EnableRemoteWakeup,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%ez470_DeviceConfigPath%",AbortPipesOnPowerDown,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%ez470_DeviceConfigPath%",UnconfigureOnClose,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%ez470_DeviceConfigPath%",ResetDeviceOnClose,0x00010001, 0
+HKLM,"%s_ConfigPath%"\"%ez470_DeviceConfigPath%",MaxIsoPackets,0x00010001, 512
+HKLM,"%s_ConfigPath%"\"%ez470_DeviceConfigPath%",ShortTransferOk,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%ez470_DeviceConfigPath%",RequestTimeout,0x00010001, 1000
+HKLM,"%S_ConfigPath%"\"%ez470_DeviceConfigPath%",SuppressPnPRemoveDlg,0x00010001, 1
+
+;******************************************************************************
+; Install section ( dsk645x )
+;------------------------------------------------------------------------------
+[dsk645x.NTx86]
+CopyFiles=_CopyFiles_sys
+AddReg=dsk645x_AddReg_SW, dsk645x_Parameters_NT
+
+[dsk645x.NTx86.Services]
+AddService = %S_DriverName%, 0x00000002, _NT_AddService, _NT_EventLog
+
+[dsk645x.NTx86.HW]
+AddReg=dsk645x_AddReg_HW
+
+[dsk645x_AddReg_SW]
+HKLM,"%S_ConfigPath%",,,
+HKLM,"%S_ConfigPath%"\"%dsk645x_DeviceConfigPath%",,,
+
+[dsk645x_AddReg_HW]
+HKR,,DriverConfigurationPath,,\Registry\Machine\%S_ConfigPath%\%dsk645x_DeviceConfigPath%
+HKR,,DriverUserInterfaceGuid,,"{73F666F7-88B3-4097-89FC-9D21FEFCA1EA}"
+
+[dsk645x_Parameters_NT]
+HKLM,"%s_ConfigPath%"\"%dsk645x_DeviceConfigPath%",PowerStateOnOpen,0x00010001, 0
+HKLM,"%s_ConfigPath%"\"%dsk645x_DeviceConfigPath%",PowerStateOnClose,0x00010001, 0
+HKLM,"%s_ConfigPath%"\"%dsk645x_DeviceConfigPath%",MinPowerStateUsed,0x00010001, 3
+HKLM,"%s_ConfigPath%"\"%dsk645x_DeviceConfigPath%",MinPowerStateUnused,0x00010001, 3
+HKLM,"%s_ConfigPath%"\"%dsk645x_DeviceConfigPath%",EnableRemoteWakeup,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%dsk645x_DeviceConfigPath%",AbortPipesOnPowerDown,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%dsk645x_DeviceConfigPath%",UnconfigureOnClose,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%dsk645x_DeviceConfigPath%",ResetDeviceOnClose,0x00010001, 0
+HKLM,"%s_ConfigPath%"\"%dsk645x_DeviceConfigPath%",MaxIsoPackets,0x00010001, 512
+HKLM,"%s_ConfigPath%"\"%dsk645x_DeviceConfigPath%",ShortTransferOk,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%dsk645x_DeviceConfigPath%",RequestTimeout,0x00010001, 1000
+HKLM,"%S_ConfigPath%"\"%dsk645x_DeviceConfigPath%",SuppressPnPRemoveDlg,0x00010001, 1
+
+;******************************************************************************
+; Install section ( xds560v2u)
+;------------------------------------------------------------------------------
+[xds560v2u.NTx86]
+CopyFiles=_CopyFiles_sys
+AddReg=xds560v2u_AddReg_SW, xds560v2u_Parameters_NT
+
+[xds560v2u.NTx86.Services]
+AddService = %S_DriverName%, 0x00000002, _NT_AddService, _NT_EventLog
+
+[xds560v2u.NTx86.HW]
+AddReg=xds560v2u_AddReg_HW
+
+[xds560v2u_AddReg_SW]
+HKLM,"%S_ConfigPath%",,,
+HKLM,"%S_ConfigPath%"\"%xds560v2u_DeviceConfigPath%",,,
+
+[xds560v2u_AddReg_HW]
+HKR,,DriverConfigurationPath,,\Registry\Machine\%S_ConfigPath%\%xds560v2u_DeviceConfigPath%
+HKR,,DriverUserInterfaceGuid,,"{C36ACF93-0E8C-446f-BEC5-DB5C8D367CED}"
+
+[xds560v2u_Parameters_NT]
+HKLM,"%s_ConfigPath%"\"%xds560v2u_DeviceConfigPath%",PowerStateOnOpen,0x00010001, 0
+HKLM,"%s_ConfigPath%"\"%xds560v2u_DeviceConfigPath%",PowerStateOnClose,0x00010001, 0
+HKLM,"%s_ConfigPath%"\"%xds560v2u_DeviceConfigPath%",MinPowerStateUsed,0x00010001, 3
+HKLM,"%s_ConfigPath%"\"%xds560v2u_DeviceConfigPath%",MinPowerStateUnused,0x00010001, 3
+HKLM,"%s_ConfigPath%"\"%xds560v2u_DeviceConfigPath%",EnableRemoteWakeup,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%xds560v2u_DeviceConfigPath%",AbortPipesOnPowerDown,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%xds560v2u_DeviceConfigPath%",UnconfigureOnClose,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%xds560v2u_DeviceConfigPath%",ResetDeviceOnClose,0x00010001, 0
+HKLM,"%s_ConfigPath%"\"%xds560v2u_DeviceConfigPath%",MaxIsoPackets,0x00010001, 512
+HKLM,"%s_ConfigPath%"\"%xds560v2u_DeviceConfigPath%",ShortTransferOk,0x00010001, 1
+HKLM,"%s_ConfigPath%"\"%xds560v2u_DeviceConfigPath%",RequestTimeout,0x00010001, 1000
+HKLM,"%S_ConfigPath%"\"%xds560v2u_DeviceConfigPath%",SuppressPnPRemoveDlg,0x00010001, 1
+
+
+;******************************************************************************
+; Text Strings
+;------------------------------------------------------------------------------
+[Strings]
+
+S_Provider="Spectrum Digital"
+S_Mfg="Spectrum Digital"
+S_DeviceClassDisplayName="SD USB Based Debug Tools"
+S_DiskName="sdusb2em driver disk"
+S_DriverName="sdusb2em"
+S_ServiceDisplayName="SD USB Emulator (sdusb2em.sys)"
+S_ConfigPath="SYSTEM\CurrentControlSet\Services\sdusb2em"
+
+xds510usb_DeviceConfigPath="Parmsxds510usb"
+xds510usb_DeviceDesc="Spectrum Digital xds510 USB"
+
+xds510usbplus_DeviceConfigPath="Parmsxds510usbplus"
+xds510usbplus_DeviceDesc="Spectrum Digital  XDS510USB-PLUS"
+
+xds2000usb_DeviceConfigPath="Parmsxds2000usb"
+xds2000usb_DeviceDesc="Spectrum Digital XDS2000 USB"
+
+sdxds560r_DeviceConfigPath="Parmssdxds560r"
+sdxds560r_DeviceDesc="Spectrum Digital XDS560R USB"
+
+dsk5416_DeviceConfigPath="Parmsdsk5416"
+dsk5416_DeviceDesc="Spectrum Digital TMS320C5416 DSK"
+
+dsk5510_DeviceConfigPath="Parmsdsk5510"
+dsk5510_DeviceDesc="Spectrum Digital TMS320C5510 DSK"
+
+dsk6416_DeviceConfigPath="Parmsdsk6416"
+dsk6416_DeviceDesc="Spectrum Digital TMS320C6416 DSK"
+
+dsk6713_DeviceConfigPath="Parmsdsk6713"
+dsk6713_DeviceDesc="Spectrum Digital TMS320C6713 DSK"
+
+ez2800_DeviceConfigPath="Parmsez2800"
+ez2800_DeviceDesc="Spectrum Digital eZdsp28xx USB"
+
+ez470_DeviceConfigPath="Parmsez470"
+ez470_DeviceDesc="Spectrum Digital TMS470R1x Target"
+
+dsk645x_DeviceConfigPath="Parmsdsk645x"
+dsk645x_DeviceDesc="Spectrum Digital TMS320C64Plus Target"
+
+xds560v2u_DeviceConfigPath="Parmsxdsxds560v2u"
+xds560v2u_DeviceDesc="Spectrum Digital XDS560v2 USB"
+
+; *** EOF ***

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RISCSimulator lang="en">
+
+	<form id="1" name="frmMain" value="RISC Simulator">
+		<object parent_id="1" name="dockPanel" value="Dock Panel" />
+		<object parent_id="1" name="toolBar" value="Tool Bar" />
+		<object parent_id="1" name="mainMenu" value="Main Menu" />
+		<object parent_id="1" name="statusBar" value="Status Bar" />
+		<object parent_id="1" name="menuItemFile" value="File" />
+		<object parent_id="1" name="menuItemNew" value="New" />
+		<object parent_id="1" name="menuItemOpen" value="Open..." />
+		<object parent_id="1" name="menuItemSave" value="Save" />
+		<object parent_id="1" name="menuItemClose" value="Close" />
+		<object parent_id="1" name="menuItemCloseAll" value="Close All" />
+		<object parent_id="1" name="menuItemExit" value="Exit" />
+		<object parent_id="1" name="menuItemEdit" value="Edit" />
+		<object parent_id="1" name="menuItemView" value="View" />
+		<object parent_id="1" name="menuItemRegisters" value="Register List" />
+		<object parent_id="1" name="menuItemLabels" value="Label List" />
+		<object parent_id="1" name="menuItemDebug" value="Debugger" />
+		<object parent_id="1" name="menuItemMemory" value="Memory Map" />
+		<object parent_id="1" name="menuItemApplicationLang" value="Application Language" />
+		<object parent_id="1" name="menuItemTurkish" value="Turkish" />
+		<object parent_id="1" name="menuItemEnglish" value="English" />
+		<object parent_id="1" name="menuItemAssemblyLang" value="Assembly Language" />
+		<object parent_id="1" name="menuItemITURisc" value="ITU Risc" />
+		<object parent_id="1" name="menuItemSchemaNew" value="New Style" />		
+		<object parent_id="1" name="menuItemSchemaOld" value="Old Style" />
+		<object parent_id="1" name="menuItemHelp" value="Help" />
+		<object parent_id="1" name="menuItemAbout" value="About Simulation" />
+		<object parent_id="1" name="menuItemBuild" value="Build" />
+		<object parent_id="1" name="menuItemStartDebugging" value="Start Debugging" />
+		<object parent_id="1" name="menuItemRun" value="Run" />
+		<object parent_id="1" name="menuItemStepByStep" value="Step by Step" />
+		<object parent_id="1" name="menuItemCheckPipelineHazard" value="Check Pipeline Hazard" />
+
+		<object parent_id="1" name="toolBarButtonNew" value="New" />
+		<object parent_id="1" name="toolBarButtonOpen" value="Open..." />
+		<object parent_id="1" name="toolBarButtonRegisters" value="Register List" />
+		<object parent_id="1" name="toolBarButtonDebug" value="Debugger" />
+		<object parent_id="1" name="toolBarButtonMemory" value="Memory Map" />
+		<object parent_id="1" name="toolBarButtonLabels" value="Label List" />
+	</form>
+
+	<form id="2" name="frmDebug" value="Debug">
+		<object parent_id="2" name="gridError" value="" />
+		<object parent_id="2" name="colLineNum" value="#" />
+		<object parent_id="2" name="colLine" value="Line" />
+		<object parent_id="2" name="colDefinition" value="Definition" />
+	</form>
+
+	<form id="3" name="frmLabels" value="Label List">
+		<object parent_id="3" name="gridListLabels" value="" />
+		<object parent_id="3" name="colId" value="#" />
+		<object parent_id="3" name="colLabel" value="Label" />
+		<object parent_id="3" name="colValue" value="Value" />
+		<object parent_id="3" name="colComment" value="Definition" />
+	</form>
+
+	<form id="4" name="frmMemory" value="Memory Map">
+		<object parent_id="4" name="colStatusRegisterName" value="Register Name" />
+		<object parent_id="4" name="colStatusRegisterValue" value="Value" />
+		
+		<object parent_id="4" name="colPipelinePipe" value="Pipe Num" />
+		<object parent_id="4" name="colPipelineValue" value="Value" />		
+		<object parent_id="4" name="colPipelineString" value="Cmd" />		
+	</form>
+
+	<form id="5" name="frmRegisters" value="Register List">
+		<object parent_id="5" name="gridRegisters" value="" />
+		<object parent_id="5" name="colWindow" value="Window" />
+		<object parent_id="5" name="colValue" value="Value" />
+		<object parent_id="5" name="colGlobal" value="Global" />
+	</form>
+
+</RISCSimulator>

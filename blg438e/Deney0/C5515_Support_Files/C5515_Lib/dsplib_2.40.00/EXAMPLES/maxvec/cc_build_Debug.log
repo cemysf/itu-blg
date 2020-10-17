@@ -1,0 +1,8 @@
+-----------------------------  maxvec.pjt - Debug  -----------------------------
+[Maxvec_t.c] "C:\CCStudio_v3.2\C5500\cgtools\bin\cl55" -g -q -fr"C:/TiDoc/c55dsplib/dsplib/EXAMPLES/maxvec/Debug" -i"../../include" -d"_DEBUG" -@"Debug.lkf" "Maxvec_t.c"
+
+[Linking...] "C:\CCStudio_v3.2\C5500\cgtools\bin\cl55" -@"Debug.lkf"
+<Linking>
+
+Build Complete,
+  0 Errors, 0 Warnings, 0 Remarks.

@@ -1,0 +1,8 @@
+	ldaa #$25
+	staa $0100
+	ldx #$0100
+	stx $4000	;write address to $4000
+	ldx #$0
+
+	ldx $4000
+	ldab 0,x

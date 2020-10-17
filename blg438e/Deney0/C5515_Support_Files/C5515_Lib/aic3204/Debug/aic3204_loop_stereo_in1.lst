@@ -1,0 +1,1671 @@
+TMS320C55x Assembler PC v4.3.8 Thu Jun 09 17:03:44 2011
+
+Tools Copyright (c) 1996-2010 Texas Instruments Incorporated
+aic3204_loop_stereo_in1.asm                                          PAGE    1
+
+    1381              ; Temporary Registers Used: None
+       1              ;*******************************************************************************
+       2              ;* TMS320C55x C/C++ Codegen                                          PC v4.3.8 *
+       3              ;* Date/Time created: Thu Jun 09 17:03:44 2011                                 *
+       4              ;*******************************************************************************
+       5                      .compiler_opts --hll_source=on --mem_model:code=flat --mem_model:data=large --silicon_core_3_3 --symd
+       6                      .mmregs
+       7                      .cpl_on
+       8                      .arms_on
+       9                      .c54cm_off
+      10                      .asg AR6, FP
+      11                      .asg XAR6, XFP
+      12                      .asg DPH, MDP
+      13                      .model call=c55_std
+      14                      .model mem=large
+      15                      .noremark 5002  ; code respects overwrite rules
+      16              ;*******************************************************************************
+      17              ;* GLOBAL FILE PARAMETERS                                                      *
+      18              ;*                                                                             *
+      19              ;*   Architecture       : TMS320C55x                                           *
+      20              ;*   Optimizing for     : Speed                                                *
+      21              ;*   Memory             : Large Model (23-Bit Data Pointers)                   *
+      22              ;*   Calls              : Normal Library ASM calls                             *
+      23              ;*   Debug Info         : Standard TI Debug Information                        *
+      24              ;*******************************************************************************
+      25              
+      26              $C$DW$CU        .dwtag  DW_TAG_compile_unit
+      27                      .dwattr $C$DW$CU, DW_AT_name("../aic3204_loop_stereo_in1.c")
+      28                      .dwattr $C$DW$CU, DW_AT_producer("TMS320C55x C/C++ Codegen PC v4.3.8 Copyright (c) 1996-2010 Texas In
+      29                      .dwattr $C$DW$CU, DW_AT_TI_version(0x01)
+      30                      .dwattr $C$DW$CU, DW_AT_comp_dir("C:\Users\Kurt\Documents\Little_Projects\MCUs\C5515\usbstk5515_BSL_R
+      31              ;******************************************************************************
+      32              ;* CINIT RECORDS                                                              *
+      33              ;******************************************************************************
+      34 000000               .sect   ".cinit"
+      35                      .align  1
+      36 000000 0030          .field          $C$IR_1,16
+      37 000001 0000-         .field          _sinetable+0,24
+         000002 0000 
+      38 000002 0000          .field          0,8
+      39 000003 0000          .field          0,16                    ; _sinetable[0] @ 0
+      40 000004 10B4          .field          4276,16                 ; _sinetable[1] @ 16
+      41 000005 2120          .field          8480,16                 ; _sinetable[2] @ 32
+      42 000006 30FB          .field          12539,16                        ; _sinetable[3] @ 48
+      43 000007 3FFF          .field          16383,16                        ; _sinetable[4] @ 64
+      44 000008 4DEA          .field          19946,16                        ; _sinetable[5] @ 80
+      45 000009 5A81          .field          23169,16                        ; _sinetable[6] @ 96
+      46 00000a 658B          .field          25995,16                        ; _sinetable[7] @ 112
+      47 00000b 6ED8          .field          28376,16                        ; _sinetable[8] @ 128
+      48 00000c 763F          .field          30271,16                        ; _sinetable[9] @ 144
+      49 00000d 7BA1          .field          31649,16                        ; _sinetable[10] @ 160
+      50 00000e 7EE5          .field          32485,16                        ; _sinetable[11] @ 176
+      51 00000f 7FFD          .field          32765,16                        ; _sinetable[12] @ 192
+      52 000010 7EE5          .field          32485,16                        ; _sinetable[13] @ 208
+      53 000011 7BA1          .field          31649,16                        ; _sinetable[14] @ 224
+TMS320C55x Assembler PC v4.3.8 Thu Jun 09 17:03:44 2011
+
+Tools Copyright (c) 1996-2010 Texas Instruments Incorporated
+aic3204_loop_stereo_in1.asm                                          PAGE    2
+
+      54 000012 76EF          .field          30447,16                        ; _sinetable[15] @ 240
+      55 000013 6ED8          .field          28376,16                        ; _sinetable[16] @ 256
+      56 000014 658B          .field          25995,16                        ; _sinetable[17] @ 272
+      57 000015 5A81          .field          23169,16                        ; _sinetable[18] @ 288
+      58 000016 4DEA          .field          19946,16                        ; _sinetable[19] @ 304
+      59 000017 3FFF          .field          16383,16                        ; _sinetable[20] @ 320
+      60 000018 30FB          .field          12539,16                        ; _sinetable[21] @ 336
+      61 000019 2120          .field          8480,16                 ; _sinetable[22] @ 352
+      62 00001a 10B4          .field          4276,16                 ; _sinetable[23] @ 368
+      63 00001b 0000          .field          0,16                    ; _sinetable[24] @ 384
+      64 00001c EF4C          .field          -4276,16                        ; _sinetable[25] @ 400
+      65 00001d DEE0          .field          -8480,16                        ; _sinetable[26] @ 416
+      66 00001e CF06          .field          -12538,16                       ; _sinetable[27] @ 432
+      67 00001f C002          .field          -16382,16                       ; _sinetable[28] @ 448
+      68 000020 B216          .field          -19946,16                       ; _sinetable[29] @ 464
+      69 000021 A57F          .field          -23169,16                       ; _sinetable[30] @ 480
+      70 000022 9A75          .field          -25995,16                       ; _sinetable[31] @ 496
+      71 000023 9128          .field          -28376,16                       ; _sinetable[32] @ 512
+      72 000024 89C1          .field          -30271,16                       ; _sinetable[33] @ 528
+      73 000025 845F          .field          -31649,16                       ; _sinetable[34] @ 544
+      74 000026 811B          .field          -32485,16                       ; _sinetable[35] @ 560
+      75 000027 8002          .field          -32766,16                       ; _sinetable[36] @ 576
+      76 000028 811B          .field          -32485,16                       ; _sinetable[37] @ 592
+      77 000029 845F          .field          -31649,16                       ; _sinetable[38] @ 608
+      78 00002a 89C1          .field          -30271,16                       ; _sinetable[39] @ 624
+      79 00002b 9128          .field          -28376,16                       ; _sinetable[40] @ 640
+      80 00002c 9A76          .field          -25994,16                       ; _sinetable[41] @ 656
+      81 00002d A57F          .field          -23169,16                       ; _sinetable[42] @ 672
+      82 00002e B216          .field          -19946,16                       ; _sinetable[43] @ 688
+      83 00002f C002          .field          -16382,16                       ; _sinetable[44] @ 704
+      84 000030 CF06          .field          -12538,16                       ; _sinetable[45] @ 720
+      85 000031 DEE0          .field          -8480,16                        ; _sinetable[46] @ 736
+      86 000032 EF4C          .field          -4276,16                        ; _sinetable[47] @ 752
+      87              $C$IR_1:        .set    48
+      88              
+      89 000033               .sect   ".cinit"
+      90                      .align  1
+      91 000033 0001          .field          1,16
+      92 000034 0000-         .field          _i+0,24
+         000035 3300 
+      93 000035 3300          .field          0,8
+      94 000036 0000          .field          0,16                    ; _i @ 0
+      95              
+      96              
+      97              $C$DW$1 .dwtag  DW_TAG_subprogram, DW_AT_name("USBSTK5515_wait")
+      98                      .dwattr $C$DW$1, DW_AT_TI_symbol_name("_USBSTK5515_wait")
+      99                      .dwattr $C$DW$1, DW_AT_declaration
+     100                      .dwattr $C$DW$1, DW_AT_external
+     101                      .dwattr $C$DW$1, DW_AT_decl_file("..\..\..\include\usbstk5515.h")
+     102                      .dwattr $C$DW$1, DW_AT_decl_line(0x6d)
+     103                      .dwattr $C$DW$1, DW_AT_decl_column(0x06)
+     104              $C$DW$2 .dwtag  DW_TAG_formal_parameter
+     105                      .dwattr $C$DW$2, DW_AT_type(*$C$DW$T$13)
+     106                      .dwendtag $C$DW$1
+     107              
+TMS320C55x Assembler PC v4.3.8 Thu Jun 09 17:03:44 2011
+
+Tools Copyright (c) 1996-2010 Texas Instruments Incorporated
+aic3204_loop_stereo_in1.asm                                          PAGE    3
+
+     108              
+     109              $C$DW$3 .dwtag  DW_TAG_subprogram, DW_AT_name("AIC3204_rset")
+     110                      .dwattr $C$DW$3, DW_AT_TI_symbol_name("_AIC3204_rset")
+     111                      .dwattr $C$DW$3, DW_AT_type(*$C$DW$T$10)
+     112                      .dwattr $C$DW$3, DW_AT_declaration
+     113                      .dwattr $C$DW$3, DW_AT_external
+     114                      .dwattr $C$DW$3, DW_AT_decl_file("../aic3204_loop_stereo_in1.c")
+     115                      .dwattr $C$DW$3, DW_AT_decl_line(0x0c)
+     116                      .dwattr $C$DW$3, DW_AT_decl_column(0x0e)
+     117              $C$DW$4 .dwtag  DW_TAG_formal_parameter
+     118                      .dwattr $C$DW$4, DW_AT_type(*$C$DW$T$11)
+     119              $C$DW$5 .dwtag  DW_TAG_formal_parameter
+     120                      .dwattr $C$DW$5, DW_AT_type(*$C$DW$T$11)
+     121                      .dwendtag $C$DW$3
+     122              
+     123                      .global _sinetable
+     124 000000               .bss    _sinetable,48,0,0
+     125              $C$DW$6 .dwtag  DW_TAG_variable, DW_AT_name("sinetable")
+     126                      .dwattr $C$DW$6, DW_AT_TI_symbol_name("_sinetable")
+     127                      .dwattr $C$DW$6, DW_AT_location[DW_OP_addr _sinetable]
+     128                      .dwattr $C$DW$6, DW_AT_type(*$C$DW$T$26)
+     129                      .dwattr $C$DW$6, DW_AT_external
+     130                      .dwattr $C$DW$6, DW_AT_decl_file("../aic3204_loop_stereo_in1.c")
+     131                      .dwattr $C$DW$6, DW_AT_decl_line(0x1a)
+     132                      .dwattr $C$DW$6, DW_AT_decl_column(0x07)
+     133                      .global _sample
+     134 000030               .bss    _sample,1,0,0
+     135              $C$DW$7 .dwtag  DW_TAG_variable, DW_AT_name("sample")
+     136                      .dwattr $C$DW$7, DW_AT_TI_symbol_name("_sample")
+     137                      .dwattr $C$DW$7, DW_AT_location[DW_OP_addr _sample]
+     138                      .dwattr $C$DW$7, DW_AT_type(*$C$DW$T$10)
+     139                      .dwattr $C$DW$7, DW_AT_external
+     140                      .dwattr $C$DW$7, DW_AT_decl_file("../aic3204_loop_stereo_in1.c")
+     141                      .dwattr $C$DW$7, DW_AT_decl_line(0x22)
+     142                      .dwattr $C$DW$7, DW_AT_decl_column(0x07)
+     143                      .global _ctr
+     144 000031               .bss    _ctr,1,0,0
+     145              $C$DW$8 .dwtag  DW_TAG_variable, DW_AT_name("ctr")
+     146                      .dwattr $C$DW$8, DW_AT_TI_symbol_name("_ctr")
+     147                      .dwattr $C$DW$8, DW_AT_location[DW_OP_addr _ctr]
+     148                      .dwattr $C$DW$8, DW_AT_type(*$C$DW$T$10)
+     149                      .dwattr $C$DW$8, DW_AT_external
+     150                      .dwattr $C$DW$8, DW_AT_decl_file("../aic3204_loop_stereo_in1.c")
+     151                      .dwattr $C$DW$8, DW_AT_decl_line(0x23)
+     152                      .dwattr $C$DW$8, DW_AT_decl_column(0x07)
+     153                      .global _j
+     154 000032               .bss    _j,1,0,0
+     155              $C$DW$9 .dwtag  DW_TAG_variable, DW_AT_name("j")
+     156                      .dwattr $C$DW$9, DW_AT_TI_symbol_name("_j")
+     157                      .dwattr $C$DW$9, DW_AT_location[DW_OP_addr _j]
+     158                      .dwattr $C$DW$9, DW_AT_type(*$C$DW$T$10)
+     159                      .dwattr $C$DW$9, DW_AT_external
+     160                      .dwattr $C$DW$9, DW_AT_decl_file("../aic3204_loop_stereo_in1.c")
+     161                      .dwattr $C$DW$9, DW_AT_decl_line(0x24)
+     162                      .dwattr $C$DW$9, DW_AT_decl_column(0x07)
+TMS320C55x Assembler PC v4.3.8 Thu Jun 09 17:03:44 2011
+
+Tools Copyright (c) 1996-2010 Texas Instruments Incorporated
+aic3204_loop_stereo_in1.asm                                          PAGE    4
+
+     163                      .global _i
+     164 000033               .bss    _i,1,0,0
+     165              $C$DW$10        .dwtag  DW_TAG_variable, DW_AT_name("i")
+     166                      .dwattr $C$DW$10, DW_AT_TI_symbol_name("_i")
+     167                      .dwattr $C$DW$10, DW_AT_location[DW_OP_addr _i]
+     168                      .dwattr $C$DW$10, DW_AT_type(*$C$DW$T$10)
+     169                      .dwattr $C$DW$10, DW_AT_external
+     170                      .dwattr $C$DW$10, DW_AT_decl_file("../aic3204_loop_stereo_in1.c")
+     171                      .dwattr $C$DW$10, DW_AT_decl_line(0x24)
+     172                      .dwattr $C$DW$10, DW_AT_decl_column(0x0a)
+     173                      .global _data1
+     174 000034               .bss    _data1,1,0,0
+     175              $C$DW$11        .dwtag  DW_TAG_variable, DW_AT_name("data1")
+     176                      .dwattr $C$DW$11, DW_AT_TI_symbol_name("_data1")
+     177                      .dwattr $C$DW$11, DW_AT_location[DW_OP_addr _data1]
+     178                      .dwattr $C$DW$11, DW_AT_type(*$C$DW$T$10)
+     179                      .dwattr $C$DW$11, DW_AT_external
+     180                      .dwattr $C$DW$11, DW_AT_decl_file("../aic3204_loop_stereo_in1.c")
+     181                      .dwattr $C$DW$11, DW_AT_decl_line(0x25)
+     182                      .dwattr $C$DW$11, DW_AT_decl_column(0x0f)
+     183                      .global _data2
+     184 000035               .bss    _data2,1,0,0
+     185              $C$DW$12        .dwtag  DW_TAG_variable, DW_AT_name("data2")
+     186                      .dwattr $C$DW$12, DW_AT_TI_symbol_name("_data2")
+     187                      .dwattr $C$DW$12, DW_AT_location[DW_OP_addr _data2]
+     188                      .dwattr $C$DW$12, DW_AT_type(*$C$DW$T$10)
+     189                      .dwattr $C$DW$12, DW_AT_external
+     190                      .dwattr $C$DW$12, DW_AT_decl_file("../aic3204_loop_stereo_in1.c")
+     191                      .dwattr $C$DW$12, DW_AT_decl_line(0x25)
+     192                      .dwattr $C$DW$12, DW_AT_decl_column(0x16)
+     193                      .global _data3
+     194 000036               .bss    _data3,1,0,0
+     195              $C$DW$13        .dwtag  DW_TAG_variable, DW_AT_name("data3")
+     196                      .dwattr $C$DW$13, DW_AT_TI_symbol_name("_data3")
+     197                      .dwattr $C$DW$13, DW_AT_location[DW_OP_addr _data3]
+     198                      .dwattr $C$DW$13, DW_AT_type(*$C$DW$T$10)
+     199                      .dwattr $C$DW$13, DW_AT_external
+     200                      .dwattr $C$DW$13, DW_AT_decl_file("../aic3204_loop_stereo_in1.c")
+     201                      .dwattr $C$DW$13, DW_AT_decl_line(0x25)
+     202                      .dwattr $C$DW$13, DW_AT_decl_column(0x1d)
+     203                      .global _data4
+     204 000037               .bss    _data4,1,0,0
+     205              $C$DW$14        .dwtag  DW_TAG_variable, DW_AT_name("data4")
+     206                      .dwattr $C$DW$14, DW_AT_TI_symbol_name("_data4")
+     207                      .dwattr $C$DW$14, DW_AT_location[DW_OP_addr _data4]
+     208                      .dwattr $C$DW$14, DW_AT_type(*$C$DW$T$10)
+     209                      .dwattr $C$DW$14, DW_AT_external
+     210                      .dwattr $C$DW$14, DW_AT_decl_file("../aic3204_loop_stereo_in1.c")
+     211                      .dwattr $C$DW$14, DW_AT_decl_line(0x25)
+     212                      .dwattr $C$DW$14, DW_AT_decl_column(0x24)
+     213                      .global _ctr_a
+     214 000038               .bss    _ctr_a,1,0,0
+     215              $C$DW$15        .dwtag  DW_TAG_variable, DW_AT_name("ctr_a")
+     216                      .dwattr $C$DW$15, DW_AT_TI_symbol_name("_ctr_a")
+     217                      .dwattr $C$DW$15, DW_AT_location[DW_OP_addr _ctr_a]
+TMS320C55x Assembler PC v4.3.8 Thu Jun 09 17:03:44 2011
+
+Tools Copyright (c) 1996-2010 Texas Instruments Incorporated
+aic3204_loop_stereo_in1.asm                                          PAGE    5
+
+     218                      .dwattr $C$DW$15, DW_AT_type(*$C$DW$T$27)
+     219                      .dwattr $C$DW$15, DW_AT_external
+     220                      .dwattr $C$DW$15, DW_AT_decl_file("../aic3204_loop_stereo_in1.c")
+     221                      .dwattr $C$DW$15, DW_AT_decl_line(0x26)
+     222                      .dwattr $C$DW$15, DW_AT_decl_column(0x11)
+     223                      .global _ctr_b
+     224 000039               .bss    _ctr_b,1,0,0
+     225              $C$DW$16        .dwtag  DW_TAG_variable, DW_AT_name("ctr_b")
+     226                      .dwattr $C$DW$16, DW_AT_TI_symbol_name("_ctr_b")
+     227                      .dwattr $C$DW$16, DW_AT_location[DW_OP_addr _ctr_b]
+     228                      .dwattr $C$DW$16, DW_AT_type(*$C$DW$T$27)
+     229                      .dwattr $C$DW$16, DW_AT_external
+     230                      .dwattr $C$DW$16, DW_AT_decl_file("../aic3204_loop_stereo_in1.c")
+     231                      .dwattr $C$DW$16, DW_AT_decl_line(0x26)
+     232                      .dwattr $C$DW$16, DW_AT_decl_column(0x18)
+     233                      .global _value_a
+     234 00003a               .bss    _value_a,1,0,0
+     235              $C$DW$17        .dwtag  DW_TAG_variable, DW_AT_name("value_a")
+     236                      .dwattr $C$DW$17, DW_AT_TI_symbol_name("_value_a")
+     237                      .dwattr $C$DW$17, DW_AT_location[DW_OP_addr _value_a]
+     238                      .dwattr $C$DW$17, DW_AT_type(*$C$DW$T$27)
+     239                      .dwattr $C$DW$17, DW_AT_external
+     240                      .dwattr $C$DW$17, DW_AT_decl_file("../aic3204_loop_stereo_in1.c")
+     241                      .dwattr $C$DW$17, DW_AT_decl_line(0x26)
+     242                      .dwattr $C$DW$17, DW_AT_decl_column(0x1f)
+     243                      .global _value_b
+     244 00003b               .bss    _value_b,1,0,0
+     245              $C$DW$18        .dwtag  DW_TAG_variable, DW_AT_name("value_b")
+     246                      .dwattr $C$DW$18, DW_AT_TI_symbol_name("_value_b")
+     247                      .dwattr $C$DW$18, DW_AT_location[DW_OP_addr _value_b]
+     248                      .dwattr $C$DW$18, DW_AT_type(*$C$DW$T$27)
+     249                      .dwattr $C$DW$18, DW_AT_external
+     250                      .dwattr $C$DW$18, DW_AT_decl_file("../aic3204_loop_stereo_in1.c")
+     251                      .dwattr $C$DW$18, DW_AT_decl_line(0x26)
+     252                      .dwattr $C$DW$18, DW_AT_decl_column(0x28)
+     253              ;       C:\Program Files (x86)\Texas Instruments\ccsv5\tools\compiler\c5500\bin\opt55.exe C:\\Users\\Kurt\\Ap
+     254 000000               .sect   ".text"
+     255                      .global _aic3204_loop_stereo_in1
+     256              
+     257              $C$DW$19        .dwtag  DW_TAG_subprogram, DW_AT_name("aic3204_loop_stereo_in1")
+     258                      .dwattr $C$DW$19, DW_AT_low_pc(_aic3204_loop_stereo_in1)
+     259                      .dwattr $C$DW$19, DW_AT_high_pc(0x00)
+     260                      .dwattr $C$DW$19, DW_AT_TI_symbol_name("_aic3204_loop_stereo_in1")
+     261                      .dwattr $C$DW$19, DW_AT_external
+     262                      .dwattr $C$DW$19, DW_AT_type(*$C$DW$T$10)
+     263                      .dwattr $C$DW$19, DW_AT_TI_begin_file("../aic3204_loop_stereo_in1.c")
+     264                      .dwattr $C$DW$19, DW_AT_TI_begin_line(0x2e)
+     265                      .dwattr $C$DW$19, DW_AT_TI_begin_column(0x07)
+     266                      .dwattr $C$DW$19, DW_AT_decl_file("../aic3204_loop_stereo_in1.c")
+     267                      .dwattr $C$DW$19, DW_AT_decl_line(0x2e)
+     268                      .dwattr $C$DW$19, DW_AT_decl_column(0x07)
+     269                      .dwattr $C$DW$19, DW_AT_TI_max_frame_size(0x02)
+     270                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 47,column 1,is_stmt,address _aic3204_loop_stereo_in1
+     271              
+     272                      .dwfde $C$DW$CIE, _aic3204_loop_stereo_in1
+TMS320C55x Assembler PC v4.3.8 Thu Jun 09 17:03:44 2011
+
+Tools Copyright (c) 1996-2010 Texas Instruments Incorporated
+aic3204_loop_stereo_in1.asm                                          PAGE    6
+
+     273              ;*******************************************************************************
+     274              ;* FUNCTION NAME: aic3204_loop_stereo_in1                                      *
+     275              ;*                                                                             *
+     276              ;*   Function Uses Regs : AC0,AC0,T0,T1,AR1,AR2,SP,CARRY,TC1,M40,SATA,SATD,RDM,*
+     277              ;*                        FRCT,SMUL                                            *
+     278              ;*   Stack Frame        : Compact (No Frame Pointer, w/ debug)                 *
+     279              ;*   Total Frame Size   : 2 words                                              *
+     280              ;*                        (2 return address/alignment)                         *
+     281              ;*   Min System Stack   : 1 word                                               *
+     282              ;*******************************************************************************
+     283              
+     284              ;*******************************************************************************
+     285              ;*                                                                             *
+     286              ;* Using -g (debug) with optimization (-o3) may disable key optimizations!     *
+     287              ;*                                                                             *
+     288              ;*******************************************************************************
+     289 000000       _aic3204_loop_stereo_in1:
+     290                      .dwcfi  cfa_offset, 1
+     291                      .dwcfi  save_reg_to_mem, 91, -1
+     292 000000 4EFF          AADD #-1, SP
+     293                      .dwcfi  cfa_offset, 2
+     294              ;* AR1   assigned to $O$y236
+     295                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 52,column 5,is_stmt
+     296 000002 3C04          MOV #0, T0
+     297              $C$DW$20        .dwtag  DW_TAG_TI_branch
+     298                      .dwattr $C$DW$20, DW_AT_low_pc(0x00)
+     299                      .dwattr $C$DW$20, DW_AT_name("_AIC3204_rset")
+     300                      .dwattr $C$DW$20, DW_AT_TI_call
+     301              
+     302 000004 6C00          CALL #_AIC3204_rset ; |52| 
+         000006 0000!
+     303 000008 3D05  ||      MOV #0, T1
+     304              
+     305                                                      ; call occurs [#_AIC3204_rset] ; |52| 
+     306                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 53,column 5,is_stmt
+     307 00000a 3C14          MOV #1, T0
+     308              $C$DW$21        .dwtag  DW_TAG_TI_branch
+     309                      .dwattr $C$DW$21, DW_AT_low_pc(0x00)
+     310                      .dwattr $C$DW$21, DW_AT_name("_AIC3204_rset")
+     311                      .dwattr $C$DW$21, DW_AT_TI_call
+     312              
+     313 00000c 6C00          CALL #_AIC3204_rset ; |53| 
+         00000e 0000!
+     314 000010 3D15  ||      MOV #1, T1
+     315              
+     316                                                      ; call occurs [#_AIC3204_rset] ; |53| 
+     317                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 54,column 5,is_stmt
+     318 000012 3C04          MOV #0, T0
+     319              $C$DW$22        .dwtag  DW_TAG_TI_branch
+     320                      .dwattr $C$DW$22, DW_AT_low_pc(0x00)
+     321                      .dwattr $C$DW$22, DW_AT_name("_AIC3204_rset")
+     322                      .dwattr $C$DW$22, DW_AT_TI_call
+     323              
+     324 000014 6C00          CALL #_AIC3204_rset ; |54| 
+         000016 0000!
+TMS320C55x Assembler PC v4.3.8 Thu Jun 09 17:03:44 2011
+
+Tools Copyright (c) 1996-2010 Texas Instruments Incorporated
+aic3204_loop_stereo_in1.asm                                          PAGE    7
+
+     325 000018 3D15  ||      MOV #1, T1
+     326              
+     327                                                      ; call occurs [#_AIC3204_rset] ; |54| 
+     328                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 55,column 5,is_stmt
+     329 00001a 3C14          MOV #1, T0
+     330              $C$DW$23        .dwtag  DW_TAG_TI_branch
+     331                      .dwattr $C$DW$23, DW_AT_low_pc(0x00)
+     332                      .dwattr $C$DW$23, DW_AT_name("_AIC3204_rset")
+     333                      .dwattr $C$DW$23, DW_AT_TI_call
+     334              
+     335 00001c 6C00          CALL #_AIC3204_rset ; |55| 
+         00001e 0000!
+     336 000020 3D85  ||      MOV #8, T1
+     337              
+     338                                                      ; call occurs [#_AIC3204_rset] ; |55| 
+     339                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 56,column 5,is_stmt
+     340 000022 3C24          MOV #2, T0
+     341              $C$DW$24        .dwtag  DW_TAG_TI_branch
+     342                      .dwattr $C$DW$24, DW_AT_low_pc(0x00)
+     343                      .dwattr $C$DW$24, DW_AT_name("_AIC3204_rset")
+     344                      .dwattr $C$DW$24, DW_AT_TI_call
+     345              
+     346 000024 6C00          CALL #_AIC3204_rset ; |56| 
+         000026 0000!
+     347 000028 3D15  ||      MOV #1, T1
+     348              
+     349                                                      ; call occurs [#_AIC3204_rset] ; |56| 
+     350                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 57,column 5,is_stmt
+     351 00002a 3C04          MOV #0, T0
+     352              $C$DW$25        .dwtag  DW_TAG_TI_branch
+     353                      .dwattr $C$DW$25, DW_AT_low_pc(0x00)
+     354                      .dwattr $C$DW$25, DW_AT_name("_AIC3204_rset")
+     355                      .dwattr $C$DW$25, DW_AT_TI_call
+     356              
+     357 00002c 6C00          CALL #_AIC3204_rset ; |57| 
+         00002e 0000!
+     358 000030 3D05  ||      MOV #0, T1
+     359              
+     360                                                      ; call occurs [#_AIC3204_rset] ; |57| 
+     361                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 59,column 5,is_stmt
+     362 000032 7600          MOV #27, T0 ; |59| 
+         000034 1B48 
+     363              $C$DW$26        .dwtag  DW_TAG_TI_branch
+     364                      .dwattr $C$DW$26, DW_AT_low_pc(0x00)
+     365                      .dwattr $C$DW$26, DW_AT_name("_AIC3204_rset")
+     366                      .dwattr $C$DW$26, DW_AT_TI_call
+     367              
+     368 000036 6C00          CALL #_AIC3204_rset ; |59| 
+         000038 0000!
+     369 00003a 3DD5  ||      MOV #13, T1
+     370              
+     371                                                      ; call occurs [#_AIC3204_rset] ; |59| 
+     372                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 60,column 5,is_stmt
+     373 00003c 7600          MOV #28, T0 ; |60| 
+         00003e 1C48 
+TMS320C55x Assembler PC v4.3.8 Thu Jun 09 17:03:44 2011
+
+Tools Copyright (c) 1996-2010 Texas Instruments Incorporated
+aic3204_loop_stereo_in1.asm                                          PAGE    8
+
+     374              $C$DW$27        .dwtag  DW_TAG_TI_branch
+     375                      .dwattr $C$DW$27, DW_AT_low_pc(0x00)
+     376                      .dwattr $C$DW$27, DW_AT_name("_AIC3204_rset")
+     377                      .dwattr $C$DW$27, DW_AT_TI_call
+     378              
+     379 000040 6C00          CALL #_AIC3204_rset ; |60| 
+         000042 0000!
+     380 000044 3D05  ||      MOV #0, T1
+     381              
+     382                                                      ; call occurs [#_AIC3204_rset] ; |60| 
+     383                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 61,column 5,is_stmt
+     384 000046 3C44          MOV #4, T0
+     385              $C$DW$28        .dwtag  DW_TAG_TI_branch
+     386                      .dwattr $C$DW$28, DW_AT_low_pc(0x00)
+     387                      .dwattr $C$DW$28, DW_AT_name("_AIC3204_rset")
+     388                      .dwattr $C$DW$28, DW_AT_TI_call
+     389              
+     390 000048 6C00          CALL #_AIC3204_rset ; |61| 
+         00004a 0000!
+     391 00004c 3D35  ||      MOV #3, T1
+     392              
+     393                                                      ; call occurs [#_AIC3204_rset] ; |61| 
+     394                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 62,column 5,is_stmt
+     395 00004e 3C64          MOV #6, T0
+     396              $C$DW$29        .dwtag  DW_TAG_TI_branch
+     397                      .dwattr $C$DW$29, DW_AT_low_pc(0x00)
+     398                      .dwattr $C$DW$29, DW_AT_name("_AIC3204_rset")
+     399                      .dwattr $C$DW$29, DW_AT_TI_call
+     400              
+     401 000050 6C00          CALL #_AIC3204_rset ; |62| 
+         000052 0000!
+     402 000054 3D75  ||      MOV #7, T1
+     403              
+     404                                                      ; call occurs [#_AIC3204_rset] ; |62| 
+     405                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 63,column 5,is_stmt
+     406 000056 3C74          MOV #7, T0
+     407              $C$DW$30        .dwtag  DW_TAG_TI_branch
+     408                      .dwattr $C$DW$30, DW_AT_low_pc(0x00)
+     409                      .dwattr $C$DW$30, DW_AT_name("_AIC3204_rset")
+     410                      .dwattr $C$DW$30, DW_AT_TI_call
+     411              
+     412 000058 6C00          CALL #_AIC3204_rset ; |63| 
+         00005a 0000!
+     413 00005c 3D65  ||      MOV #6, T1
+     414              
+     415                                                      ; call occurs [#_AIC3204_rset] ; |63| 
+     416                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 64,column 5,is_stmt
+     417 00005e 7600          MOV #144, T1 ; |64| 
+         000060 9058 
+     418              $C$DW$31        .dwtag  DW_TAG_TI_branch
+     419                      .dwattr $C$DW$31, DW_AT_low_pc(0x00)
+     420                      .dwattr $C$DW$31, DW_AT_name("_AIC3204_rset")
+     421                      .dwattr $C$DW$31, DW_AT_TI_call
+     422              
+     423 000062 6C00          CALL #_AIC3204_rset ; |64| 
+TMS320C55x Assembler PC v4.3.8 Thu Jun 09 17:03:44 2011
+
+Tools Copyright (c) 1996-2010 Texas Instruments Incorporated
+aic3204_loop_stereo_in1.asm                                          PAGE    9
+
+         000064 0000!
+     424 000066 3D84  ||      MOV #8, T0
+     425              
+     426                                                      ; call occurs [#_AIC3204_rset] ; |64| 
+     427                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 65,column 5,is_stmt
+     428 000068 7600          MOV #136, T1 ; |65| 
+         00006a 8858 
+     429 00006c 7600          MOV #30, T0 ; |65| 
+         00006e 1E48 
+     430              $C$DW$32        .dwtag  DW_TAG_TI_branch
+     431                      .dwattr $C$DW$32, DW_AT_low_pc(0x00)
+     432                      .dwattr $C$DW$32, DW_AT_name("_AIC3204_rset")
+     433                      .dwattr $C$DW$32, DW_AT_TI_call
+     434 000070 6C00          CALL #_AIC3204_rset ; |65| 
+         000072 0000!
+     435                                                      ; call occurs [#_AIC3204_rset] ; |65| 
+     436                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 67,column 5,is_stmt
+     437 000074 7600          MOV #145, T1 ; |67| 
+         000076 9158 
+     438              $C$DW$33        .dwtag  DW_TAG_TI_branch
+     439                      .dwattr $C$DW$33, DW_AT_low_pc(0x00)
+     440                      .dwattr $C$DW$33, DW_AT_name("_AIC3204_rset")
+     441                      .dwattr $C$DW$33, DW_AT_TI_call
+     442              
+     443 000078 6C00          CALL #_AIC3204_rset ; |67| 
+         00007a 0000!
+     444 00007c 3D54  ||      MOV #5, T0
+     445              
+     446                                                      ; call occurs [#_AIC3204_rset] ; |67| 
+     447                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 68,column 5,is_stmt
+     448 00007e 3CD4          MOV #13, T0
+     449              $C$DW$34        .dwtag  DW_TAG_TI_branch
+     450                      .dwattr $C$DW$34, DW_AT_low_pc(0x00)
+     451                      .dwattr $C$DW$34, DW_AT_name("_AIC3204_rset")
+     452                      .dwattr $C$DW$34, DW_AT_TI_call
+     453              
+     454 000080 6C00          CALL #_AIC3204_rset ; |68| 
+         000082 0000!
+     455 000084 3D05  ||      MOV #0, T1
+     456              
+     457                                                      ; call occurs [#_AIC3204_rset] ; |68| 
+     458                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 69,column 5,is_stmt
+     459 000086 7600          MOV #128, T1 ; |69| 
+         000088 8058 
+     460              $C$DW$35        .dwtag  DW_TAG_TI_branch
+     461                      .dwattr $C$DW$35, DW_AT_low_pc(0x00)
+     462                      .dwattr $C$DW$35, DW_AT_name("_AIC3204_rset")
+     463                      .dwattr $C$DW$35, DW_AT_TI_call
+     464              
+     465 00008a 6C00          CALL #_AIC3204_rset ; |69| 
+         00008c 0000!
+     466 00008e 3DE4  ||      MOV #14, T0
+     467              
+     468                                                      ; call occurs [#_AIC3204_rset] ; |69| 
+     469                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 70,column 5,is_stmt
+TMS320C55x Assembler PC v4.3.8 Thu Jun 09 17:03:44 2011
+
+Tools Copyright (c) 1996-2010 Texas Instruments Incorporated
+aic3204_loop_stereo_in1.asm                                          PAGE   10
+
+     470 000090 7600          MOV #128, T1 ; |70| 
+         000092 8058 
+     471 000094 7600          MOV #20, T0 ; |70| 
+         000096 1448 
+     472              $C$DW$36        .dwtag  DW_TAG_TI_branch
+     473                      .dwattr $C$DW$36, DW_AT_low_pc(0x00)
+     474                      .dwattr $C$DW$36, DW_AT_name("_AIC3204_rset")
+     475                      .dwattr $C$DW$36, DW_AT_TI_call
+     476 000098 6C00          CALL #_AIC3204_rset ; |70| 
+         00009a 0000!
+     477                                                      ; call occurs [#_AIC3204_rset] ; |70| 
+     478                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 71,column 5,is_stmt
+     479 00009c 7600          MOV #130, T1 ; |71| 
+         00009e 8258 
+     480              $C$DW$37        .dwtag  DW_TAG_TI_branch
+     481                      .dwattr $C$DW$37, DW_AT_low_pc(0x00)
+     482                      .dwattr $C$DW$37, DW_AT_name("_AIC3204_rset")
+     483                      .dwattr $C$DW$37, DW_AT_TI_call
+     484              
+     485 0000a0 6C00          CALL #_AIC3204_rset ; |71| 
+         0000a2 0000!
+     486 0000a4 3DB4  ||      MOV #11, T0
+     487              
+     488                                                      ; call occurs [#_AIC3204_rset] ; |71| 
+     489                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 72,column 5,is_stmt
+     490 0000a6 7600          MOV #135, T1 ; |72| 
+         0000a8 8758 
+     491              $C$DW$38        .dwtag  DW_TAG_TI_branch
+     492                      .dwattr $C$DW$38, DW_AT_low_pc(0x00)
+     493                      .dwattr $C$DW$38, DW_AT_name("_AIC3204_rset")
+     494                      .dwattr $C$DW$38, DW_AT_TI_call
+     495              
+     496 0000aa 6C00          CALL #_AIC3204_rset ; |72| 
+         0000ac 0000!
+     497 0000ae 3DC4  ||      MOV #12, T0
+     498              
+     499                                                      ; call occurs [#_AIC3204_rset] ; |72| 
+     500                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 73,column 5,is_stmt
+     501 0000b0 7600          MOV #135, T1 ; |73| 
+         0000b2 8758 
+     502 0000b4 7600          MOV #18, T0 ; |73| 
+         0000b6 1248 
+     503              $C$DW$39        .dwtag  DW_TAG_TI_branch
+     504                      .dwattr $C$DW$39, DW_AT_low_pc(0x00)
+     505                      .dwattr $C$DW$39, DW_AT_name("_AIC3204_rset")
+     506                      .dwattr $C$DW$39, DW_AT_TI_call
+     507 0000b8 6C00          CALL #_AIC3204_rset ; |73| 
+         0000ba 0000!
+     508                                                      ; call occurs [#_AIC3204_rset] ; |73| 
+     509                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 74,column 5,is_stmt
+     510 0000bc 7600          MOV #130, T1 ; |74| 
+         0000be 8258 
+     511 0000c0 7600          MOV #19, T0 ; |74| 
+         0000c2 1348 
+     512              $C$DW$40        .dwtag  DW_TAG_TI_branch
+TMS320C55x Assembler PC v4.3.8 Thu Jun 09 17:03:44 2011
+
+Tools Copyright (c) 1996-2010 Texas Instruments Incorporated
+aic3204_loop_stereo_in1.asm                                          PAGE   11
+
+     513                      .dwattr $C$DW$40, DW_AT_low_pc(0x00)
+     514                      .dwattr $C$DW$40, DW_AT_name("_AIC3204_rset")
+     515                      .dwattr $C$DW$40, DW_AT_TI_call
+     516 0000c4 6C00          CALL #_AIC3204_rset ; |74| 
+         0000c6 0000!
+     517                                                      ; call occurs [#_AIC3204_rset] ; |74| 
+     518                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 76,column 5,is_stmt
+     519 0000c8 3C04          MOV #0, T0
+     520              $C$DW$41        .dwtag  DW_TAG_TI_branch
+     521                      .dwattr $C$DW$41, DW_AT_low_pc(0x00)
+     522                      .dwattr $C$DW$41, DW_AT_name("_AIC3204_rset")
+     523                      .dwattr $C$DW$41, DW_AT_TI_call
+     524              
+     525 0000ca 6C00          CALL #_AIC3204_rset ; |76| 
+         0000cc 0000!
+     526 0000ce 3D15  ||      MOV #1, T1
+     527              
+     528                                                      ; call occurs [#_AIC3204_rset] ; |76| 
+     529                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 77,column 5,is_stmt
+     530 0000d0 3CC4          MOV #12, T0
+     531              $C$DW$42        .dwtag  DW_TAG_TI_branch
+     532                      .dwattr $C$DW$42, DW_AT_low_pc(0x00)
+     533                      .dwattr $C$DW$42, DW_AT_name("_AIC3204_rset")
+     534                      .dwattr $C$DW$42, DW_AT_TI_call
+     535              
+     536 0000d2 6C00          CALL #_AIC3204_rset ; |77| 
+         0000d4 0000!
+     537 0000d6 3D85  ||      MOV #8, T1
+     538              
+     539                                                      ; call occurs [#_AIC3204_rset] ; |77| 
+     540                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 78,column 5,is_stmt
+     541 0000d8 3CD4          MOV #13, T0
+     542              $C$DW$43        .dwtag  DW_TAG_TI_branch
+     543                      .dwattr $C$DW$43, DW_AT_low_pc(0x00)
+     544                      .dwattr $C$DW$43, DW_AT_name("_AIC3204_rset")
+     545                      .dwattr $C$DW$43, DW_AT_TI_call
+     546              
+     547 0000da 6C00          CALL #_AIC3204_rset ; |78| 
+         0000dc 0000!
+     548 0000de 3D85  ||      MOV #8, T1
+     549              
+     550                                                      ; call occurs [#_AIC3204_rset] ; |78| 
+     551                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 79,column 5,is_stmt
+     552 0000e0 3C04          MOV #0, T0
+     553              $C$DW$44        .dwtag  DW_TAG_TI_branch
+     554                      .dwattr $C$DW$44, DW_AT_low_pc(0x00)
+     555                      .dwattr $C$DW$44, DW_AT_name("_AIC3204_rset")
+     556                      .dwattr $C$DW$44, DW_AT_TI_call
+     557              
+     558 0000e2 6C00          CALL #_AIC3204_rset ; |79| 
+         0000e4 0000!
+     559 0000e6 3D05  ||      MOV #0, T1
+     560              
+     561                                                      ; call occurs [#_AIC3204_rset] ; |79| 
+     562                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 80,column 5,is_stmt
+TMS320C55x Assembler PC v4.3.8 Thu Jun 09 17:03:44 2011
+
+Tools Copyright (c) 1996-2010 Texas Instruments Incorporated
+aic3204_loop_stereo_in1.asm                                          PAGE   12
+
+     563 0000e8 7600          MOV #64, T0 ; |80| 
+         0000ea 4048 
+     564              $C$DW$45        .dwtag  DW_TAG_TI_branch
+     565                      .dwattr $C$DW$45, DW_AT_low_pc(0x00)
+     566                      .dwattr $C$DW$45, DW_AT_name("_AIC3204_rset")
+     567                      .dwattr $C$DW$45, DW_AT_TI_call
+     568              
+     569 0000ec 6C00          CALL #_AIC3204_rset ; |80| 
+         0000ee 0000!
+     570 0000f0 3D25  ||      MOV #2, T1
+     571              
+     572                                                      ; call occurs [#_AIC3204_rset] ; |80| 
+     573                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 81,column 5,is_stmt
+     574 0000f2 7600          MOV #65, T0 ; |81| 
+         0000f4 4148 
+     575              $C$DW$46        .dwtag  DW_TAG_TI_branch
+     576                      .dwattr $C$DW$46, DW_AT_low_pc(0x00)
+     577                      .dwattr $C$DW$46, DW_AT_name("_AIC3204_rset")
+     578                      .dwattr $C$DW$46, DW_AT_TI_call
+     579              
+     580 0000f6 6C00          CALL #_AIC3204_rset ; |81| 
+         0000f8 0000!
+     581 0000fa 3D05  ||      MOV #0, T1
+     582              
+     583                                                      ; call occurs [#_AIC3204_rset] ; |81| 
+     584                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 82,column 5,is_stmt
+     585 0000fc 7600          MOV #212, T1 ; |82| 
+         0000fe D458 
+     586 000100 7600          MOV #63, T0 ; |82| 
+         000102 3F48 
+     587              $C$DW$47        .dwtag  DW_TAG_TI_branch
+     588                      .dwattr $C$DW$47, DW_AT_low_pc(0x00)
+     589                      .dwattr $C$DW$47, DW_AT_name("_AIC3204_rset")
+     590                      .dwattr $C$DW$47, DW_AT_TI_call
+     591 000104 6C00          CALL #_AIC3204_rset ; |82| 
+         000106 0000!
+     592                                                      ; call occurs [#_AIC3204_rset] ; |82| 
+     593                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 83,column 5,is_stmt
+     594 000108 3C04          MOV #0, T0
+     595              $C$DW$48        .dwtag  DW_TAG_TI_branch
+     596                      .dwattr $C$DW$48, DW_AT_low_pc(0x00)
+     597                      .dwattr $C$DW$48, DW_AT_name("_AIC3204_rset")
+     598                      .dwattr $C$DW$48, DW_AT_TI_call
+     599              
+     600 00010a 6C00          CALL #_AIC3204_rset ; |83| 
+         00010c 0000!
+     601 00010e 3D15  ||      MOV #1, T1
+     602              
+     603                                                      ; call occurs [#_AIC3204_rset] ; |83| 
+     604                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 84,column 5,is_stmt
+     605 000110 7600          MOV #16, T0 ; |84| 
+         000112 1048 
+     606              $C$DW$49        .dwtag  DW_TAG_TI_branch
+     607                      .dwattr $C$DW$49, DW_AT_low_pc(0x00)
+     608                      .dwattr $C$DW$49, DW_AT_name("_AIC3204_rset")
+TMS320C55x Assembler PC v4.3.8 Thu Jun 09 17:03:44 2011
+
+Tools Copyright (c) 1996-2010 Texas Instruments Incorporated
+aic3204_loop_stereo_in1.asm                                          PAGE   13
+
+     609                      .dwattr $C$DW$49, DW_AT_TI_call
+     610              
+     611 000114 6C00          CALL #_AIC3204_rset ; |84| 
+         000116 0000!
+     612 000118 3D05  ||      MOV #0, T1
+     613              
+     614                                                      ; call occurs [#_AIC3204_rset] ; |84| 
+     615                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 85,column 5,is_stmt
+     616 00011a 7600          MOV #17, T0 ; |85| 
+         00011c 1148 
+     617              $C$DW$50        .dwtag  DW_TAG_TI_branch
+     618                      .dwattr $C$DW$50, DW_AT_low_pc(0x00)
+     619                      .dwattr $C$DW$50, DW_AT_name("_AIC3204_rset")
+     620                      .dwattr $C$DW$50, DW_AT_TI_call
+     621              
+     622 00011e 6C00          CALL #_AIC3204_rset ; |85| 
+         000120 0000!
+     623 000122 3D05  ||      MOV #0, T1
+     624              
+     625                                                      ; call occurs [#_AIC3204_rset] ; |85| 
+     626                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 86,column 5,is_stmt
+     627 000124 7600          MOV #48, T1 ; |86| 
+         000126 3058 
+     628              $C$DW$51        .dwtag  DW_TAG_TI_branch
+     629                      .dwattr $C$DW$51, DW_AT_low_pc(0x00)
+     630                      .dwattr $C$DW$51, DW_AT_name("_AIC3204_rset")
+     631                      .dwattr $C$DW$51, DW_AT_TI_call
+     632              
+     633 000128 6C00          CALL #_AIC3204_rset ; |86| 
+         00012a 0000!
+     634 00012c 3D94  ||      MOV #9, T0
+     635              
+     636                                                      ; call occurs [#_AIC3204_rset] ; |86| 
+     637                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 87,column 5,is_stmt
+     638 00012e 3C04          MOV #0, T0
+     639              $C$DW$52        .dwtag  DW_TAG_TI_branch
+     640                      .dwattr $C$DW$52, DW_AT_low_pc(0x00)
+     641                      .dwattr $C$DW$52, DW_AT_name("_AIC3204_rset")
+     642                      .dwattr $C$DW$52, DW_AT_TI_call
+     643              
+     644 000130 6C00          CALL #_AIC3204_rset ; |87| 
+         000132 0000!
+     645 000134 3D05  ||      MOV #0, T1
+     646              
+     647                                                      ; call occurs [#_AIC3204_rset] ; |87| 
+     648                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 88,column 5,is_stmt
+     649 000136 7601          MOV #500, AC0 ; |88| 
+         000138 F408 
+     650              $C$DW$53        .dwtag  DW_TAG_TI_branch
+     651                      .dwattr $C$DW$53, DW_AT_low_pc(0x00)
+     652                      .dwattr $C$DW$53, DW_AT_name("_USBSTK5515_wait")
+     653                      .dwattr $C$DW$53, DW_AT_TI_call
+     654 00013a 6C00          CALL #_USBSTK5515_wait ; |88| 
+         00013c 0000!
+     655                                                      ; call occurs [#_USBSTK5515_wait] ; |88| 
+TMS320C55x Assembler PC v4.3.8 Thu Jun 09 17:03:44 2011
+
+Tools Copyright (c) 1996-2010 Texas Instruments Incorporated
+aic3204_loop_stereo_in1.asm                                          PAGE   14
+
+     656                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 91,column 5,is_stmt
+     657 00013e 3C04          MOV #0, T0
+     658              $C$DW$54        .dwtag  DW_TAG_TI_branch
+     659                      .dwattr $C$DW$54, DW_AT_low_pc(0x00)
+     660                      .dwattr $C$DW$54, DW_AT_name("_AIC3204_rset")
+     661                      .dwattr $C$DW$54, DW_AT_TI_call
+     662              
+     663 000140 6C00          CALL #_AIC3204_rset ; |91| 
+         000142 0000!
+     664 000144 3D15  ||      MOV #1, T1
+     665              
+     666                                                      ; call occurs [#_AIC3204_rset] ; |91| 
+     667                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 92,column 5,is_stmt
+     668 000146 7600          MOV #48, T1 ; |92| 
+         000148 3058 
+     669 00014a 7600          MOV #52, T0 ; |92| 
+         00014c 3448 
+     670              $C$DW$55        .dwtag  DW_TAG_TI_branch
+     671                      .dwattr $C$DW$55, DW_AT_low_pc(0x00)
+     672                      .dwattr $C$DW$55, DW_AT_name("_AIC3204_rset")
+     673                      .dwattr $C$DW$55, DW_AT_TI_call
+     674 00014e 6C00          CALL #_AIC3204_rset ; |92| 
+         000150 0000!
+     675                                                      ; call occurs [#_AIC3204_rset] ; |92| 
+     676                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 94,column 5,is_stmt
+     677 000152 7600          MOV #48, T1 ; |94| 
+         000154 3058 
+     678 000156 7600          MOV #55, T0 ; |94| 
+         000158 3748 
+     679              $C$DW$56        .dwtag  DW_TAG_TI_branch
+     680                      .dwattr $C$DW$56, DW_AT_low_pc(0x00)
+     681                      .dwattr $C$DW$56, DW_AT_name("_AIC3204_rset")
+     682                      .dwattr $C$DW$56, DW_AT_TI_call
+     683 00015a 6C00          CALL #_AIC3204_rset ; |94| 
+         00015c 0000!
+     684                                                      ; call occurs [#_AIC3204_rset] ; |94| 
+     685                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 95,column 5,is_stmt
+     686 00015e 7600          MOV #54, T0 ; |95| 
+         000160 3648 
+     687              $C$DW$57        .dwtag  DW_TAG_TI_branch
+     688                      .dwattr $C$DW$57, DW_AT_low_pc(0x00)
+     689                      .dwattr $C$DW$57, DW_AT_name("_AIC3204_rset")
+     690                      .dwattr $C$DW$57, DW_AT_TI_call
+     691              
+     692 000162 6C00          CALL #_AIC3204_rset ; |95| 
+         000164 0000!
+     693 000166 3D35  ||      MOV #3, T1
+     694              
+     695                                                      ; call occurs [#_AIC3204_rset] ; |95| 
+     696                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 96,column 5,is_stmt
+     697 000168 7600          MOV #192, T1 ; |96| 
+         00016a C058 
+     698 00016c 7600          MOV #57, T0 ; |96| 
+         00016e 3948 
+     699              $C$DW$58        .dwtag  DW_TAG_TI_branch
+TMS320C55x Assembler PC v4.3.8 Thu Jun 09 17:03:44 2011
+
+Tools Copyright (c) 1996-2010 Texas Instruments Incorporated
+aic3204_loop_stereo_in1.asm                                          PAGE   15
+
+     700                      .dwattr $C$DW$58, DW_AT_low_pc(0x00)
+     701                      .dwattr $C$DW$58, DW_AT_name("_AIC3204_rset")
+     702                      .dwattr $C$DW$58, DW_AT_TI_call
+     703 000170 6C00          CALL #_AIC3204_rset ; |96| 
+         000172 0000!
+     704                                                      ; call occurs [#_AIC3204_rset] ; |96| 
+     705                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 97,column 5,is_stmt
+     706 000174 7600          MOV #59, T0 ; |97| 
+         000176 3B48 
+     707              $C$DW$59        .dwtag  DW_TAG_TI_branch
+     708                      .dwattr $C$DW$59, DW_AT_low_pc(0x00)
+     709                      .dwattr $C$DW$59, DW_AT_name("_AIC3204_rset")
+     710                      .dwattr $C$DW$59, DW_AT_TI_call
+     711              
+     712 000178 6C00          CALL #_AIC3204_rset ; |97| 
+         00017a 0000!
+     713 00017c 3D05  ||      MOV #0, T1
+     714              
+     715                                                      ; call occurs [#_AIC3204_rset] ; |97| 
+     716                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 98,column 5,is_stmt
+     717 00017e 7600          MOV #60, T0 ; |98| 
+         000180 3C48 
+     718              $C$DW$60        .dwtag  DW_TAG_TI_branch
+     719                      .dwattr $C$DW$60, DW_AT_low_pc(0x00)
+     720                      .dwattr $C$DW$60, DW_AT_name("_AIC3204_rset")
+     721                      .dwattr $C$DW$60, DW_AT_TI_call
+     722              
+     723 000182 6C00          CALL #_AIC3204_rset ; |98| 
+         000184 0000!
+     724 000186 3D05  ||      MOV #0, T1
+     725              
+     726                                                      ; call occurs [#_AIC3204_rset] ; |98| 
+     727                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 99,column 5,is_stmt
+     728 000188 3C04          MOV #0, T0
+     729              $C$DW$61        .dwtag  DW_TAG_TI_branch
+     730                      .dwattr $C$DW$61, DW_AT_low_pc(0x00)
+     731                      .dwattr $C$DW$61, DW_AT_name("_AIC3204_rset")
+     732                      .dwattr $C$DW$61, DW_AT_TI_call
+     733              
+     734 00018a 6C00          CALL #_AIC3204_rset ; |99| 
+         00018c 0000!
+     735 00018e 3D05  ||      MOV #0, T1
+     736              
+     737                                                      ; call occurs [#_AIC3204_rset] ; |99| 
+     738                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 100,column 5,is_stmt
+     739 000190 7600          MOV #192, T1 ; |100| 
+         000192 C058 
+     740 000194 7600          MOV #81, T0 ; |100| 
+         000196 5148 
+     741              $C$DW$62        .dwtag  DW_TAG_TI_branch
+     742                      .dwattr $C$DW$62, DW_AT_low_pc(0x00)
+     743                      .dwattr $C$DW$62, DW_AT_name("_AIC3204_rset")
+     744                      .dwattr $C$DW$62, DW_AT_TI_call
+     745 000198 6C00          CALL #_AIC3204_rset ; |100| 
+         00019a 0000!
+TMS320C55x Assembler PC v4.3.8 Thu Jun 09 17:03:44 2011
+
+Tools Copyright (c) 1996-2010 Texas Instruments Incorporated
+aic3204_loop_stereo_in1.asm                                          PAGE   16
+
+     746                                                      ; call occurs [#_AIC3204_rset] ; |100| 
+     747                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 101,column 5,is_stmt
+     748 00019c 7600          MOV #82, T0 ; |101| 
+         00019e 5248 
+     749              $C$DW$63        .dwtag  DW_TAG_TI_branch
+     750                      .dwattr $C$DW$63, DW_AT_low_pc(0x00)
+     751                      .dwattr $C$DW$63, DW_AT_name("_AIC3204_rset")
+     752                      .dwattr $C$DW$63, DW_AT_TI_call
+     753              
+     754 0001a0 6C00          CALL #_AIC3204_rset ; |101| 
+         0001a2 0000!
+     755 0001a4 3D05  ||      MOV #0, T1
+     756              
+     757                                                      ; call occurs [#_AIC3204_rset] ; |101| 
+     758                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 103,column 5,is_stmt
+     759 0001a6 3C04          MOV #0, T0
+     760              $C$DW$64        .dwtag  DW_TAG_TI_branch
+     761                      .dwattr $C$DW$64, DW_AT_low_pc(0x00)
+     762                      .dwattr $C$DW$64, DW_AT_name("_AIC3204_rset")
+     763                      .dwattr $C$DW$64, DW_AT_TI_call
+     764              
+     765 0001a8 6C00          CALL #_AIC3204_rset ; |103| 
+         0001aa 0000!
+     766 0001ac 3D05  ||      MOV #0, T1
+     767              
+     768                                                      ; call occurs [#_AIC3204_rset] ; |103| 
+     769                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 104,column 5,is_stmt
+     770 0001ae 7600          MOV #200, AC0 ; |104| 
+         0001b0 C808 
+     771              $C$DW$65        .dwtag  DW_TAG_TI_branch
+     772                      .dwattr $C$DW$65, DW_AT_low_pc(0x00)
+     773                      .dwattr $C$DW$65, DW_AT_name("_USBSTK5515_wait")
+     774                      .dwattr $C$DW$65, DW_AT_TI_call
+     775 0001b2 6C00          CALL #_USBSTK5515_wait ; |104| 
+         0001b4 0000!
+     776                                                      ; call occurs [#_USBSTK5515_wait] ; |104| 
+     777                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 106,column 5,is_stmt
+     778 0001b6 E651          MOV #0, *port(#10244) ; |106| 
+         0001b8 0028 
+         0001ba 04   
+     779                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 107,column 5,is_stmt
+     780 0001bb FB51          MOV #32784, *port(#10240) ; |107| 
+         0001bd 8010 
+         0001bf 2800 
+     781                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 108,column 5,is_stmt
+     782 0001c1 7600          MOV #48, AR2 ; |124| 
+         0001c3 30A8 
+     783 0001c5 E651          MOV #63, *port(#10260) ; |108| 
+         0001c7 3F28 
+         0001c9 14   
+     784 0001ca       $C$L1:    
+     785 0001ca       $C$DW$L$_aic3204_loop_stereo_in1$6$B:
+     786                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 123,column 11,is_stmt
+     787 0001ca A931          MOV *(#_ctr), AR1 ; |123| 
+         0001cc 0000 
+TMS320C55x Assembler PC v4.3.8 Thu Jun 09 17:03:44 2011
+
+Tools Copyright (c) 1996-2010 Texas Instruments Incorporated
+aic3204_loop_stereo_in1.asm                                          PAGE   17
+
+         0001ce 31-  
+     788 0001cf 4019          ADD #1, AR1, AR1 ; |123| 
+     789 0001d1 C931          MOV AR1, *(#_ctr) ; |123| 
+         0001d3 0000 
+         0001d5 31-  
+     790                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 124,column 11,is_stmt
+     791 0001d6 1294          CMP AR1 < AR2, TC1 ; |124| 
+         0001d8 A0   
+     792                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 124,column 25,is_stmt
+     793 0001d9 96F4          XCCPART !TC1
+     794 0001db E631             MOV #0, *(#_ctr) ; |124| 
+         0001dd 0000 
+         0001df 0031-
+     795                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 126,column 11,is_stmt
+     796 0001e1 E631          MOV #0, *(#_ctr_a) ; |126| 
+         0001e3 0000 
+         0001e5 0038-
+     797                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 127,column 22,is_stmt
+     798 0001e7 DC51          BTST #5, *port(#10256), TC1 ; |127| 
+         0001e9 5028 
+         0001eb 10   
+     799 0001ec 67E4          BCC $C$L3,TC1 ; |127| 
+     800                                                      ; branchcc occurs ; |127| 
+     801 0001ee       $C$DW$L$_aic3204_loop_stereo_in1$6$E:
+     802 0001ee       $C$L2:    
+     803 0001ee       $C$DW$L$_aic3204_loop_stereo_in1$7$B:
+     804                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 127,column 44,is_stmt
+     805 0001ee F731          ADD #1, *(#_ctr_a) ; |127| 
+         0001f0 0001 
+         0001f2 0000 
+         0001f4 38-  
+     806                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 127,column 22,is_stmt
+     807 0001f5 DC51          BTST #5, *port(#10256), TC1 ; |127| 
+         0001f7 5028 
+         0001f9 10   
+     808 0001fa 0474          BCC $C$L2,!TC1 ; |127| 
+         0001fc F1   
+     809                                                      ; branchcc occurs ; |127| 
+     810 0001fd       $C$DW$L$_aic3204_loop_stereo_in1$7$E:
+     811 0001fd       $C$L3:    
+     812 0001fd       $C$DW$L$_aic3204_loop_stereo_in1$8$B:
+     813                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 128,column 16,is_stmt
+     814 0001fd A931          MOV *(#_ctr_a), AR1 ; |128| 
+         0001ff 0000 
+         000201 38-  
+     815 000202 C931          MOV AR1, *(#_value_a) ; |128| 
+         000204 0000 
+         000206 3A-  
+     816                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 129,column 5,is_stmt
+     817 000207 A931          MOV *(#_data3), AR1 ; |129| 
+         000209 0000 
+         00020b 36-  
+     818 00020c C951          MOV AR1, *port(#10249) ; |129| 
+         00020e 2809 
+     819                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 130,column 16,is_stmt
+TMS320C55x Assembler PC v4.3.8 Thu Jun 09 17:03:44 2011
+
+Tools Copyright (c) 1996-2010 Texas Instruments Incorporated
+aic3204_loop_stereo_in1.asm                                          PAGE   18
+
+     820 000210 E651          MOV #0, *port(#10248) ; |130| 
+         000212 0028 
+         000214 08   
+     821                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 131,column 16,is_stmt
+     822 000215 A931          MOV *(#_data4), AR1 ; |131| 
+         000217 0000 
+         000219 37-  
+     823 00021a C951          MOV AR1, *port(#10253) ; |131| 
+         00021c 280D 
+     824                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 132,column 16,is_stmt
+     825 00021e E651          MOV #0, *port(#10252) ; |132| 
+         000220 0028 
+         000222 0C   
+     826                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 134,column 16,is_stmt
+     827 000223 E631          MOV #0, *(#_ctr_b) ; |134| 
+         000225 0000 
+         000227 0039-
+     828                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 135,column 20,is_stmt
+     829 000229 DC51          BTST #3, *port(#10256), TC1 ; |135| 
+         00022b 3028 
+         00022d 10   
+     830 00022e 67E4          BCC $C$L5,TC1 ; |135| 
+     831                                                      ; branchcc occurs ; |135| 
+     832 000230       $C$DW$L$_aic3204_loop_stereo_in1$8$E:
+     833 000230       $C$L4:    
+     834 000230       $C$DW$L$_aic3204_loop_stereo_in1$9$B:
+     835                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 135,column 41,is_stmt
+     836 000230 F731          ADD #1, *(#_ctr_b) ; |135| 
+         000232 0001 
+         000234 0000 
+         000236 39-  
+     837                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 135,column 20,is_stmt
+     838 000237 DC51          BTST #3, *port(#10256), TC1 ; |135| 
+         000239 3028 
+         00023b 10   
+     839 00023c 0474          BCC $C$L4,!TC1 ; |135| 
+         00023e F1   
+     840                                                      ; branchcc occurs ; |135| 
+     841 00023f       $C$DW$L$_aic3204_loop_stereo_in1$9$E:
+     842 00023f       $C$L5:    
+     843 00023f       $C$DW$L$_aic3204_loop_stereo_in1$10$B:
+     844                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 136,column 14,is_stmt
+     845 00023f A931          MOV *(#_ctr_b), AR1 ; |136| 
+         000241 0000 
+         000243 39-  
+     846 000244 C931          MOV AR1, *(#_value_b) ; |136| 
+         000246 0000 
+         000248 3B-  
+     847                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 137,column 17,is_stmt
+     848 000249 A951          MOV *port(#10281), AR1 ; |137| 
+         00024b 2829 
+     849 00024d C931          MOV AR1, *(#_data3) ; |137| 
+         00024f 0000 
+         000251 36-  
+     850                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 138,column 16,is_stmt
+TMS320C55x Assembler PC v4.3.8 Thu Jun 09 17:03:44 2011
+
+Tools Copyright (c) 1996-2010 Texas Instruments Incorporated
+aic3204_loop_stereo_in1.asm                                          PAGE   19
+
+     851 000252 A951          MOV *port(#10280), AR1 ; |138| 
+         000254 2828 
+     852                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 139,column 16,is_stmt
+     853 000256 A951          MOV *port(#10285), AR1 ; |139| 
+         000258 282D 
+     854 00025a C931          MOV AR1, *(#_data4) ; |139| 
+         00025c 0000 
+         00025e 37-  
+     855                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 140,column 16,is_stmt
+     856 00025f A951          MOV *port(#10284), AR1 ; |140| 
+         000261 282C 
+     857                      .dwpsn  file "../aic3204_loop_stereo_in1.c",line 121,column 17,is_stmt
+     858 000263 06FF          B $C$L1   ; |121| 
+         000265 64   
+     859                                                      ; branch occurs ; |121| 
+     860 000266       $C$DW$L$_aic3204_loop_stereo_in1$10$E:
+     861                      .dwcfi  cfa_offset, 1
+     862              
+     863              $C$DW$66        .dwtag  DW_TAG_TI_loop
+     864                      .dwattr $C$DW$66, DW_AT_name("C:\Users\Kurt\Documents\Little_Projects\MCUs\C5515\usbstk5515_BSL_RevA\
+     865                      .dwattr $C$DW$66, DW_AT_TI_begin_file("../aic3204_loop_stereo_in1.c")
+     866                      .dwattr $C$DW$66, DW_AT_TI_begin_line(0x79)
+     867                      .dwattr $C$DW$66, DW_AT_TI_end_line(0x96)
+     868              $C$DW$67        .dwtag  DW_TAG_TI_loop_range
+     869                      .dwattr $C$DW$67, DW_AT_low_pc($C$DW$L$_aic3204_loop_stereo_in1$6$B)
+     870                      .dwattr $C$DW$67, DW_AT_high_pc($C$DW$L$_aic3204_loop_stereo_in1$6$E)
+     871              $C$DW$68        .dwtag  DW_TAG_TI_loop_range
+     872                      .dwattr $C$DW$68, DW_AT_low_pc($C$DW$L$_aic3204_loop_stereo_in1$8$B)
+     873                      .dwattr $C$DW$68, DW_AT_high_pc($C$DW$L$_aic3204_loop_stereo_in1$8$E)
+     874              $C$DW$69        .dwtag  DW_TAG_TI_loop_range
+     875                      .dwattr $C$DW$69, DW_AT_low_pc($C$DW$L$_aic3204_loop_stereo_in1$10$B)
+     876                      .dwattr $C$DW$69, DW_AT_high_pc($C$DW$L$_aic3204_loop_stereo_in1$10$E)
+     877              
+     878              $C$DW$70        .dwtag  DW_TAG_TI_loop
+     879                      .dwattr $C$DW$70, DW_AT_name("C:\Users\Kurt\Documents\Little_Projects\MCUs\C5515\usbstk5515_BSL_RevA\
+     880                      .dwattr $C$DW$70, DW_AT_TI_begin_file("../aic3204_loop_stereo_in1.c")
+     881                      .dwattr $C$DW$70, DW_AT_TI_begin_line(0x7f)
+     882                      .dwattr $C$DW$70, DW_AT_TI_end_line(0x7f)
+     883              $C$DW$71        .dwtag  DW_TAG_TI_loop_range
+     884                      .dwattr $C$DW$71, DW_AT_low_pc($C$DW$L$_aic3204_loop_stereo_in1$7$B)
+     885                      .dwattr $C$DW$71, DW_AT_high_pc($C$DW$L$_aic3204_loop_stereo_in1$7$E)
+     886                      .dwendtag $C$DW$70
+     887              
+     888              
+     889              $C$DW$72        .dwtag  DW_TAG_TI_loop
+     890                      .dwattr $C$DW$72, DW_AT_name("C:\Users\Kurt\Documents\Little_Projects\MCUs\C5515\usbstk5515_BSL_RevA\
+     891                      .dwattr $C$DW$72, DW_AT_TI_begin_file("../aic3204_loop_stereo_in1.c")
+     892                      .dwattr $C$DW$72, DW_AT_TI_begin_line(0x87)
+     893                      .dwattr $C$DW$72, DW_AT_TI_end_line(0x87)
+     894              $C$DW$73        .dwtag  DW_TAG_TI_loop_range
+     895                      .dwattr $C$DW$73, DW_AT_low_pc($C$DW$L$_aic3204_loop_stereo_in1$9$B)
+     896                      .dwattr $C$DW$73, DW_AT_high_pc($C$DW$L$_aic3204_loop_stereo_in1$9$E)
+     897                      .dwendtag $C$DW$72
+     898              
+     899                      .dwendtag $C$DW$66
+TMS320C55x Assembler PC v4.3.8 Thu Jun 09 17:03:44 2011
+
+Tools Copyright (c) 1996-2010 Texas Instruments Incorporated
+aic3204_loop_stereo_in1.asm                                          PAGE   20
+
+     900              
+     901                      .dwattr $C$DW$19, DW_AT_TI_end_file("../aic3204_loop_stereo_in1.c")
+     902                      .dwattr $C$DW$19, DW_AT_TI_end_line(0x9d)
+     903                      .dwattr $C$DW$19, DW_AT_TI_end_column(0x01)
+     904                      .dwendentry
+     905                      .dwendtag $C$DW$19
+     906              
+     907              ;******************************************************************************
+     908              ;* UNDEFINED EXTERNAL REFERENCES                                              *
+     909              ;******************************************************************************
+     910                      .global _USBSTK5515_wait
+     911                      .global _AIC3204_rset
+     912              
+     913              ;*******************************************************************************
+     914              ;* TYPE INFORMATION                                                            *
+     915              ;*******************************************************************************
+     916              $C$DW$T$4       .dwtag  DW_TAG_base_type
+     917                      .dwattr $C$DW$T$4, DW_AT_encoding(DW_ATE_boolean)
+     918                      .dwattr $C$DW$T$4, DW_AT_name("bool")
+     919                      .dwattr $C$DW$T$4, DW_AT_byte_size(0x01)
+     920              $C$DW$T$5       .dwtag  DW_TAG_base_type
+     921                      .dwattr $C$DW$T$5, DW_AT_encoding(DW_ATE_signed_char)
+     922                      .dwattr $C$DW$T$5, DW_AT_name("signed char")
+     923                      .dwattr $C$DW$T$5, DW_AT_byte_size(0x01)
+     924              $C$DW$T$6       .dwtag  DW_TAG_base_type
+     925                      .dwattr $C$DW$T$6, DW_AT_encoding(DW_ATE_unsigned_char)
+     926                      .dwattr $C$DW$T$6, DW_AT_name("unsigned char")
+     927                      .dwattr $C$DW$T$6, DW_AT_byte_size(0x01)
+     928              $C$DW$T$19      .dwtag  DW_TAG_pointer_type
+     929                      .dwattr $C$DW$T$19, DW_AT_type(*$C$DW$T$6)
+     930                      .dwattr $C$DW$T$19, DW_AT_address_class(0x17)
+     931              $C$DW$T$7       .dwtag  DW_TAG_base_type
+     932                      .dwattr $C$DW$T$7, DW_AT_encoding(DW_ATE_signed_char)
+     933                      .dwattr $C$DW$T$7, DW_AT_name("wchar_t")
+     934                      .dwattr $C$DW$T$7, DW_AT_byte_size(0x01)
+     935              $C$DW$T$8       .dwtag  DW_TAG_base_type
+     936                      .dwattr $C$DW$T$8, DW_AT_encoding(DW_ATE_signed)
+     937                      .dwattr $C$DW$T$8, DW_AT_name("short")
+     938                      .dwattr $C$DW$T$8, DW_AT_byte_size(0x01)
+     939              $C$DW$T$9       .dwtag  DW_TAG_base_type
+     940                      .dwattr $C$DW$T$9, DW_AT_encoding(DW_ATE_unsigned)
+     941                      .dwattr $C$DW$T$9, DW_AT_name("unsigned short")
+     942                      .dwattr $C$DW$T$9, DW_AT_byte_size(0x01)
+     943              $C$DW$T$10      .dwtag  DW_TAG_base_type
+     944                      .dwattr $C$DW$T$10, DW_AT_encoding(DW_ATE_signed)
+     945                      .dwattr $C$DW$T$10, DW_AT_name("int")
+     946                      .dwattr $C$DW$T$10, DW_AT_byte_size(0x01)
+     947              
+     948              $C$DW$T$26      .dwtag  DW_TAG_array_type
+     949                      .dwattr $C$DW$T$26, DW_AT_type(*$C$DW$T$10)
+     950                      .dwattr $C$DW$T$26, DW_AT_language(DW_LANG_C)
+     951                      .dwattr $C$DW$T$26, DW_AT_byte_size(0x30)
+     952              $C$DW$74        .dwtag  DW_TAG_subrange_type
+     953                      .dwattr $C$DW$74, DW_AT_upper_bound(0x2f)
+     954                      .dwendtag $C$DW$T$26
+TMS320C55x Assembler PC v4.3.8 Thu Jun 09 17:03:44 2011
+
+Tools Copyright (c) 1996-2010 Texas Instruments Incorporated
+aic3204_loop_stereo_in1.asm                                          PAGE   21
+
+     955              
+     956              $C$DW$T$11      .dwtag  DW_TAG_base_type
+     957                      .dwattr $C$DW$T$11, DW_AT_encoding(DW_ATE_unsigned)
+     958                      .dwattr $C$DW$T$11, DW_AT_name("unsigned int")
+     959                      .dwattr $C$DW$T$11, DW_AT_byte_size(0x01)
+     960              $C$DW$75        .dwtag  DW_TAG_TI_far_type
+     961                      .dwattr $C$DW$75, DW_AT_type(*$C$DW$T$11)
+     962              $C$DW$T$27      .dwtag  DW_TAG_volatile_type
+     963                      .dwattr $C$DW$T$27, DW_AT_type(*$C$DW$75)
+     964              $C$DW$T$30      .dwtag  DW_TAG_typedef, DW_AT_name("size_t")
+     965                      .dwattr $C$DW$T$30, DW_AT_type(*$C$DW$T$11)
+     966                      .dwattr $C$DW$T$30, DW_AT_language(DW_LANG_C)
+     967                      .dwattr $C$DW$T$30, DW_AT_decl_file("C:/Program Files (x86)/Texas Instruments/ccsv5/tools/compiler/c5
+     968                      .dwattr $C$DW$T$30, DW_AT_decl_line(0x19)
+     969                      .dwattr $C$DW$T$30, DW_AT_decl_column(0x19)
+     970              $C$DW$T$12      .dwtag  DW_TAG_base_type
+     971                      .dwattr $C$DW$T$12, DW_AT_encoding(DW_ATE_signed)
+     972                      .dwattr $C$DW$T$12, DW_AT_name("long")
+     973                      .dwattr $C$DW$T$12, DW_AT_byte_size(0x02)
+     974              $C$DW$T$31      .dwtag  DW_TAG_typedef, DW_AT_name("fpos_t")
+     975                      .dwattr $C$DW$T$31, DW_AT_type(*$C$DW$T$12)
+     976                      .dwattr $C$DW$T$31, DW_AT_language(DW_LANG_C)
+     977                      .dwattr $C$DW$T$31, DW_AT_decl_file("C:/Program Files (x86)/Texas Instruments/ccsv5/tools/compiler/c5
+     978                      .dwattr $C$DW$T$31, DW_AT_decl_line(0x27)
+     979                      .dwattr $C$DW$T$31, DW_AT_decl_column(0x0e)
+     980              $C$DW$T$13      .dwtag  DW_TAG_base_type
+     981                      .dwattr $C$DW$T$13, DW_AT_encoding(DW_ATE_unsigned)
+     982                      .dwattr $C$DW$T$13, DW_AT_name("unsigned long")
+     983                      .dwattr $C$DW$T$13, DW_AT_byte_size(0x02)
+     984              $C$DW$T$14      .dwtag  DW_TAG_base_type
+     985                      .dwattr $C$DW$T$14, DW_AT_encoding(DW_ATE_signed)
+     986                      .dwattr $C$DW$T$14, DW_AT_name("long long")
+     987                      .dwattr $C$DW$T$14, DW_AT_byte_size(0x04)
+     988                      .dwattr $C$DW$T$14, DW_AT_bit_size(0x28)
+     989                      .dwattr $C$DW$T$14, DW_AT_bit_offset(0x18)
+     990              $C$DW$T$15      .dwtag  DW_TAG_base_type
+     991                      .dwattr $C$DW$T$15, DW_AT_encoding(DW_ATE_unsigned)
+     992                      .dwattr $C$DW$T$15, DW_AT_name("unsigned long long")
+     993                      .dwattr $C$DW$T$15, DW_AT_byte_size(0x04)
+     994                      .dwattr $C$DW$T$15, DW_AT_bit_size(0x28)
+     995                      .dwattr $C$DW$T$15, DW_AT_bit_offset(0x18)
+     996              $C$DW$T$16      .dwtag  DW_TAG_base_type
+     997                      .dwattr $C$DW$T$16, DW_AT_encoding(DW_ATE_float)
+     998                      .dwattr $C$DW$T$16, DW_AT_name("float")
+     999                      .dwattr $C$DW$T$16, DW_AT_byte_size(0x02)
+    1000              $C$DW$T$17      .dwtag  DW_TAG_base_type
+    1001                      .dwattr $C$DW$T$17, DW_AT_encoding(DW_ATE_float)
+    1002                      .dwattr $C$DW$T$17, DW_AT_name("double")
+    1003                      .dwattr $C$DW$T$17, DW_AT_byte_size(0x02)
+    1004              $C$DW$T$18      .dwtag  DW_TAG_base_type
+    1005                      .dwattr $C$DW$T$18, DW_AT_encoding(DW_ATE_float)
+    1006                      .dwattr $C$DW$T$18, DW_AT_name("long double")
+    1007                      .dwattr $C$DW$T$18, DW_AT_byte_size(0x02)
+    1008              
+    1009              $C$DW$T$20      .dwtag  DW_TAG_structure_type
+TMS320C55x Assembler PC v4.3.8 Thu Jun 09 17:03:44 2011
+
+Tools Copyright (c) 1996-2010 Texas Instruments Incorporated
+aic3204_loop_stereo_in1.asm                                          PAGE   22
+
+    1010                      .dwattr $C$DW$T$20, DW_AT_byte_size(0x0c)
+    1011              $C$DW$76        .dwtag  DW_TAG_member
+    1012                      .dwattr $C$DW$76, DW_AT_type(*$C$DW$T$10)
+    1013                      .dwattr $C$DW$76, DW_AT_name("fd")
+    1014                      .dwattr $C$DW$76, DW_AT_TI_symbol_name("_fd")
+    1015                      .dwattr $C$DW$76, DW_AT_data_member_location[DW_OP_plus_uconst 0x0]
+    1016                      .dwattr $C$DW$76, DW_AT_accessibility(DW_ACCESS_public)
+    1017                      .dwattr $C$DW$76, DW_AT_decl_file("C:/Program Files (x86)/Texas Instruments/ccsv5/tools/compiler/c550
+    1018                      .dwattr $C$DW$76, DW_AT_decl_line(0x1d)
+    1019                      .dwattr $C$DW$76, DW_AT_decl_column(0x0b)
+    1020              $C$DW$77        .dwtag  DW_TAG_member
+    1021                      .dwattr $C$DW$77, DW_AT_type(*$C$DW$T$19)
+    1022                      .dwattr $C$DW$77, DW_AT_name("buf")
+    1023                      .dwattr $C$DW$77, DW_AT_TI_symbol_name("_buf")
+    1024                      .dwattr $C$DW$77, DW_AT_data_member_location[DW_OP_plus_uconst 0x2]
+    1025                      .dwattr $C$DW$77, DW_AT_accessibility(DW_ACCESS_public)
+    1026                      .dwattr $C$DW$77, DW_AT_decl_file("C:/Program Files (x86)/Texas Instruments/ccsv5/tools/compiler/c550
+    1027                      .dwattr $C$DW$77, DW_AT_decl_line(0x1e)
+    1028                      .dwattr $C$DW$77, DW_AT_decl_column(0x16)
+    1029              $C$DW$78        .dwtag  DW_TAG_member
+    1030                      .dwattr $C$DW$78, DW_AT_type(*$C$DW$T$19)
+    1031                      .dwattr $C$DW$78, DW_AT_name("pos")
+    1032                      .dwattr $C$DW$78, DW_AT_TI_symbol_name("_pos")
+    1033                      .dwattr $C$DW$78, DW_AT_data_member_location[DW_OP_plus_uconst 0x4]
+    1034                      .dwattr $C$DW$78, DW_AT_accessibility(DW_ACCESS_public)
+    1035                      .dwattr $C$DW$78, DW_AT_decl_file("C:/Program Files (x86)/Texas Instruments/ccsv5/tools/compiler/c550
+    1036                      .dwattr $C$DW$78, DW_AT_decl_line(0x1f)
+    1037                      .dwattr $C$DW$78, DW_AT_decl_column(0x16)
+    1038              $C$DW$79        .dwtag  DW_TAG_member
+    1039                      .dwattr $C$DW$79, DW_AT_type(*$C$DW$T$19)
+    1040                      .dwattr $C$DW$79, DW_AT_name("bufend")
+    1041                      .dwattr $C$DW$79, DW_AT_TI_symbol_name("_bufend")
+    1042                      .dwattr $C$DW$79, DW_AT_data_member_location[DW_OP_plus_uconst 0x6]
+    1043                      .dwattr $C$DW$79, DW_AT_accessibility(DW_ACCESS_public)
+    1044                      .dwattr $C$DW$79, DW_AT_decl_file("C:/Program Files (x86)/Texas Instruments/ccsv5/tools/compiler/c550
+    1045                      .dwattr $C$DW$79, DW_AT_decl_line(0x20)
+    1046                      .dwattr $C$DW$79, DW_AT_decl_column(0x16)
+    1047              $C$DW$80        .dwtag  DW_TAG_member
+    1048                      .dwattr $C$DW$80, DW_AT_type(*$C$DW$T$19)
+    1049                      .dwattr $C$DW$80, DW_AT_name("buff_stop")
+    1050                      .dwattr $C$DW$80, DW_AT_TI_symbol_name("_buff_stop")
+    1051                      .dwattr $C$DW$80, DW_AT_data_member_location[DW_OP_plus_uconst 0x8]
+    1052                      .dwattr $C$DW$80, DW_AT_accessibility(DW_ACCESS_public)
+    1053                      .dwattr $C$DW$80, DW_AT_decl_file("C:/Program Files (x86)/Texas Instruments/ccsv5/tools/compiler/c550
+    1054                      .dwattr $C$DW$80, DW_AT_decl_line(0x21)
+    1055                      .dwattr $C$DW$80, DW_AT_decl_column(0x16)
+    1056              $C$DW$81        .dwtag  DW_TAG_member
+    1057                      .dwattr $C$DW$81, DW_AT_type(*$C$DW$T$11)
+    1058                      .dwattr $C$DW$81, DW_AT_name("flags")
+    1059                      .dwattr $C$DW$81, DW_AT_TI_symbol_name("_flags")
+    1060                      .dwattr $C$DW$81, DW_AT_data_member_location[DW_OP_plus_uconst 0xa]
+    1061                      .dwattr $C$DW$81, DW_AT_accessibility(DW_ACCESS_public)
+    1062                      .dwattr $C$DW$81, DW_AT_decl_file("C:/Program Files (x86)/Texas Instruments/ccsv5/tools/compiler/c550
+    1063                      .dwattr $C$DW$81, DW_AT_decl_line(0x22)
+    1064                      .dwattr $C$DW$81, DW_AT_decl_column(0x16)
+TMS320C55x Assembler PC v4.3.8 Thu Jun 09 17:03:44 2011
+
+Tools Copyright (c) 1996-2010 Texas Instruments Incorporated
+aic3204_loop_stereo_in1.asm                                          PAGE   23
+
+    1065                      .dwendtag $C$DW$T$20
+    1066              
+    1067                      .dwattr $C$DW$T$20, DW_AT_decl_file("C:/Program Files (x86)/Texas Instruments/ccsv5/tools/compiler/c5
+    1068                      .dwattr $C$DW$T$20, DW_AT_decl_line(0x1c)
+    1069                      .dwattr $C$DW$T$20, DW_AT_decl_column(0x10)
+    1070              $C$DW$T$32      .dwtag  DW_TAG_typedef, DW_AT_name("FILE")
+    1071                      .dwattr $C$DW$T$32, DW_AT_type(*$C$DW$T$20)
+    1072                      .dwattr $C$DW$T$32, DW_AT_language(DW_LANG_C)
+    1073                      .dwattr $C$DW$T$32, DW_AT_decl_file("C:/Program Files (x86)/Texas Instruments/ccsv5/tools/compiler/c5
+    1074                      .dwattr $C$DW$T$32, DW_AT_decl_line(0x23)
+    1075                      .dwattr $C$DW$T$32, DW_AT_decl_column(0x03)
+    1076              $C$DW$T$33      .dwtag  DW_TAG_base_type
+    1077                      .dwattr $C$DW$T$33, DW_AT_encoding(DW_ATE_signed_char)
+    1078                      .dwattr $C$DW$T$33, DW_AT_name("signed char")
+    1079                      .dwattr $C$DW$T$33, DW_AT_byte_size(0x01)
+    1080              $C$DW$T$34      .dwtag  DW_TAG_pointer_type
+    1081                      .dwattr $C$DW$T$34, DW_AT_type(*$C$DW$T$33)
+    1082                      .dwattr $C$DW$T$34, DW_AT_address_class(0x17)
+    1083              $C$DW$T$35      .dwtag  DW_TAG_typedef, DW_AT_name("va_list")
+    1084                      .dwattr $C$DW$T$35, DW_AT_type(*$C$DW$T$34)
+    1085                      .dwattr $C$DW$T$35, DW_AT_language(DW_LANG_C)
+    1086                      .dwattr $C$DW$T$35, DW_AT_decl_file("C:/Program Files (x86)/Texas Instruments/ccsv5/tools/compiler/c5
+    1087                      .dwattr $C$DW$T$35, DW_AT_decl_line(0x0d)
+    1088                      .dwattr $C$DW$T$35, DW_AT_decl_column(0x0f)
+    1089                      .dwattr $C$DW$CU, DW_AT_language(DW_LANG_C)
+    1090              
+    1091              ;***************************************************************
+    1092              ;* DWARF CIE ENTRIES                                           *
+    1093              ;***************************************************************
+    1094              
+    1095              $C$DW$CIE       .dwcie 91
+    1096                      .dwcfi  cfa_register, 36
+    1097                      .dwcfi  cfa_offset, 0
+    1098                      .dwcfi  undefined, 0
+    1099                      .dwcfi  undefined, 1
+    1100                      .dwcfi  undefined, 2
+    1101                      .dwcfi  undefined, 3
+    1102                      .dwcfi  undefined, 4
+    1103                      .dwcfi  undefined, 5
+    1104                      .dwcfi  undefined, 6
+    1105                      .dwcfi  undefined, 7
+    1106                      .dwcfi  undefined, 8
+    1107                      .dwcfi  undefined, 9
+    1108                      .dwcfi  undefined, 10
+    1109                      .dwcfi  undefined, 11
+    1110                      .dwcfi  undefined, 12
+    1111                      .dwcfi  undefined, 13
+    1112                      .dwcfi  same_value, 14
+    1113                      .dwcfi  same_value, 15
+    1114                      .dwcfi  undefined, 16
+    1115                      .dwcfi  undefined, 17
+    1116                      .dwcfi  undefined, 18
+    1117                      .dwcfi  undefined, 19
+    1118                      .dwcfi  undefined, 20
+    1119                      .dwcfi  undefined, 21
+TMS320C55x Assembler PC v4.3.8 Thu Jun 09 17:03:44 2011
+
+Tools Copyright (c) 1996-2010 Texas Instruments Incorporated
+aic3204_loop_stereo_in1.asm                                          PAGE   24
+
+    1120                      .dwcfi  undefined, 22
+    1121                      .dwcfi  undefined, 23
+    1122                      .dwcfi  undefined, 24
+    1123                      .dwcfi  undefined, 25
+    1124                      .dwcfi  same_value, 26
+    1125                      .dwcfi  same_value, 27
+    1126                      .dwcfi  same_value, 28
+    1127                      .dwcfi  same_value, 29
+    1128                      .dwcfi  same_value, 30
+    1129                      .dwcfi  same_value, 31
+    1130                      .dwcfi  undefined, 32
+    1131                      .dwcfi  undefined, 33
+    1132                      .dwcfi  undefined, 34
+    1133                      .dwcfi  undefined, 35
+    1134                      .dwcfi  undefined, 36
+    1135                      .dwcfi  undefined, 37
+    1136                      .dwcfi  undefined, 38
+    1137                      .dwcfi  undefined, 39
+    1138                      .dwcfi  undefined, 40
+    1139                      .dwcfi  undefined, 41
+    1140                      .dwcfi  undefined, 42
+    1141                      .dwcfi  undefined, 43
+    1142                      .dwcfi  undefined, 44
+    1143                      .dwcfi  undefined, 45
+    1144                      .dwcfi  undefined, 46
+    1145                      .dwcfi  undefined, 47
+    1146                      .dwcfi  undefined, 48
+    1147                      .dwcfi  undefined, 49
+    1148                      .dwcfi  undefined, 50
+    1149                      .dwcfi  undefined, 51
+    1150                      .dwcfi  undefined, 52
+    1151                      .dwcfi  undefined, 53
+    1152                      .dwcfi  undefined, 54
+    1153                      .dwcfi  undefined, 55
+    1154                      .dwcfi  undefined, 56
+    1155                      .dwcfi  undefined, 57
+    1156                      .dwcfi  undefined, 58
+    1157                      .dwcfi  undefined, 59
+    1158                      .dwcfi  undefined, 60
+    1159                      .dwcfi  undefined, 61
+    1160                      .dwcfi  undefined, 62
+    1161                      .dwcfi  undefined, 63
+    1162                      .dwcfi  undefined, 64
+    1163                      .dwcfi  undefined, 65
+    1164                      .dwcfi  undefined, 66
+    1165                      .dwcfi  undefined, 67
+    1166                      .dwcfi  undefined, 68
+    1167                      .dwcfi  undefined, 69
+    1168                      .dwcfi  undefined, 70
+    1169                      .dwcfi  undefined, 71
+    1170                      .dwcfi  undefined, 72
+    1171                      .dwcfi  undefined, 73
+    1172                      .dwcfi  undefined, 74
+    1173                      .dwcfi  undefined, 75
+    1174                      .dwcfi  undefined, 76
+TMS320C55x Assembler PC v4.3.8 Thu Jun 09 17:03:44 2011
+
+Tools Copyright (c) 1996-2010 Texas Instruments Incorporated
+aic3204_loop_stereo_in1.asm                                          PAGE   25
+
+    1175                      .dwcfi  undefined, 77
+    1176                      .dwcfi  undefined, 78
+    1177                      .dwcfi  undefined, 79
+    1178                      .dwcfi  undefined, 80
+    1179                      .dwcfi  undefined, 81
+    1180                      .dwcfi  undefined, 82
+    1181                      .dwcfi  undefined, 83
+    1182                      .dwcfi  undefined, 84
+    1183                      .dwcfi  undefined, 85
+    1184                      .dwcfi  undefined, 86
+    1185                      .dwcfi  undefined, 87
+    1186                      .dwcfi  undefined, 88
+    1187                      .dwcfi  undefined, 89
+    1188                      .dwcfi  undefined, 90
+    1189                      .dwcfi  undefined, 91
+    1190                      .dwendentry
+    1191              
+    1192              ;***************************************************************
+    1193              ;* DWARF REGISTER MAP                                          *
+    1194              ;***************************************************************
+    1195              
+    1196              $C$DW$82        .dwtag  DW_TAG_TI_assign_register, DW_AT_name("AC0")
+    1197                      .dwattr $C$DW$82, DW_AT_location[DW_OP_reg0]
+    1198              $C$DW$83        .dwtag  DW_TAG_TI_assign_register, DW_AT_name("AC0")
+    1199                      .dwattr $C$DW$83, DW_AT_location[DW_OP_reg1]
+    1200              $C$DW$84        .dwtag  DW_TAG_TI_assign_register, DW_AT_name("AC0_G")
+    1201                      .dwattr $C$DW$84, DW_AT_location[DW_OP_reg2]
+    1202              $C$DW$85        .dwtag  DW_TAG_TI_assign_register, DW_AT_name("AC1")
+    1203                      .dwattr $C$DW$85, DW_AT_location[DW_OP_reg3]
+    1204              $C$DW$86        .dwtag  DW_TAG_TI_assign_register, DW_AT_name("AC1")
+    1205                      .dwattr $C$DW$86, DW_AT_location[DW_OP_reg4]
+    1206              $C$DW$87        .dwtag  DW_TAG_TI_assign_register, DW_AT_name("AC1_G")
+    1207                      .dwattr $C$DW$87, DW_AT_location[DW_OP_reg5]
+    1208              $C$DW$88        .dwtag  DW_TAG_TI_assign_register, DW_AT_name("AC2")
+    1209                      .dwattr $C$DW$88, DW_AT_location[DW_OP_reg6]
+    1210              $C$DW$89        .dwtag  DW_TAG_TI_assign_register, DW_AT_name("AC2")
+    1211                      .dwattr $C$DW$89, DW_AT_location[DW_OP_reg7]
+    1212              $C$DW$90        .dwtag  DW_TAG_TI_assign_register, DW_AT_name("AC2_G")
+    1213                      .dwattr $C$DW$90, DW_AT_location[DW_OP_reg8]
+    1214              $C$DW$91        .dwtag  DW_TAG_TI_assign_register, DW_AT_name("AC3")
+    1215                      .dwattr $C$DW$91, DW_AT_location[DW_OP_reg9]
+    1216              $C$DW$92        .dwtag  DW_TAG_TI_assign_register, DW_AT_name("AC3")
+    1217                      .dwattr $C$DW$92, DW_AT_location[DW_OP_reg10]
+    1218              $C$DW$93        .dwtag  DW_TAG_TI_assign_register, DW_AT_name("AC3_G")
+    1219                      .dwattr $C$DW$93, DW_AT_location[DW_OP_reg11]
+    1220              $C$DW$94        .dwtag  DW_TAG_TI_assign_register, DW_AT_name("T0")
+    1221                      .dwattr $C$DW$94, DW_AT_location[DW_OP_reg12]
+    1222              $C$DW$95        .dwtag  DW_TAG_TI_assign_register, DW_AT_name("T1")
+    1223                      .dwattr $C$DW$95, DW_AT_location[DW_OP_reg13]
+    1224              $C$DW$96        .dwtag  DW_TAG_TI_assign_register, DW_AT_name("T2")
+    1225                      .dwattr $C$DW$96, DW_AT_location[DW_OP_reg14]
+    1226              $C$DW$97        .dwtag  DW_TAG_TI_assign_register, DW_AT_name("T3")
+    1227                      .dwattr $C$DW$97, DW_AT_location[DW_OP_reg15]
+    1228              $C$DW$98        .dwtag  DW_TAG_TI_assign_register, DW_AT_name("AR0")
+    1229                      .dwattr $C$DW$98, DW_AT_location[DW_OP_reg16]
+TMS320C55x Assembler PC v4.3.8 Thu Jun 09 17:03:44 2011
+
+Tools Copyright (c) 1996-2010 Texas Instruments Incorporated
+aic3204_loop_stereo_in1.asm                                          PAGE   26
+
+    1230              $C$DW$99        .dwtag  DW_TAG_TI_assign_register, DW_AT_name("XAR0")
+    1231                      .dwattr $C$DW$99, DW_AT_location[DW_OP_reg17]
+    1232              $C$DW$100       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("AR1")
+    1233                      .dwattr $C$DW$100, DW_AT_location[DW_OP_reg18]
+    1234              $C$DW$101       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("XAR1")
+    1235                      .dwattr $C$DW$101, DW_AT_location[DW_OP_reg19]
+    1236              $C$DW$102       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("AR2")
+    1237                      .dwattr $C$DW$102, DW_AT_location[DW_OP_reg20]
+    1238              $C$DW$103       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("XAR2")
+    1239                      .dwattr $C$DW$103, DW_AT_location[DW_OP_reg21]
+    1240              $C$DW$104       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("AR3")
+    1241                      .dwattr $C$DW$104, DW_AT_location[DW_OP_reg22]
+    1242              $C$DW$105       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("XAR3")
+    1243                      .dwattr $C$DW$105, DW_AT_location[DW_OP_reg23]
+    1244              $C$DW$106       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("AR4")
+    1245                      .dwattr $C$DW$106, DW_AT_location[DW_OP_reg24]
+    1246              $C$DW$107       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("XAR4")
+    1247                      .dwattr $C$DW$107, DW_AT_location[DW_OP_reg25]
+    1248              $C$DW$108       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("AR5")
+    1249                      .dwattr $C$DW$108, DW_AT_location[DW_OP_reg26]
+    1250              $C$DW$109       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("XAR5")
+    1251                      .dwattr $C$DW$109, DW_AT_location[DW_OP_reg27]
+    1252              $C$DW$110       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("AR6")
+    1253                      .dwattr $C$DW$110, DW_AT_location[DW_OP_reg28]
+    1254              $C$DW$111       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("XAR6")
+    1255                      .dwattr $C$DW$111, DW_AT_location[DW_OP_reg29]
+    1256              $C$DW$112       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("AR7")
+    1257                      .dwattr $C$DW$112, DW_AT_location[DW_OP_reg30]
+    1258              $C$DW$113       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("XAR7")
+    1259                      .dwattr $C$DW$113, DW_AT_location[DW_OP_reg31]
+    1260              $C$DW$114       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("FP")
+    1261                      .dwattr $C$DW$114, DW_AT_location[DW_OP_regx 0x20]
+    1262              $C$DW$115       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("XFP")
+    1263                      .dwattr $C$DW$115, DW_AT_location[DW_OP_regx 0x21]
+    1264              $C$DW$116       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("PC")
+    1265                      .dwattr $C$DW$116, DW_AT_location[DW_OP_regx 0x22]
+    1266              $C$DW$117       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("SP")
+    1267                      .dwattr $C$DW$117, DW_AT_location[DW_OP_regx 0x23]
+    1268              $C$DW$118       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("XSP")
+    1269                      .dwattr $C$DW$118, DW_AT_location[DW_OP_regx 0x24]
+    1270              $C$DW$119       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("BKC")
+    1271                      .dwattr $C$DW$119, DW_AT_location[DW_OP_regx 0x25]
+    1272              $C$DW$120       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("BK03")
+    1273                      .dwattr $C$DW$120, DW_AT_location[DW_OP_regx 0x26]
+    1274              $C$DW$121       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("BK47")
+    1275                      .dwattr $C$DW$121, DW_AT_location[DW_OP_regx 0x27]
+    1276              $C$DW$122       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("ST0")
+    1277                      .dwattr $C$DW$122, DW_AT_location[DW_OP_regx 0x28]
+    1278              $C$DW$123       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("ST1")
+    1279                      .dwattr $C$DW$123, DW_AT_location[DW_OP_regx 0x29]
+    1280              $C$DW$124       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("ST2")
+    1281                      .dwattr $C$DW$124, DW_AT_location[DW_OP_regx 0x2a]
+    1282              $C$DW$125       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("ST3")
+    1283                      .dwattr $C$DW$125, DW_AT_location[DW_OP_regx 0x2b]
+    1284              $C$DW$126       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("MDP")
+TMS320C55x Assembler PC v4.3.8 Thu Jun 09 17:03:44 2011
+
+Tools Copyright (c) 1996-2010 Texas Instruments Incorporated
+aic3204_loop_stereo_in1.asm                                          PAGE   27
+
+    1285                      .dwattr $C$DW$126, DW_AT_location[DW_OP_regx 0x2c]
+    1286              $C$DW$127       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("MDP05")
+    1287                      .dwattr $C$DW$127, DW_AT_location[DW_OP_regx 0x2d]
+    1288              $C$DW$128       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("MDP67")
+    1289                      .dwattr $C$DW$128, DW_AT_location[DW_OP_regx 0x2e]
+    1290              $C$DW$129       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("BRC0")
+    1291                      .dwattr $C$DW$129, DW_AT_location[DW_OP_regx 0x2f]
+    1292              $C$DW$130       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("RSA0")
+    1293                      .dwattr $C$DW$130, DW_AT_location[DW_OP_regx 0x30]
+    1294              $C$DW$131       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("RSA0_H")
+    1295                      .dwattr $C$DW$131, DW_AT_location[DW_OP_regx 0x31]
+    1296              $C$DW$132       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("REA0")
+    1297                      .dwattr $C$DW$132, DW_AT_location[DW_OP_regx 0x32]
+    1298              $C$DW$133       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("REA0_H")
+    1299                      .dwattr $C$DW$133, DW_AT_location[DW_OP_regx 0x33]
+    1300              $C$DW$134       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("BRS1")
+    1301                      .dwattr $C$DW$134, DW_AT_location[DW_OP_regx 0x34]
+    1302              $C$DW$135       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("BRC1")
+    1303                      .dwattr $C$DW$135, DW_AT_location[DW_OP_regx 0x35]
+    1304              $C$DW$136       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("RSA1")
+    1305                      .dwattr $C$DW$136, DW_AT_location[DW_OP_regx 0x36]
+    1306              $C$DW$137       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("RSA1_H")
+    1307                      .dwattr $C$DW$137, DW_AT_location[DW_OP_regx 0x37]
+    1308              $C$DW$138       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("REA1")
+    1309                      .dwattr $C$DW$138, DW_AT_location[DW_OP_regx 0x38]
+    1310              $C$DW$139       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("REA1_H")
+    1311                      .dwattr $C$DW$139, DW_AT_location[DW_OP_regx 0x39]
+    1312              $C$DW$140       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("CSR")
+    1313                      .dwattr $C$DW$140, DW_AT_location[DW_OP_regx 0x3a]
+    1314              $C$DW$141       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("RPTC")
+    1315                      .dwattr $C$DW$141, DW_AT_location[DW_OP_regx 0x3b]
+    1316              $C$DW$142       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("CDP")
+    1317                      .dwattr $C$DW$142, DW_AT_location[DW_OP_regx 0x3c]
+    1318              $C$DW$143       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("XCDP")
+    1319                      .dwattr $C$DW$143, DW_AT_location[DW_OP_regx 0x3d]
+    1320              $C$DW$144       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("TRN0")
+    1321                      .dwattr $C$DW$144, DW_AT_location[DW_OP_regx 0x3e]
+    1322              $C$DW$145       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("TRN1")
+    1323                      .dwattr $C$DW$145, DW_AT_location[DW_OP_regx 0x3f]
+    1324              $C$DW$146       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("BSA01")
+    1325                      .dwattr $C$DW$146, DW_AT_location[DW_OP_regx 0x40]
+    1326              $C$DW$147       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("BSA23")
+    1327                      .dwattr $C$DW$147, DW_AT_location[DW_OP_regx 0x41]
+    1328              $C$DW$148       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("BSA45")
+    1329                      .dwattr $C$DW$148, DW_AT_location[DW_OP_regx 0x42]
+    1330              $C$DW$149       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("BSA67")
+    1331                      .dwattr $C$DW$149, DW_AT_location[DW_OP_regx 0x43]
+    1332              $C$DW$150       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("BSAC")
+    1333                      .dwattr $C$DW$150, DW_AT_location[DW_OP_regx 0x44]
+    1334              $C$DW$151       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("CARRY")
+    1335                      .dwattr $C$DW$151, DW_AT_location[DW_OP_regx 0x45]
+    1336              $C$DW$152       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("TC1")
+    1337                      .dwattr $C$DW$152, DW_AT_location[DW_OP_regx 0x46]
+    1338              $C$DW$153       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("TC2")
+    1339                      .dwattr $C$DW$153, DW_AT_location[DW_OP_regx 0x47]
+TMS320C55x Assembler PC v4.3.8 Thu Jun 09 17:03:44 2011
+
+Tools Copyright (c) 1996-2010 Texas Instruments Incorporated
+aic3204_loop_stereo_in1.asm                                          PAGE   28
+
+    1340              $C$DW$154       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("M40")
+    1341                      .dwattr $C$DW$154, DW_AT_location[DW_OP_regx 0x48]
+    1342              $C$DW$155       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("SXMD")
+    1343                      .dwattr $C$DW$155, DW_AT_location[DW_OP_regx 0x49]
+    1344              $C$DW$156       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("ARMS")
+    1345                      .dwattr $C$DW$156, DW_AT_location[DW_OP_regx 0x4a]
+    1346              $C$DW$157       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("C54CM")
+    1347                      .dwattr $C$DW$157, DW_AT_location[DW_OP_regx 0x4b]
+    1348              $C$DW$158       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("SATA")
+    1349                      .dwattr $C$DW$158, DW_AT_location[DW_OP_regx 0x4c]
+    1350              $C$DW$159       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("SATD")
+    1351                      .dwattr $C$DW$159, DW_AT_location[DW_OP_regx 0x4d]
+    1352              $C$DW$160       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("RDM")
+    1353                      .dwattr $C$DW$160, DW_AT_location[DW_OP_regx 0x4e]
+    1354              $C$DW$161       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("FRCT")
+    1355                      .dwattr $C$DW$161, DW_AT_location[DW_OP_regx 0x4f]
+    1356              $C$DW$162       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("SMUL")
+    1357                      .dwattr $C$DW$162, DW_AT_location[DW_OP_regx 0x50]
+    1358              $C$DW$163       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("INTM")
+    1359                      .dwattr $C$DW$163, DW_AT_location[DW_OP_regx 0x51]
+    1360              $C$DW$164       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("AR0LC")
+    1361                      .dwattr $C$DW$164, DW_AT_location[DW_OP_regx 0x52]
+    1362              $C$DW$165       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("AR1LC")
+    1363                      .dwattr $C$DW$165, DW_AT_location[DW_OP_regx 0x53]
+    1364              $C$DW$166       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("AR2LC")
+    1365                      .dwattr $C$DW$166, DW_AT_location[DW_OP_regx 0x54]
+    1366              $C$DW$167       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("AR3LC")
+    1367                      .dwattr $C$DW$167, DW_AT_location[DW_OP_regx 0x55]
+    1368              $C$DW$168       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("AR4LC")
+    1369                      .dwattr $C$DW$168, DW_AT_location[DW_OP_regx 0x56]
+    1370              $C$DW$169       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("AR5LC")
+    1371                      .dwattr $C$DW$169, DW_AT_location[DW_OP_regx 0x57]
+    1372              $C$DW$170       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("AR6LC")
+    1373                      .dwattr $C$DW$170, DW_AT_location[DW_OP_regx 0x58]
+    1374              $C$DW$171       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("AR7LC")
+    1375                      .dwattr $C$DW$171, DW_AT_location[DW_OP_regx 0x59]
+    1376              $C$DW$172       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("CDPLC")
+    1377                      .dwattr $C$DW$172, DW_AT_location[DW_OP_regx 0x5a]
+    1378              $C$DW$173       .dwtag  DW_TAG_TI_assign_register, DW_AT_name("CIE_RETA")
+    1379                      .dwattr $C$DW$173, DW_AT_location[DW_OP_regx 0x5b]
+    1380                      .dwendtag $C$DW$CU
+    1381              
+    1381              
+    1381              
+
+No Assembly Errors, No Assembly Warnings

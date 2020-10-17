@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1426865076 source:/home/cya/dev_/ders_temp/objehw1/main.cpp
+	<string>
+	<iostream>
+	"SystemManager.h"
+
+1426875598 /home/cya/dev_/ders_temp/objehw1/SystemManager.h
+	<string>
+	<iostream>
+

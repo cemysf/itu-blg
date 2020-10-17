@@ -1,0 +1,1 @@
+"./usbstk5515_led.obj" "./usbstk5515_i2c.obj" "./usbstk5515_gpio.obj" "./usbstk5515.obj" "./sar.obj" "./main.obj" "./LCD_FCN.obj" "./AIC_func.obj" -l"rts55x.lib" "../452_Labs_Essentials.lib" "../55xdspx_LARGE.lib" "../lnkx.cmd" "../rts55x.lib" "../usbstk5515bsl.lib" 

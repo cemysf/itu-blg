@@ -1,0 +1,1 @@
+cmd_/home/itucs/Desktop/scull_exercise/scull.ko := ld -r -m elf_i386 -T /home/itucs/Desktop/linux-source-3.13.0/scripts/module-common.lds --build-id  -o /home/itucs/Desktop/scull_exercise/scull.ko /home/itucs/Desktop/scull_exercise/scull.o /home/itucs/Desktop/scull_exercise/scull.mod.o

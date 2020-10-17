@@ -1,0 +1,33 @@
+;	jmp $4000
+;	.org $4000
+;	ldaa #$52	;plain text
+;	staa $10
+;	ldaa #$a9	;key
+;	staa $11
+;	clra	
+
+;;; part1 ;;;
+	ldaa $10
+	ldab $10
+	anda #%00001111
+	rola
+	rola
+	rola
+	rola
+	andb #%11110000
+	rorb
+	rorb
+	rorb
+	rorb
+	stab $09
+	oraa $09
+	tab
+	anda #%10101010
+	rora
+	andb #%01010101
+	rolb
+	stab $09
+	oraa $09
+	eora $11
+	staa $12
+	swi

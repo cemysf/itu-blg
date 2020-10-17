@@ -1,0 +1,44 @@
+	jmp $4000
+	.org $4000
+	lds #$4200
+	ldx #$4100
+	ldaa #$0a
+	stx $0010
+	staa $12
+l1	staa 0,x
+	inx	
+	deca
+	cmpa #$0
+	bne l1
+	ldx #$4100
+
+	ldaa $12	;a=n
+b1	ldx #$4100
+	ldab $12
+	decb		;b=n-1
+b2	nop
+	psha
+	pshb
+	ldaa 0,x	;a=array[j]
+	inx
+	ldab 0,x	;b=array[j+1]
+	cba
+	ble next	;no swap if a[j]<=a[j+1]
+	staa $40f0
+	tba			;a<-b
+	ldab $40f0	;b<-a
+	stab 0,x
+	dex
+	staa 0,x
+
+next	inx	
+	pulb
+	pula
+	decb
+	cmpb #$0
+	bne b2
+	deca
+	cmpa #$0
+	bne b1
+	swi
+	wai

@@ -1,0 +1,45 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <pthread.h>
+#include <sys/ipc.h>
+#include <sys/sem.h>
+#include <sys/types.h>
+
+void * nurse_function(void *ptr)
+{
+    printf(" %s\n", (char *) ptr);
+
+    //printf("nurse!\n");
+    pthread_exit(NULL);
+}
+
+void * doctor1_function(void *ptr)
+{
+    printf(" %s\n", (char *) ptr);
+
+    //printf("doct1!\n");
+    pthread_exit(NULL);
+}
+
+int main()
+{
+    pthread_t nurse, doctor1, doctor2;
+    char *chars[] = { "nurse" ,"doc1", "doct2" };
+
+
+    if(pthread_create(&nurse, NULL, nurse_function, chars[0]))     //pthread_t address, attributes, funct pointer, funct arguments
+    {
+        printf("nurse thread hata");
+        exit(-1);
+    }
+
+    if(pthread_create(&doctor1, NULL, doctor1_function, chars[1]))
+    {
+        printf("doct1 hata");
+        exit(-1);
+    }
+
+    //sleep(2);
+    //return 0;
+    pthread_exit(NULL);
+}
